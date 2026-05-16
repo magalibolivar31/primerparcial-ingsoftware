@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace GUI
@@ -24,8 +23,7 @@ namespace GUI
             cboLotePadre.Items.Clear();
             cboLotePadre.Items.Add(new ItemCombo { Id = null, Texto = "(Sin lote padre)" });
 
-            var todas = _bll.ObtenerTodos();
-            foreach (var u in todas)
+            foreach (var u in _bll.ObtenerTodos())
                 if (u is BE.Lote l)
                     cboLotePadre.Items.Add(new ItemCombo { Id = l.Id, Texto = l.Nombre });
 
@@ -42,7 +40,7 @@ namespace GUI
             }
             if (nudValor.Value <= 0)
             {
-                MessageBox.Show("El valor declarado debe ser mayor a cero.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El precio base debe ser mayor a cero.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 nudValor.Focus();
                 return;
             }
@@ -53,16 +51,12 @@ namespace GUI
                 {
                     Nombre         = txtNombre.Text.Trim(),
                     Descripcion    = txtDescripcion.Text.Trim(),
-                    Categoria      = txtCategoria.Text.Trim(),
-                    EstadoFisico   = txtEstado.Text.Trim(),
-                    Ubicacion      = txtUbicacion.Text.Trim(),
                     ValorDeclarado = nudValor.Value,
                     Activo         = true
                 };
 
                 int id = _bll.AltaArticulo(articulo);
 
-                // Asignar al lote padre si se seleccionó uno.
                 if (cboLotePadre.SelectedItem is ItemCombo item && item.Id.HasValue)
                     _bll.AgregarALote(item.Id.Value, id);
 

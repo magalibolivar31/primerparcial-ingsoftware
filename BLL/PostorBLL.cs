@@ -5,10 +5,9 @@ namespace BLL
 {
     public class PostorBLL : Interfaces.IPostorService
     {
-        private readonly DAL.PostorDAL       _dalPostor  = new DAL.PostorDAL();
-        private readonly DAL.SuscripcionDAL  _dalSusc    = new DAL.SuscripcionDAL();
-        private readonly DAL.SubastaDAL      _dalSubasta = new DAL.SubastaDAL();
-        private readonly Servicios.Bitacora  _bitacora   = new Servicios.Bitacora();
+        private readonly DAL.PostorDAL      _dalPostor  = new DAL.PostorDAL();
+        private readonly DAL.SuscripcionDAL _dalSusc    = new DAL.SuscripcionDAL();
+        private readonly DAL.SubastaDAL     _dalSubasta = new DAL.SubastaDAL();
 
         private readonly GestorPujas _gestorPujas = GestorPujas.GetInstance();
 
@@ -24,7 +23,6 @@ namespace BLL
             postor.FechaAlta = DateTime.Now;
             int id = _dalPostor.Alta(postor);
             postor.Id = id;
-            _bitacora.Registrar("Postores", $"Alta postor: {postor.Nombre} (DNI/CUIT: {postor.DniCuit})", BE.Criticidad.Baja);
             return id;
         }
 
@@ -32,13 +30,11 @@ namespace BLL
         {
             Validar(postor);
             _dalPostor.Modificar(postor);
-            _bitacora.Registrar("Postores", $"Modificación postor ID {postor.Id}: {postor.Nombre}", BE.Criticidad.Baja);
         }
 
         public void Baja(int id)
         {
             _dalPostor.Baja(id);
-            _bitacora.Registrar("Postores", $"Baja postor ID {id}", BE.Criticidad.Media);
         }
 
         // RF-05: suscribir un postor a una subasta activa.
@@ -57,30 +53,24 @@ namespace BLL
             if (postor == null)
                 throw new Exception($"Postor {idPostor} no encontrado.");
 
-            var suscripcion = new BE.Suscripcion
+            _dalSusc.Alta(new BE.Suscripcion
             {
                 IdPostor         = idPostor,
                 IdSubasta        = idSubasta,
                 FechaSuscripcion = DateTime.Now,
                 Activa           = true
-            };
-            _dalSusc.Alta(suscripcion);
+            });
 
             // Registrar el observer en el GestorPujas para notificaciones en tiempo real.
-            var notificador = new Servicios.NotificadorPostor(postor);
-            _gestorPujas.AgregarObserver(idSubasta, notificador);
-
-            _bitacora.Registrar("Suscripciones", $"Suscripción: Postor '{postor.Nombre}' → Subasta {idSubasta}", BE.Criticidad.Baja);
+            _gestorPujas.AgregarObserver(idSubasta, new Servicios.NotificadorPostor(postor));
         }
 
-        // RF-08: dar de baja la suscripcion; el postor deja de recibir alertas de inmediato.
+        // RF-08: dar de baja la suscripcion.
         public void Desuscribir(int idPostor, int idSubasta)
         {
             if (!_dalSusc.ExisteSuscripcionActiva(idPostor, idSubasta))
                 throw new Exception("No existe una suscripción activa para ese postor en esa subasta.");
-
             _dalSusc.Baja(idPostor, idSubasta);
-            _bitacora.Registrar("Suscripciones", $"Baja suscripción: Postor {idPostor} — Subasta {idSubasta}", BE.Criticidad.Baja);
         }
 
         public List<BE.Suscripcion> ObtenerSuscripcionesActivas(int idSubasta)

@@ -12,7 +12,7 @@ namespace DAL
             var lista = new List<BE.ArticuloIndividual>();
             DataTable tabla = acceso.Leer(
                 "SELECT u.Id, u.Nombre, u.Descripcion, u.PrecioBase, u.FechaAlta, u.Activo, u.IdLotePadre, " +
-                "       a.ValorDeclarado, a.Categoria, a.EstadoFisico, a.Ubicacion " +
+                "       a.ValorDeclarado " +
                 "FROM UnidadDeVenta u INNER JOIN ArticuloIndividual a ON a.Id = u.Id " +
                 "WHERE u.Activo = 1 ORDER BY u.Nombre", null);
             foreach (DataRow row in tabla.Rows)
@@ -25,15 +25,13 @@ namespace DAL
             SqlParameter[] p = { new SqlParameter("@Id", id) };
             DataTable tabla = acceso.Leer(
                 "SELECT u.Id, u.Nombre, u.Descripcion, u.PrecioBase, u.FechaAlta, u.Activo, u.IdLotePadre, " +
-                "       a.ValorDeclarado, a.Categoria, a.EstadoFisico, a.Ubicacion " +
+                "       a.ValorDeclarado " +
                 "FROM UnidadDeVenta u INNER JOIN ArticuloIndividual a ON a.Id = u.Id " +
                 "WHERE u.Id = @Id AND u.Activo = 1", p);
             if (tabla == null || tabla.Rows.Count == 0) return null;
             return Mapear(tabla.Rows[0]);
         }
 
-        // Alta: inserta en UnidadDeVenta y luego en ArticuloIndividual dentro de una transaccion.
-        // Devuelve el Id generado.
         public int Alta(BE.ArticuloIndividual articulo)
         {
             int idNuevo = 0;
@@ -50,19 +48,14 @@ namespace DAL
                 idNuevo = Convert.ToInt32(cmdU.ExecuteScalar());
 
                 var cmdA = new SqlCommand(
-                    "INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion) " +
-                    "VALUES (@Id, @ValorDeclarado, @Categoria, @EstadoFisico, @Ubicacion)", conn, tx);
+                    "INSERT INTO ArticuloIndividual (Id, ValorDeclarado) VALUES (@Id, @ValorDeclarado)", conn, tx);
                 cmdA.Parameters.AddWithValue("@Id",             idNuevo);
                 cmdA.Parameters.AddWithValue("@ValorDeclarado", articulo.ValorDeclarado);
-                cmdA.Parameters.AddWithValue("@Categoria",      (object)articulo.Categoria    ?? DBNull.Value);
-                cmdA.Parameters.AddWithValue("@EstadoFisico",   (object)articulo.EstadoFisico ?? DBNull.Value);
-                cmdA.Parameters.AddWithValue("@Ubicacion",      (object)articulo.Ubicacion    ?? DBNull.Value);
                 cmdA.ExecuteNonQuery();
             });
             return idNuevo;
         }
 
-        // Modifica datos de un articulo existente.
         public void Modificar(BE.ArticuloIndividual articulo)
         {
             acceso.EjecutarTransaccion((conn, tx) =>
@@ -77,13 +70,8 @@ namespace DAL
                 cmdU.ExecuteNonQuery();
 
                 var cmdA = new SqlCommand(
-                    "UPDATE ArticuloIndividual SET ValorDeclarado=@ValorDeclarado, " +
-                    "Categoria=@Categoria, EstadoFisico=@EstadoFisico, Ubicacion=@Ubicacion " +
-                    "WHERE Id=@Id", conn, tx);
+                    "UPDATE ArticuloIndividual SET ValorDeclarado=@ValorDeclarado WHERE Id=@Id", conn, tx);
                 cmdA.Parameters.AddWithValue("@ValorDeclarado", articulo.ValorDeclarado);
-                cmdA.Parameters.AddWithValue("@Categoria",      (object)articulo.Categoria    ?? DBNull.Value);
-                cmdA.Parameters.AddWithValue("@EstadoFisico",   (object)articulo.EstadoFisico ?? DBNull.Value);
-                cmdA.Parameters.AddWithValue("@Ubicacion",      (object)articulo.Ubicacion    ?? DBNull.Value);
                 cmdA.Parameters.AddWithValue("@Id",             articulo.Id);
                 cmdA.ExecuteNonQuery();
             });
@@ -100,10 +88,7 @@ namespace DAL
                 FechaAlta      = Convert.ToDateTime(row["FechaAlta"]),
                 Activo         = Convert.ToBoolean(row["Activo"]),
                 IdLotePadre    = row["IdLotePadre"] != DBNull.Value ? (int?)Convert.ToInt32(row["IdLotePadre"]) : null,
-                ValorDeclarado = Convert.ToDecimal(row["ValorDeclarado"]),
-                Categoria      = row["Categoria"]    != DBNull.Value ? row["Categoria"].ToString()    : null,
-                EstadoFisico   = row["EstadoFisico"] != DBNull.Value ? row["EstadoFisico"].ToString() : null,
-                Ubicacion      = row["Ubicacion"]    != DBNull.Value ? row["Ubicacion"].ToString()    : null
+                ValorDeclarado = Convert.ToDecimal(row["ValorDeclarado"])
             };
         }
     }

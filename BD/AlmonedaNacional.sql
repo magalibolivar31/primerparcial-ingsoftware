@@ -1,4 +1,4 @@
--- ============================================================
+﻿-- ============================================================
 -- LA ALMONEDA NACIONAL — Script de creacion de base de datos
 -- Ingeniera de Software UAI 2026
 -- ============================================================
@@ -36,10 +36,7 @@ GO
 -- ============================================================
 CREATE TABLE ArticuloIndividual (
     Id             INT           PRIMARY KEY REFERENCES UnidadDeVenta(Id),
-    ValorDeclarado DECIMAL(12,2) NOT NULL,
-    Categoria      VARCHAR(100)  NULL,
-    EstadoFisico   VARCHAR(50)   NULL,
-    Ubicacion      VARCHAR(200)  NULL
+    ValorDeclarado DECIMAL(12,2) NOT NULL
 );
 GO
 
@@ -253,16 +250,16 @@ INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Act
 VALUES ('Oleo "Atardecer en el Rio"',
         'Ramon Gomez Cornet, 1923. Oleo sobre tela, 80x60 cm. Marco dorado original. Certificado de autenticidad.',
         'ARTICULO', 180000.00, '2026-03-01 09:00:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 180000.00, 'Pintura', 'Muy bueno', 'Sala Principal — Vitrina 1');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 180000.00);
 
 -- ---- Id=2: Acuarela ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Acuarela "Vista del Puerto de Buenos Aires"',
         'Prilidiano Pueyrredon (atribuida), c.1860. Acuarela sobre papel, 45x30 cm. Enmarcada con paspartú.',
         'ARTICULO', 95000.00, '2026-03-01 09:10:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 95000.00, 'Pintura', 'Bueno', 'Sala Principal — Vitrina 1');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 95000.00);
 
 -- ---- Id=3: Lote Bellas Artes ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
@@ -278,16 +275,16 @@ INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Act
 VALUES ('Reloj de pie aleman — c.1890',
         'Junghans, circa 1890. Caja roble tallado, 195 cm. Mecanismo original en funcionamiento. Restaurado 2019.',
         'ARTICULO', 320000.00, '2026-03-05 10:00:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 320000.00, 'Antiguedad', 'Excelente', 'Deposito B — Seccion Relojes');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 320000.00);
 
 -- ---- Id=5: Candelabros ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Candelabros de plata maciza x6',
         'Plata 925, punzonados Londres 1875. Altura 42 cm c/u. Peso total 4.8 kg. Estuche original.',
         'ARTICULO', 210000.00, '2026-03-05 10:15:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 210000.00, 'Plata', 'Muy bueno', 'Deposito B — Caja Fuerte 2');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 210000.00);
 
 -- ---- Id=6: Lote Meissen ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
@@ -302,16 +299,16 @@ INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Act
 VALUES ('Juego de te Meissen — 12 piezas',
         'Tetera, azucarera, lechera y 9 tazas con platos. Decoracion floral policromada, c.1870.',
         'ARTICULO', 90000.00, '2026-03-05 10:35:00', 1, @idLoteMeissen);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 90000.00, 'Porcelana', 'Bueno', 'Deposito B — Vitrina 3');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 90000.00);
 
 -- ---- Id=8: Florero (hijo de Meissen) ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo, IdLotePadre)
 VALUES ('Florero Meissen — motivo floral',
         'Porcelana Meissen, altura 35 cm, decoracion rosas y pajaros pintada a mano, c.1860.',
         'ARTICULO', 65000.00, '2026-03-05 10:40:00', 1, @idLoteMeissen);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 65000.00, 'Porcelana', 'Excelente', 'Deposito B — Vitrina 3');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 65000.00);
 
 -- ---- Id=9: Lote Antiguedades Europeas ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
@@ -328,136 +325,136 @@ INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Act
 VALUES ('Collar de brillantes Art Deco',
         'Oro blanco 18k, 47 brillantes talla baguette, total 2.3 ct. Certificado GIA. Caja Cartier original.',
         'ARTICULO', 850000.00, '2026-03-10 09:00:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 850000.00, 'Joyeria', 'Excelente', 'Deposito A — Caja Fuerte 1');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 850000.00);
 
 -- ---- Id=11: Anillo ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Anillo solitario — diamante 2.1 ct',
         'Oro amarillo 18k. Diamante 2.1 ct, talla brillante, color G, claridad VS1. Certificado IGI. Aro pavé.',
         'ARTICULO', 1200000.00, '2026-03-10 09:30:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 1200000.00, 'Joyeria', 'Excelente', 'Deposito A — Caja Fuerte 1');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 1200000.00);
 
 -- ---- Id=12: Escritorio ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Escritorio victoriano en roble macizo',
         'Ingles, c.1880. Tapete cuero verde, 9 cajones, tiradores bronce. 155x80x78 cm. Firma del ebanista.',
         'ARTICULO', 145000.00, '2026-03-15 10:00:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 145000.00, 'Muebles', 'Muy bueno', 'Salon Exhibicion — Piso 2');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 145000.00);
 
 -- ---- Id=13: Torno CNC ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Torno CNC Mazak Modelo X200',
         'Torno control numerico Mazak X200, 2019. Control Mazatrol SmoothC. Incluye herramientas y documentacion.',
         'ARTICULO', 45000.00, '2026-03-18 08:00:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 45000.00, 'Maquinaria', 'Bueno', 'Deposito C — Sector Industrial');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 45000.00);
 
 -- ---- Id=14: Vinos ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Coleccion de vinos — Reserva Especial',
         '12 botellas: 6x Catena Zapata Adrianna 2018 + 3x Achaval Ferrer Quimera 2019 + 3x Clos de los Siete 2020.',
         'ARTICULO', 38000.00, '2026-03-20 11:00:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 38000.00, 'Vinos', 'Excelente', 'Deposito A — Bodega Climatizada');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 38000.00);
 
 -- ---- Id=15: BMW ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('BMW Serie 7 730d xDrive 2020',
         'Sedan de lujo, diesel, 265 CV, traccion integral. Color negro zafiro, interior cuero beige. 48.000 km.',
         'ARTICULO', 8500000.00, '2026-04-01 09:00:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 8500000.00, 'Vehiculos', 'Excelente', 'Playa Vehiculos — Lugar A01');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 8500000.00);
 
 -- ---- Id=16: Ford F-150 ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Ford F-150 Raptor 2021',
         'Pick-up alta performance, V6 EcoBoost biturbo 450 CV. Color gris Leadfoot. 22.500 km. Pack Raptor R.',
         'ARTICULO', 6200000.00, '2026-04-01 09:30:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 6200000.00, 'Vehiculos', 'Muy bueno', 'Playa Vehiculos — Lugar A02');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 6200000.00);
 
 -- ---- Id=17: Harley ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Motocicleta Harley-Davidson Road King Special 2022',
         'Motor Milwaukee-Eight 114, 1868 cc. Color Vivid Black. 9.800 km. Accesorios originales: alforjas + sissy bar.',
         'ARTICULO', 1850000.00, '2026-04-02 10:00:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 1850000.00, 'Vehiculos', 'Excelente', 'Playa Vehiculos — Lugar B01');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 1850000.00);
 
 -- ---- Id=18: Generador ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Generador Diesel Stamford 150 kVA',
         'Grupo electrogeno Stamford, motor Perkins 150 kVA / 120 kW. Tablero ATS. 850 hs de uso. Incluye transferencia.',
         'ARTICULO', 380000.00, '2026-04-05 08:00:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 380000.00, 'Maquinaria', 'Muy bueno', 'Deposito C — Patio Exterior');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 380000.00);
 
 -- ---- Id=19: Fresadora ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Fresadora CNC Haas VF-2 2018',
         'Centro de mecanizado vertical Haas VF-2, mesa 914x356 mm, 30 posiciones de herramientas, 2018.',
         'ARTICULO', 220000.00, '2026-04-05 08:30:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 220000.00, 'Maquinaria', 'Bueno', 'Deposito C — Sector Industrial');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 220000.00);
 
 -- ---- Id=20: Compresor ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Compresor industrial Atlas Copco GA30 200L',
         'Compresor tornillo rotativo Atlas Copco GA30, 30 kW, deposito 200L, presion max 13 bar. 2020. Poco uso.',
         'ARTICULO', 95000.00, '2026-04-05 09:00:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 95000.00, 'Maquinaria', 'Muy bueno', 'Deposito C — Sector Industrial');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 95000.00);
 
 -- ---- Id=21: Set herramientas Snap-on ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Set herramientas Snap-on 312 piezas',
         'Kit profesional Snap-on 312 piezas: llaves combinadas, torx, allen, dados 1/4 1/2 y 3/4. Carro rodante incluido.',
         'ARTICULO', 45000.00, '2026-04-08 10:00:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 45000.00, 'Herramientas', 'Excelente', 'Deposito D — Anaquel 1');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 45000.00);
 
 -- ---- Id=22: Torquimetro ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Llave torquimetro digital Snap-on TECHANGLE',
         'Torquimetro digital Snap-on TECHANGLE, rango 3-200 Nm, precision ±1%. Calibrado y certificado 2025.',
         'ARTICULO', 12000.00, '2026-04-08 10:15:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 12000.00, 'Herramientas', 'Excelente', 'Deposito D — Anaquel 1');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 12000.00);
 
 -- ---- Id=23: Repuestos motor ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Bolsa repuestos motor Ford Ranger 2.5 Duratec',
         'Kit completo: juntas, bieletas, pistones, anillos y valvulas para motor Ford Duratec 2.5. Originales Ford.',
         'ARTICULO', 28000.00, '2026-04-08 10:30:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 28000.00, 'Repuestos', 'Excelente', 'Deposito D — Anaquel 3');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 28000.00);
 
 -- ---- Id=24: Kit suspension ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Kit suspension Bilstein B8 Performance Plus',
         'Amortiguadores delanteros y traseros Bilstein B8 + resortes Eibach para VW Golf VII. Nuevos en caja.',
         'ARTICULO', 35000.00, '2026-04-08 10:45:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 35000.00, 'Repuestos', 'Excelente', 'Deposito D — Anaquel 3');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 35000.00);
 
 -- ---- Id=25: Piano Steinway ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Piano de cola Steinway & Sons Modelo B 1948',
         'Piano de cola Steinway Modelo B, Hamburg 1948, 211 cm. Lacado negro. Revisado y afinado. 88 teclas, cuerdas nuevas.',
         'ARTICULO', 2800000.00, '2026-04-10 09:00:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 2800000.00, 'Instrumentos', 'Muy bueno', 'Salon Exhibicion — Piso 1');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 2800000.00);
 
 -- ---- Id=26: Violin ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Violin solista italiano — Francesco Ruggieri c.1685',
         'Violin italiano Francesco Ruggieri, Cremona c.1685. Certificado Beare & Olofsson. Estuche cuero y arco Pernambuco.',
         'ARTICULO', 480000.00, '2026-04-10 09:30:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 480000.00, 'Instrumentos', 'Muy bueno', 'Salon Exhibicion — Piso 1');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 480000.00);
 
 -- ---- Id=27: Lote Vehiculos Premium ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
@@ -500,24 +497,24 @@ INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Act
 VALUES ('Tapiz flamenco — Sevilla s.XVII',
         'Tapiz lana y seda, tejido a mano, motivos geometricos andaluces. 280x190 cm. Restaurado 2021. Certificado perito.',
         'ARTICULO', 175000.00, '2026-04-12 09:00:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 175000.00, 'Textiles', 'Muy bueno', 'Sala Principal — Vitrina 2');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 175000.00);
 
 -- ---- Id=32: Silla Luis XV ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Silla Luis XV — nogal tallado c.1760',
         'Silla estilo Louis XV, nogal tallado, tapizado terciopelo azul cobalto. Francia, c.1760. Certificado perito Paris.',
         'ARTICULO', 110000.00, '2026-04-12 09:30:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 110000.00, 'Muebles', 'Bueno', 'Salon Exhibicion — Piso 2');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 110000.00);
 
 -- ---- Id=33: Camara Leica ----
 INSERT INTO UnidadDeVenta (Nombre, Descripcion, Tipo, PrecioBase, FechaAlta, Activo)
 VALUES ('Camara Leica M3 — cuerpo + lente Summicron 50mm',
         'Leica M3 Double Stroke, 1954. Shutter funciona correctamente. Lente Summicron 50mm f/2. Estuche de cuero original.',
         'ARTICULO', 320000.00, '2026-04-14 10:00:00', 1);
-INSERT INTO ArticuloIndividual (Id, ValorDeclarado, Categoria, EstadoFisico, Ubicacion)
-VALUES (SCOPE_IDENTITY(), 320000.00, 'Fotografia', 'Muy bueno', 'Deposito A — Vitrina 4');
+INSERT INTO ArticuloIndividual (Id, ValorDeclarado)
+VALUES (SCOPE_IDENTITY(), 320000.00);
 
 -- ============================================================
 -- SUBASTAS (21)
@@ -878,3 +875,4 @@ PRINT 'Pujas:    62 (mezcla ACEPTADAS/RECHAZADAS)';
 PRINT 'Adjudicaciones: 12  |  Suscripciones: 24  |  Bitacora: 20';
 PRINT '============================================================';
 GO
+
