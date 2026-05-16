@@ -65,23 +65,24 @@ namespace GUI
             this.dgv.SelectionChanged += new System.EventHandler(this.dgv_SelectionChanged);
 
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colTipo",      HeaderText = "Tipo",          Width = 80  },
-                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colNombre",    HeaderText = "Nombre",         Width = 240 },
-                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colPrecio",    HeaderText = "Precio / Valor", Width = 130,
+                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colTipo",      HeaderText = "Tipo",           Width = 80  },
+                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colNombre",    HeaderText = "Nombre",          Width = 230 },
+                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colPrecio",    HeaderText = "Precio / Valor",  Width = 130,
                     DefaultCellStyle = new System.Windows.Forms.DataGridViewCellStyle {
                         Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight,
                         ForeColor = System.Drawing.Color.DarkGreen } },
-                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colCategoria", HeaderText = "Categoría",     Width = 110 },
-                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colEstado",    HeaderText = "Estado físico", Width = 100 },
-                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colUbicacion", HeaderText = "Ubicación",     Width = 200 },
-                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colLotePadre", HeaderText = "Lote padre",    Width = 160 },
-                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colFecha",     HeaderText = "Fecha alta",    Width = 90  },
+                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colEstadoOp",  HeaderText = "Estado",          Width = 110 },
+                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colCategoria", HeaderText = "Categoría",      Width = 100 },
+                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colEstadoFis", HeaderText = "Estado físico",  Width = 100 },
+                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colUbicacion", HeaderText = "Ubicación",      Width = 190 },
+                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colLotePadre", HeaderText = "Lote padre",     Width = 150 },
+                new System.Windows.Forms.DataGridViewTextBoxColumn { Name = "colFecha",     HeaderText = "Fecha alta",     Width = 90  },
             });
 
             // ---- Form ----
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode       = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize          = new System.Drawing.Size(1150, 540);
+            this.ClientSize          = new System.Drawing.Size(1220, 540);
             this.Controls.Add(this.dgv);
             this.Controls.Add(this.toolStrip);
             this.Font  = new System.Drawing.Font("Segoe UI", 9F);
