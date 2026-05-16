@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BE.Adjudicacion" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgCAAgAgIAAAAQBAAAAAAAEAAAQAABAAAAgAAAAAAA=</HashCode>
+      <FileName>Adjudicacion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BE.ArticuloIndividual" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAgAAAAAIAAABAAAAAACAAgAEAABAA=</HashCode>
+      <FileName>ArticuloIndividual.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BE.Lote" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQAAAAAAAAAAAAAAAAAAAACAAgAAAABAg=</HashCode>
+      <FileName>Lote.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BE.Postor" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABACAAAAACAAAAEAAAAAgACAAAAAAAAgAAAAAgAAAAA=</HashCode>
+      <FileName>Postor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BE.Puja" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAgQAAAAAAAAAAAAIAAIAAAAAAAIAAAQAAAAAAg=</HashCode>
+      <FileName>Puja.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BE.Subasta" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAgKAAAAQBAAAAAAAAECAQJABAAAggAAAAIAg=</HashCode>
+      <FileName>Subasta.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BE.Suscripcion" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAgAAAAAAAAAAAAAAAAAAIAAAAAoAAAwAAAAAAg=</HashCode>
+      <FileName>Suscripcion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BE.UnidadDeVenta" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAABBEAAAAAgAABAAAAAAAgCAAgAAAABAA=</HashCode>
+      <FileName>UnidadDeVenta.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BE.Usuario" Collapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAAAAiAAAAEEAIAAgABgAAAAggAgIAAAAAAEAAA=</HashCode>
+      <FileName>Usuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="BE.CanalNotificacion" Collapsed="true">
+    <Position X="5.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAQAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>CanalNotificacion.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BE.Criticidad" Collapsed="true">
+    <Position X="7" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Criticidad.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BE.EstadoPuja" Collapsed="true">
+    <Position X="8.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EstadoPuja.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BE.EstadoSubasta" Collapsed="true">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAQA=</HashCode>
+      <FileName>EstadoSubasta.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BE.RolUsuario" Collapsed="true">
+    <Position X="7" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAABIAA=</HashCode>
+      <FileName>RolUsuario.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

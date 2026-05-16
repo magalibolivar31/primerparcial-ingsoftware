@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DAL.Acceso" Collapsed="true">
+    <Position X="21" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAEAEAAAAAAAAAgAAAAAAAABAAAAAAAICAAAAAAQAA=</HashCode>
+      <FileName>Acceso.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.AdjudicacionDAL" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAiAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AdjudicacionDAL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.ArticuloIndividualDAL" Collapsed="true">
+    <Position X="11.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAiACAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ArticuloIndividualDAL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.BaseDAL&lt;T&gt;" Collapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAiAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BaseDAL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.LoteDAL" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAiAAAAAAAAAAAAAQAAAAAAAAAAAACA=</HashCode>
+      <FileName>LoteDAL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.PostorDAL" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAiACAAAAEAAAAAAQAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>PostorDAL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.PujaDAL" Collapsed="true">
+    <Position X="14" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAACiAAAAAAAAAAIAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>PujaDAL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.SubastaDAL" Collapsed="true">
+    <Position X="18.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAEAAIAAIAAiABAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SubastaDAL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.SuscripcionDAL" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAIiAAAAAAAAAAAAAQAAAAIAAAAAAAAQ=</HashCode>
+      <FileName>SuscripcionDAL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.UnidadDeVentaDAL" Collapsed="true">
+    <Position X="9.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEEAgAAAAEiAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>UnidadDeVentaDAL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.UsuarioDAL" Collapsed="true">
+    <Position X="16.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABEQAgAAAAAiAAAAEAAgAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UsuarioDAL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

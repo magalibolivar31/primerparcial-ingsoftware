@@ -1,0 +1,30 @@
+============================================
+  LA ALMONEDA NACIONAL — Usuarios del Sistema
+============================================
+
+Todos los usuarios tienen la contrasena: admin123
+
+--------------------------------------------
+ROL: Administrador
+  Email   : admin@almoneda.com
+  Password: admin123
+  Acceso  : total (todas las funciones)
+--------------------------------------------
+ROL: Martillero
+  Email   : martillero@almoneda.com
+  Password: admin123
+  Acceso  : catalogo + abrir/cerrar subastas + reportes
+--------------------------------------------
+ROL: Operador
+  Email   : operador@almoneda.com
+  Password: admin123
+  Acceso  : subastas activas + registrar pujas + postores
+--------------------------------------------
+ROL: Supervisor
+  Email   : supervisor@almoneda.com
+  Password: admin123
+  Acceso  : reportes y bitacora (solo consulta)
+--------------------------------------------
+
+NOTA: El sistema bloquea la cuenta luego de 3 intentos fallidos.
+El Administrador puede resetear la contrasena desde Gestion de Usuarios.
