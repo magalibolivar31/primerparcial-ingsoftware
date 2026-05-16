@@ -22,7 +22,9 @@ namespace GUI
         private void CargarArbol()
         {
             treeView.Nodes.Clear();
-            LimpiarDetalle();
+            dgvDetalle.Rows.Clear();
+            btnBaja.Enabled = false;
+
             try
             {
                 var todas = _bll.ObtenerTodos();
@@ -31,8 +33,8 @@ namespace GUI
                 foreach (var u in todas)
                 {
                     string texto = u is BE.Lote
-                        ? $"[Lote] {u.Nombre}  —  $ {u.PrecioBase:N2}"
-                        : $" [Art] {u.Nombre}  —  $ {((BE.ArticuloIndividual)u).ValorDeclarado:N2}";
+                        ? $"[Lote] {u.Nombre}"
+                        : $" [Art] {u.Nombre}";
                     mapa[u.Id] = new TreeNode(texto) { Tag = u };
                 }
 
@@ -53,36 +55,60 @@ namespace GUI
             }
         }
 
-        private void LimpiarDetalle()
-        {
-            lblTipoVal.Text   = string.Empty;
-            lblNombreVal.Text = string.Empty;
-            lblPrecioVal.Text = string.Empty;
-            lblDescVal.Text   = string.Empty;
-            lblFechaVal.Text  = string.Empty;
-            lblExtraVal.Text  = string.Empty;
-            btnBaja.Enabled   = false;
-        }
-
         private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (!(e.Node?.Tag is BE.UnidadDeVenta u)) return;
+            if (!(e.Node?.Tag is BE.UnidadDeVenta seleccionado)) return;
 
-            lblTipoVal.Text   = u is BE.Lote ? "Lote" : "Artículo Individual";
-            lblNombreVal.Text = u.Nombre;
-            lblDescVal.Text   = u.Descripcion ?? "—";
-            lblFechaVal.Text  = u.FechaAlta.ToString("dd/MM/yyyy");
-            btnBaja.Enabled   = true;
+            btnBaja.Enabled = true;
 
-            if (u is BE.ArticuloIndividual a)
+            if (seleccionado is BE.Lote)
             {
-                lblPrecioVal.Text = $"$ {a.ValorDeclarado:N2}";
-                lblExtraVal.Text  = $"Categoría: {a.Categoria}  |  Estado físico: {a.EstadoFisico}  |  Ubicación: {a.Ubicacion}";
+                // Mostrar hijos directos del lote en la grilla
+                var hijos = new List<BE.UnidadDeVenta>();
+                foreach (TreeNode hijo in e.Node.Nodes)
+                    if (hijo.Tag is BE.UnidadDeVenta u) hijos.Add(u);
+
+                MostrarEnGrilla(hijos, $"Contenido de lote: {seleccionado.Nombre}");
             }
             else
             {
-                lblPrecioVal.Text = $"$ {u.PrecioBase:N2}  (suma de componentes)";
-                lblExtraVal.Text  = $"Componentes directos: {e.Node.Nodes.Count}";
+                // Mostrar el artículo individual solo
+                MostrarEnGrilla(new[] { seleccionado }, null);
+            }
+        }
+
+        private void MostrarEnGrilla(IEnumerable<BE.UnidadDeVenta> items, string titulo)
+        {
+            dgvDetalle.Rows.Clear();
+
+            if (titulo != null)
+                this.Text = $"Catálogo — {titulo}";
+            else
+                this.Text = "Catálogo de Unidades de Venta";
+
+            foreach (var u in items)
+            {
+                string tipo, precio, categoria, estado, ubicacion;
+
+                if (u is BE.ArticuloIndividual a)
+                {
+                    tipo      = "Artículo";
+                    precio    = $"$ {a.ValorDeclarado:N2}";
+                    categoria = a.Categoria   ?? "—";
+                    estado    = a.EstadoFisico ?? "—";
+                    ubicacion = a.Ubicacion    ?? "—";
+                }
+                else
+                {
+                    tipo      = "Lote";
+                    precio    = $"$ {u.PrecioBase:N2}";
+                    categoria = "—";
+                    estado    = "—";
+                    ubicacion = "—";
+                }
+
+                dgvDetalle.Rows.Add(tipo, u.Nombre, precio, categoria, estado, ubicacion,
+                                    u.FechaAlta.ToString("dd/MM/yyyy"));
             }
         }
 
