@@ -9,7 +9,6 @@ namespace BLL.Interfaces
         bool  Login(string email, string password);
         void  Logout();
         int   Alta(BE.Usuario usuario, string passwordPlano);
-        void  CambiarPassword(int id, string passwordActual, string passwordNuevo);
         void  ResetearPassword(int id, string passwordNuevo);
     }
 }

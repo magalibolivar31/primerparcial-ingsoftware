@@ -16,7 +16,7 @@ namespace DAL
                 DataTable tabla = acceso.Leer(
                     "SELECT u.Id, u.Nombre, u.Descripcion, u.Tipo, u.PrecioBase, " +
                     "       u.FechaAlta, u.Activo, u.IdLotePadre, " +
-                    "       a.ValorDeclarado, a.Categoria, a.EstadoFisico, a.Ubicacion " +
+                    "       a.ValorDeclarado " +
                     "FROM UnidadDeVenta u " +
                     "LEFT JOIN ArticuloIndividual a ON a.Id = u.Id " +
                     "WHERE u.Activo = 1 " +
@@ -40,7 +40,7 @@ namespace DAL
                 DataTable tabla = acceso.Leer(
                     "SELECT u.Id, u.Nombre, u.Descripcion, u.Tipo, u.PrecioBase, " +
                     "       u.FechaAlta, u.Activo, u.IdLotePadre, " +
-                    "       a.ValorDeclarado, a.Categoria, a.EstadoFisico, a.Ubicacion " +
+                    "       a.ValorDeclarado " +
                     "FROM UnidadDeVenta u " +
                     "LEFT JOIN ArticuloIndividual a ON a.Id = u.Id " +
                     "WHERE u.Id = @Id AND u.Activo = 1", p);
@@ -91,7 +91,7 @@ namespace DAL
             DataTable tabla = acceso.Leer(
                 "SELECT u.Id, u.Nombre, u.Descripcion, u.Tipo, u.PrecioBase, " +
                 "       u.FechaAlta, u.Activo, u.IdLotePadre, " +
-                "       a.ValorDeclarado, a.Categoria, a.EstadoFisico, a.Ubicacion " +
+                "       a.ValorDeclarado " +
                 "FROM UnidadDeVenta u " +
                 "LEFT JOIN ArticuloIndividual a ON a.Id = u.Id " +
                 "WHERE u.IdLotePadre = @IdLote AND u.Activo = 1", p);
@@ -114,10 +114,7 @@ namespace DAL
                     FechaAlta      = Convert.ToDateTime(row["FechaAlta"]),
                     Activo         = Convert.ToBoolean(row["Activo"]),
                     IdLotePadre    = row["IdLotePadre"] != DBNull.Value ? (int?)Convert.ToInt32(row["IdLotePadre"]) : null,
-                    ValorDeclarado = row["ValorDeclarado"] != DBNull.Value ? Convert.ToDecimal(row["ValorDeclarado"]) : 0,
-                    Categoria      = row["Categoria"]    != DBNull.Value ? row["Categoria"].ToString()    : null,
-                    EstadoFisico   = row["EstadoFisico"] != DBNull.Value ? row["EstadoFisico"].ToString() : null,
-                    Ubicacion      = row["Ubicacion"]    != DBNull.Value ? row["Ubicacion"].ToString()    : null
+                    ValorDeclarado = row["ValorDeclarado"] != DBNull.Value ? Convert.ToDecimal(row["ValorDeclarado"]) : 0
                 };
             }
             else
