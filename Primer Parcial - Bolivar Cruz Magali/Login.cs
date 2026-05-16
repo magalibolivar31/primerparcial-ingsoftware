@@ -23,7 +23,7 @@ namespace GUI
 
             if (string.IsNullOrWhiteSpace(txtEmail.Text))
             {
-                MostrarError("Ingresá tu email.");
+                MostrarError("Ingresá tu usuario.");
                 txtEmail.Focus();
                 return;
             }
@@ -74,6 +74,11 @@ namespace GUI
         {
             lblError.Text    = mensaje;
             lblError.Visible = true;
+        }
+
+        private void lblEmail_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
