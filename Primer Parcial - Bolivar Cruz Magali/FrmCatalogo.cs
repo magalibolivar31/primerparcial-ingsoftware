@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace GUI
@@ -7,6 +8,7 @@ namespace GUI
     public partial class FrmCatalogo : Form
     {
         private readonly BLL.CatalogoBLL _bll = new BLL.CatalogoBLL();
+        private List<BE.UnidadDeVenta> _todas;
 
         public FrmCatalogo()
         {
@@ -16,38 +18,50 @@ namespace GUI
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            CargarArbol();
+            CargarGrilla();
         }
 
-        private void CargarArbol()
+        private void CargarGrilla()
         {
-            treeView.Nodes.Clear();
-            dgvDetalle.Rows.Clear();
+            dgv.Rows.Clear();
             btnBaja.Enabled = false;
 
             try
             {
-                var todas = _bll.ObtenerTodos();
-                var mapa  = new Dictionary<int, TreeNode>();
+                _todas = _bll.ObtenerTodos();
 
-                foreach (var u in todas)
-                {
-                    string texto = u is BE.Lote
-                        ? $"[Lote] {u.Nombre}"
-                        : $" [Art] {u.Nombre}";
-                    mapa[u.Id] = new TreeNode(texto) { Tag = u };
-                }
+                // Índice nombre de lotes para columna "Lote padre"
+                var nombrePorId = _todas.ToDictionary(u => u.Id, u => u.Nombre);
 
-                foreach (var u in todas)
+                foreach (var u in _todas)
                 {
-                    var nodo = mapa[u.Id];
-                    if (u.IdLotePadre.HasValue && mapa.ContainsKey(u.IdLotePadre.Value))
-                        mapa[u.IdLotePadre.Value].Nodes.Add(nodo);
+                    string tipo, precio, categoria, estado, ubicacion;
+
+                    if (u is BE.ArticuloIndividual a)
+                    {
+                        tipo      = "Artículo";
+                        precio    = $"$ {a.ValorDeclarado:N2}";
+                        categoria = a.Categoria    ?? "—";
+                        estado    = a.EstadoFisico ?? "—";
+                        ubicacion = a.Ubicacion    ?? "—";
+                    }
                     else
-                        treeView.Nodes.Add(nodo);
-                }
+                    {
+                        tipo      = "Lote";
+                        precio    = $"$ {u.PrecioBase:N2}";
+                        categoria = "—";
+                        estado    = "—";
+                        ubicacion = "—";
+                    }
 
-                treeView.ExpandAll();
+                    string lotePadre = u.IdLotePadre.HasValue && nombrePorId.ContainsKey(u.IdLotePadre.Value)
+                        ? nombrePorId[u.IdLotePadre.Value]
+                        : "—";
+
+                    int idx = dgv.Rows.Add(tipo, u.Nombre, precio, categoria, estado, ubicacion,
+                                           lotePadre, u.FechaAlta.ToString("dd/MM/yyyy"));
+                    dgv.Rows[idx].Tag = u;
+                }
             }
             catch (Exception ex)
             {
@@ -55,85 +69,33 @@ namespace GUI
             }
         }
 
-        private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
+        private void dgv_SelectionChanged(object sender, EventArgs e)
         {
-            if (!(e.Node?.Tag is BE.UnidadDeVenta seleccionado)) return;
-
-            btnBaja.Enabled = true;
-
-            if (seleccionado is BE.Lote)
-            {
-                // Mostrar hijos directos del lote en la grilla
-                var hijos = new List<BE.UnidadDeVenta>();
-                foreach (TreeNode hijo in e.Node.Nodes)
-                    if (hijo.Tag is BE.UnidadDeVenta u) hijos.Add(u);
-
-                MostrarEnGrilla(hijos, $"Contenido de lote: {seleccionado.Nombre}");
-            }
-            else
-            {
-                // Mostrar el artículo individual solo
-                MostrarEnGrilla(new[] { seleccionado }, null);
-            }
-        }
-
-        private void MostrarEnGrilla(IEnumerable<BE.UnidadDeVenta> items, string titulo)
-        {
-            dgvDetalle.Rows.Clear();
-
-            if (titulo != null)
-                this.Text = $"Catálogo — {titulo}";
-            else
-                this.Text = "Catálogo de Unidades de Venta";
-
-            foreach (var u in items)
-            {
-                string tipo, precio, categoria, estado, ubicacion;
-
-                if (u is BE.ArticuloIndividual a)
-                {
-                    tipo      = "Artículo";
-                    precio    = $"$ {a.ValorDeclarado:N2}";
-                    categoria = a.Categoria   ?? "—";
-                    estado    = a.EstadoFisico ?? "—";
-                    ubicacion = a.Ubicacion    ?? "—";
-                }
-                else
-                {
-                    tipo      = "Lote";
-                    precio    = $"$ {u.PrecioBase:N2}";
-                    categoria = "—";
-                    estado    = "—";
-                    ubicacion = "—";
-                }
-
-                dgvDetalle.Rows.Add(tipo, u.Nombre, precio, categoria, estado, ubicacion,
-                                    u.FechaAlta.ToString("dd/MM/yyyy"));
-            }
+            btnBaja.Enabled = dgv.SelectedRows.Count > 0;
         }
 
         private void btnNuevoArticulo_Click(object sender, EventArgs e)
         {
             using (var frm = new FrmNuevoArticulo())
-                if (frm.ShowDialog(this) == DialogResult.OK) CargarArbol();
+                if (frm.ShowDialog(this) == DialogResult.OK) CargarGrilla();
         }
 
         private void btnNuevoLote_Click(object sender, EventArgs e)
         {
             using (var frm = new FrmNuevoLote())
-                if (frm.ShowDialog(this) == DialogResult.OK) CargarArbol();
+                if (frm.ShowDialog(this) == DialogResult.OK) CargarGrilla();
         }
 
         private void btnBaja_Click(object sender, EventArgs e)
         {
-            if (!(treeView.SelectedNode?.Tag is BE.UnidadDeVenta u)) return;
+            if (!(dgv.SelectedRows[0]?.Tag is BE.UnidadDeVenta u)) return;
             if (MessageBox.Show(
                     $"¿Dar de baja «{u.Nombre}»?\nNo se puede dar de baja si tiene una subasta activa.",
                     "Confirmar baja", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
             try
             {
                 _bll.BajaUnidad(u.Id);
-                CargarArbol();
+                CargarGrilla();
             }
             catch (Exception ex)
             {
@@ -141,6 +103,6 @@ namespace GUI
             }
         }
 
-        private void btnRefrescar_Click(object sender, EventArgs e) => CargarArbol();
+        private void btnRefrescar_Click(object sender, EventArgs e) => CargarGrilla();
     }
 }
