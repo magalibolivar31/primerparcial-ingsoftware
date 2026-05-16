@@ -46,8 +46,8 @@ namespace GUI
             this.lblRol.Text = "Rol *:";           this.lblRol.Font = boldFont; this.lblRol.Location = new System.Drawing.Point(lx, y + 3); this.lblRol.Size = new System.Drawing.Size(lw, 20);
             this.cboRol.Font = normFont;             this.cboRol.Location = new System.Drawing.Point(tx, y); this.cboRol.Size = new System.Drawing.Size(tw, 24);
             this.cboRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboRol.Items.AddRange(new object[] { "Administrador", "Martillero", "Operador", "Supervisor" });
-            this.cboRol.SelectedIndex = 2; this.cboRol.TabIndex = 4;
+            this.cboRol.Items.AddRange(new object[] { "Martillero", "Operador" });
+            this.cboRol.SelectedIndex = 1; this.cboRol.TabIndex = 4;
             y += gap + 10;
 
             this.btnGuardar.Text = "Guardar";
