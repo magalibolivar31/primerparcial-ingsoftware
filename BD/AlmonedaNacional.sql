@@ -175,16 +175,8 @@ DECLARE @hash VARCHAR(512) = '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa8
 -- USUARIOS (10) — password de todos: admin123
 -- ============================================================
 INSERT INTO Usuario (Nombre, Apellido, Email, PasswordHash, Rol, Activo, FechaAlta) VALUES
-('Carlos',     'Mendez',    'martillero',   @hash, 'Martillero', 1, '2026-01-10 08:05:00'),
-('Laura',      'Torres',    'operador',     @hash, 'Operador',   1, '2026-01-10 08:10:00'),
-('Roberto',    'Silva',     'martillero2',  @hash, 'Martillero', 1, '2026-01-10 08:15:00'),
-('Diego',      'Suarez',    'operador2',    @hash, 'Operador',   1, '2026-02-01 09:00:00'),
-('Fernanda',   'Castro',    'operador3',    @hash, 'Operador',   1, '2026-02-01 09:10:00'),
-('Miguel',     'Romero',    'operador4',    @hash, 'Operador',   1, '2026-02-15 10:00:00'),
-('Patricia',   'Leal',      'operador5',    @hash, 'Operador',   1, '2026-02-15 10:05:00'),
-('Sebastian',  'Rojas',     'martillero3',  @hash, 'Martillero', 1, '2026-03-01 08:30:00'),
-('Claudia',    'Vega',      'operador6',    @hash, 'Operador',   1, '2026-03-01 08:35:00'),
-('Ana',        'Gutierrez', 'martillero4',  @hash, 'Martillero', 1, '2026-03-15 09:00:00');
+('Carlos',  'Mendez', 'martillero', @hash, 'Martillero', 1, '2026-01-10 08:05:00'),
+('Laura',   'Torres', 'operador',   @hash, 'Operador',   1, '2026-01-10 08:10:00');
 
 -- ============================================================
 -- POSTORES (30)
