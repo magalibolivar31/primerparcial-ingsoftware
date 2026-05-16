@@ -10,9 +10,8 @@ namespace Servicios
     // se reutiliza aqui para generar el informe completo de la jornada.
     public class ReporteJornada
     {
-        private readonly DAL.UnidadDeVentaDAL  _dalUnidad  = new DAL.UnidadDeVentaDAL();
-        private readonly DAL.SubastaDAL        _dalSubasta = new DAL.SubastaDAL();
-        private readonly DAL.AdjudicacionDAL   _dalAdj     = new DAL.AdjudicacionDAL();
+        private readonly BLL.CatalogoBLL _catalogoBLL = new BLL.CatalogoBLL();
+        private readonly BLL.SubastaBLL  _subastaBLL  = new BLL.SubastaBLL();
 
         // Genera el informe consolidado de la jornada.
         // Lista todas las unidades de venta con su precio final o estado "Desierta".
@@ -25,14 +24,14 @@ namespace Servicios
             sb.AppendLine("========================================");
             sb.AppendLine();
 
-            // Cargar todas las unidades activas (lista plana desde BD).
-            List<BE.UnidadDeVenta> todas = _dalUnidad.ObtenerTodos();
+            // Cargar todas las unidades activas a través de BLL.
+            List<BE.UnidadDeVenta> todas = _catalogoBLL.ObtenerTodos();
 
             // Construir el arbol Composite en memoria.
             BE.UnidadDeVenta arbol = ConstruirArbol(todas);
 
-            // Cargar adjudicaciones del dia para consultar resultados.
-            List<BE.Adjudicacion> adjudicaciones = _dalAdj.ObtenerTodos();
+            // Cargar adjudicaciones a través de BLL.
+            List<BE.Adjudicacion> adjudicaciones = _subastaBLL.ObtenerAdjudicaciones();
             var mapaAdj = new Dictionary<int, BE.Adjudicacion>();
             foreach (var adj in adjudicaciones)
                 mapaAdj[adj.IdUnidad] = adj;

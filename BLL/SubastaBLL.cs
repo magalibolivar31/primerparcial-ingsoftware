@@ -107,6 +107,10 @@ namespace BLL
         public List<BE.Puja> ObtenerHistorialPujas(int idSubasta)
             => _dalPuja.ObtenerPorSubasta(idSubasta);
 
+        // RF-13: todas las adjudicaciones para el reporte de jornada.
+        public List<BE.Adjudicacion> ObtenerAdjudicaciones()
+            => _dalAdj.ObtenerTodos();
+
         // RF-10: registra una puja delegando en el Singleton GestorPujas.
         public BE.Puja RegistrarPuja(int idSubasta, int idPostor, decimal monto)
         {
