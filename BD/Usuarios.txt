@@ -6,22 +6,22 @@ Todos los usuarios tienen la contrasena: admin123
 
 --------------------------------------------
 ROL: Administrador
-  Email   : admin@almoneda.com
+  Email   : admin
   Password: admin123
   Acceso  : total (todas las funciones)
 --------------------------------------------
 ROL: Martillero
-  Email   : martillero@almoneda.com
+  Email   : martillero
   Password: admin123
   Acceso  : catalogo + abrir/cerrar subastas + reportes
 --------------------------------------------
 ROL: Operador
-  Email   : operador@almoneda.com
+  Email   : operador
   Password: admin123
   Acceso  : subastas activas + registrar pujas + postores
 --------------------------------------------
 ROL: Supervisor
-  Email   : supervisor@almoneda.com
+  Email   : supervisor
   Password: admin123
   Acceso  : reportes y bitacora (solo consulta)
 --------------------------------------------

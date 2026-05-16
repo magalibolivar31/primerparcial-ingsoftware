@@ -182,7 +182,7 @@ INSERT INTO Usuario (Nombre, Apellido, Email, PasswordHash, Rol, Activo, FechaAl
 VALUES (
     'Admin',
     'Sistema',
-    'admin@almoneda.com',
+    'admin',
     -- SHA-256 de "admin123"
     '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9',
     'Administrador',
@@ -197,9 +197,9 @@ GO
 
 -- Usuarios
 INSERT INTO Usuario (Nombre, Apellido, Email, PasswordHash, Rol, Activo, FechaAlta) VALUES
-('Carlos',  'Mendez',  'martillero@almoneda.com', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'Martillero', 1, GETDATE()),
-('Laura',   'Torres',  'operador@almoneda.com',   '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'Operador',   1, GETDATE()),
-('Roberto', 'Silva',   'supervisor@almoneda.com', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'Supervisor', 1, GETDATE());
+('Carlos',  'Mendez',  'martillero', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'Martillero', 1, GETDATE()),
+('Laura',   'Torres',  'operador',   '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'Operador',   1, GETDATE()),
+('Roberto', 'Silva',   'supervisor', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'Supervisor', 1, GETDATE());
 GO
 
 -- Postores
