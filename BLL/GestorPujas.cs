@@ -123,6 +123,19 @@ namespace BLL
             }
         }
 
+        // RF-07: notifica el cierre a todos los observers y luego elimina el gestor.
+        public void NotificarCierre(int idSubasta, BE.Subasta subasta)
+        {
+            lock (_pujaLock)
+            {
+                if (_gestores.TryGetValue(idSubasta, out Servicios.GestorNotificaciones g))
+                {
+                    g.ActualizarSubasta(subasta);
+                    g.Notificar();
+                }
+            }
+        }
+
         // Elimina el gestor de una subasta al cerrarla.
         public void EliminarGestor(int idSubasta)
         {
