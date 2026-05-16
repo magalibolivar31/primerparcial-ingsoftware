@@ -1,178 +1,94 @@
-# 🏛️ La Almoneda Nacional
-### Sistema de Gestión de Subastas — Primer Parcial Ingeniería de Software · UAI 2026
+# La Almoneda Nacional — Primer Parcial Ingeniería de Software · UAI 2026
 
-> Aplicación de escritorio Windows Forms (.NET 4.7.2) que gestiona el ciclo completo de subastas:
-> catálogo de artículos y lotes, apertura/cierre de subastas, registro de pujas en tiempo real
-> y reportes de jornada.
-
----
-
-## 🗂️ Arquitectura
-
-```
-┌─────────────────────────────────────────────────────┐
-│                    GUI (WinForms MDI)                │
-│  Login · Menu · Catálogo · Subastas · Postores      │
-│  Registrar Puja · Reporte de Jornada · Usuarios     │
-├──────────────────────────────────────────────────────┤
-│                        BLL                           │
-│  CatalogoBLL · SubastaBLL · PostorBLL · UsuarioBLL  │
-│  GestorPujas (Singleton)                            │
-├──────────────────────────────────────────────────────┤
-│            Servicios              Seguridad          │
-│  GestorNotificaciones   SessionManager (Singleton)  │
-│  NotificadorPostor      Encriptador (SHA-256)       │
-│  ReporteJornada · Bitacora                          │
-├──────────────────────────────────────────────────────┤
-│                        DAL                           │
-│  Acceso (Singleton) · SubastaDAL · PujaDAL          │
-│  UnidadDeVentaDAL · PostorDAL · UsuarioDAL · ...    │
-├──────────────────────────────────────────────────────┤
-│                         BE                           │
-│  UnidadDeVenta · ArticuloIndividual · Lote          │
-│  Subasta · Puja · Postor · Usuario · Suscripcion    │
-└──────────────────────────────────────────────────────┘
-                          │
-                   SQL Server Express
-                   AlmonedaNacionalDB
-```
+**Alumna:** Bolivar Cruz, Magali  
+**Docente:** Juan Ignacio Silva  
+**Sistema:** Gestión de subastas con catálogo jerárquico, pujas en tiempo real y reportes de jornada.
 
 ---
 
-## 🎨 Patrones de Diseño
+## Solución — Proyectos
 
-### Composite — Catálogo de Unidades de Venta
-```
-UnidadDeVenta (Component)
-├── ArticuloIndividual (Leaf)    → ObtenerPrecioBase() = ValorDeclarado
-└── Lote (Composite)             → ObtenerPrecioBase() = Σ hijos (recursivo)
-```
-Permite tratar artículos individuales y lotes agrupados de forma uniforme.
-El precio de un lote se calcula recursivamente sumando todos sus componentes.
+| Proyecto | Tipo | Responsabilidad |
+|----------|------|----------------|
+| `BE` | Class Library | Entidades del dominio (sin dependencias externas) |
+| `DAL` | Class Library | Acceso a SQL Server via ADO.NET puro |
+| `Servicios` | Class Library | Observer + Reporte de Jornada + Bitácora |
+| `Seguridad` | Class Library | Sesión (Singleton) + Hash SHA-256 |
+| `BLL` | Class Library | Lógica de negocio + interfaces + `GestorPujas` (Singleton) |
+| `GUI` | WinExe | WinForms MDI — formularios operativos |
 
-### Observer — Notificaciones en Tiempo Real
-```
-ISujetoSubasta          IObserverPostor
-      │                       │
-GestorNotificaciones ←── NotificadorPostor
-      │
-   Notificar() ──► itera sobre la lista de observers
-```
-Cada vez que se acepta una puja, todos los postores suscriptos reciben
-una notificación automática con el nuevo precio vigente.
-
-### Singleton — Control de Concurrencia y Sesión
-| Singleton | Responsabilidad |
-|-----------|----------------|
-| `GestorPujas` | Serializa pujas concurrentes con `lock`; evita doble adjudicación |
-| `DAL.Acceso` | Instancia única de acceso a BD (connection pooling) |
-| `Seguridad.SessionManager` | Usuario autenticado disponible en toda la app |
-
-Todos usan **double-checked locking** con `volatile` + `lock`.
+Dependencias: `GUI → BLL → Servicios / Seguridad → DAL → BE`
 
 ---
 
-## 🖥️ Formularios
+## Patrones implementados
 
-| Formulario | Rol requerido | Función |
-|-----------|--------------|---------|
-| `Login` | — | Autenticación con bloqueo tras 3 intentos |
-| `Menu` (MDI) | Todos | Shell principal con menú filtrado por rol |
-| `FrmCatalogo` | Martillero / Admin | TreeView del árbol Composite |
-| `FrmNuevoArticulo` | Martillero / Admin | Alta de artículo individual (Leaf) |
-| `FrmNuevoLote` | Martillero / Admin | Alta de lote (Composite node) |
-| `FrmSubastas` | Martillero / Admin | Abrir · Cerrar · Ver activas |
-| `FrmRegistrarPuja` | Operador / Admin | Registra puja via `GestorPujas` Singleton |
-| `FrmPostores` | Operador / Admin | ABM de postores + suscripciones Observer |
-| `FrmReporteJornada` | Todos | Recorre el árbol Composite recursivamente |
-| `FrmGestionUsuarios` | Admin | Desbloquear cuentas · Resetear contraseñas |
+### Composite — RF-01 al RF-04, RF-13
+
+**Problema:** el catálogo contiene artículos individuales y lotes que agrupan otros artículos o lotes. El precio base y la descripción deben calcularse de forma uniforme sin importar la profundidad del árbol.
+
+```
+BE.UnidadDeVenta          ← Component (abstracto)
+├── BE.ArticuloIndividual ← Leaf       → ObtenerPrecioBase() = ValorDeclarado
+└── BE.Lote               ← Composite  → ObtenerPrecioBase() = Σ hijos (recursivo)
+```
+
+`DAL.UnidadDeVentaDAL` discrimina el tipo por la columna `Tipo` (`ARTICULO` / `LOTE`).  
+`BLL.CatalogoBLL.ConstruirArbolDesde(id)` reconstituye el árbol en memoria con recursión.  
+`Servicios.ReporteJornada` reutiliza la misma recursión para generar el informe de jornada.
 
 ---
 
-## 👥 Usuarios de prueba
+### Observer — RF-05 al RF-08
 
-| Email | Contraseña | Rol | Acceso |
-|-------|-----------|-----|--------|
-| `admin@almoneda.com` | `admin123` | Administrador | Total |
-| `martillero@almoneda.com` | `admin123` | Martillero | Catálogo + Subastas + Reportes |
-| `operador@almoneda.com` | `admin123` | Operador | Subastas activas + Pujas + Postores |
-| `supervisor@almoneda.com` | `admin123` | Supervisor | Reportes (solo lectura) |
+**Problema:** cuando se acepta una puja, todos los postores suscriptos a esa subasta deben recibir la notificación de inmediato.
 
-> Las contraseñas se almacenan como hash SHA-256. La cuenta se bloquea automáticamente tras 3 intentos fallidos.
+```
+Servicios.ISujetoSubasta          ← Subject interface
+Servicios.IObserverPostor         ← Observer interface
+Servicios.GestorNotificaciones    ← Concrete Subject  (uno por subasta activa)
+Servicios.NotificadorPostor       ← Concrete Observer (uno por postor suscripto)
+```
+
+`BLL.SubastaBLL.AbrirSubasta()` crea un `GestorNotificaciones` para la nueva subasta.  
+`BLL.PostorBLL.Suscribir()` crea un `NotificadorPostor` y lo registra en el gestor.  
+`BLL.GestorPujas.RegistrarPuja()` llama a `gestor.Notificar()` tras aceptar la puja.
 
 ---
 
-## ⚙️ Cómo ejecutar
+### Singleton — RF-09
 
-### Requisitos
-- Visual Studio 2019 o superior
-- .NET Framework 4.7.2
-- SQL Server Express (instancia `.\SQLEXPRESS`)
+**Problema:** múltiples hilos pueden intentar registrar pujas sobre la misma subasta al mismo tiempo, o acceder simultáneamente a la base de datos / a la sesión del usuario.
 
-### Pasos
+Todos implementan **double-checked locking** (`volatile` + `lock`):
 
-**1. Crear la base de datos**
-```sql
--- Ejecutar en SQL Server Management Studio o sqlcmd:
--- BD/AlmonedaNacional.sql
-```
-El script crea la BD `AlmonedaNacionalDB`, todas las tablas, índices y los 4 usuarios seed.
-
-**2. Verificar la cadena de conexión**
-
-En `Primer Parcial - Bolivar Cruz Magali/App.config`:
-```xml
-<add name="AlmonedaNacionalDB"
-     connectionString="Data Source=.\SQLEXPRESS;Initial Catalog=AlmonedaNacionalDB;Integrated Security=True"
-     providerName="System.Data.SqlClient" />
-```
-Cambiar `.\SQLEXPRESS` por el nombre de tu instancia si difiere.
-
-**3. Compilar y ejecutar**
-```
-Abrir: Primer Parcial - Bolivar Cruz Magali.sln
-Build → Rebuild Solution  (Ctrl+Shift+B)
-Run                        (F5)
-```
+| Clase | Lock | Garantía |
+|-------|------|----------|
+| `BLL.GestorPujas` | `_pujaLock` separado del lock de instancia | Pujas serializadas; el segundo hilo ve el precio ya actualizado por el primero y es rechazado |
+| `DAL.Acceso` | `_lock` de instancia | Una sola cadena de conexión; connection pool de ADO.NET |
+| `Seguridad.SessionManager` | `_lock` de instancia | `GetInstance` lanza si no hay sesión activa; `Login` / `Logout` bajo lock |
 
 ---
 
-## 🗄️ Modelo de datos (resumen)
+## Formularios GUI
 
-```
-UnidadDeVenta ──┬── ArticuloIndividual
-                └── Lote
-                      │
-                   Subasta ──── Puja ──── Postor
-                      │                     │
-                   Adjudicacion          Suscripcion
-                      │
-                   Bitacora
-```
-
----
-
-## 📁 Estructura del repositorio
-
-```
-/
-├── BD/                          Script SQL + usuarios.txt
-├── BE/                          Entidades del dominio
-├── DAL/                         Acceso a datos (ADO.NET)
-├── BLL/                         Lógica de negocio + Interfaces
-│   └── Interfaces/
-├── Servicios/                   Observer + Reporte + Bitácora
-├── Seguridad/                   SessionManager + Encriptador
-└── Primer Parcial - Bolivar Cruz Magali/
-    ├── GUI.csproj
-    ├── Program.cs
-    ├── Login.cs / Menu.cs
-    ├── Frm*.cs                  Formularios operativos
-    └── App.config
-```
+| Formulario | Acceso por rol | Patrón que demuestra |
+|-----------|---------------|---------------------|
+| `Login` | — | Seguridad / SessionManager |
+| `Menu` (MDI) | Todos | Filtro por rol en `ConfigurarMenuPorRol()` |
+| `FrmCatalogo` | Martillero, Admin | Composite — TreeView jerárquico |
+| `FrmNuevoArticulo` | Martillero, Admin | Composite — alta de hoja |
+| `FrmNuevoLote` | Martillero, Admin | Composite — alta de nodo |
+| `FrmSubastas` | Martillero, Admin | Observer (apertura crea Subject) |
+| `FrmRegistrarPuja` | Operador, Admin | Singleton + Observer (puja → notifica) |
+| `FrmPostores` | Operador, Admin | Observer (suscripción registra Observer) |
+| `FrmReporteJornada` | Todos | Composite — recorrido recursivo |
+| `FrmGestionUsuarios` | Admin | Seguridad — desbloqueo y reset |
 
 ---
 
-## 👩‍💻 Autora
+## Base de datos
 
-**Magali Bolivar Cruz** — Ingeniería de Software · UAI 2026
+Script completo en `BD/AlmonedaNacional.sql`.  
+Cadena de conexión en `Primer Parcial - Bolivar Cruz Magali/App.config` → `AlmonedaNacionalDB`.  
+Usuarios seed y contraseñas de prueba en `BD/Usuarios.txt`.
