@@ -60,9 +60,10 @@ CREATE TABLE Usuario (
     PasswordHash     VARCHAR(512)  NOT NULL,
     Rol              VARCHAR(20)   NOT NULL CHECK (Rol IN ('Martillero')),
     Activo           BIT           NOT NULL DEFAULT 1,
-    IntentosFallidos INT           NOT NULL DEFAULT 0,
-    Bloqueado        BIT           NOT NULL DEFAULT 0,
-    FechaAlta        DATETIME      NOT NULL DEFAULT GETDATE()
+    IntentosFallidos     INT      NOT NULL DEFAULT 0,
+    Bloqueado            BIT      NOT NULL DEFAULT 0,
+    UltimoIntentoFallido DATETIME NULL,
+    FechaAlta            DATETIME NOT NULL DEFAULT GETDATE()
 );
 GO
 

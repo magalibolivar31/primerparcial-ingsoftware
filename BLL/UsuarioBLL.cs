@@ -7,7 +7,8 @@ namespace BLL
     {
         private readonly DAL.UsuarioDAL _dalUsuario = new DAL.UsuarioDAL();
 
-        private const int MaxIntentosFallidos = 3;
+        private const int MaxIntentosFallidos    = 3;
+        private const int MinutosBloqueo         = 10;
 
         public List<BE.Usuario> ObtenerTodos() => _dalUsuario.ObtenerTodos();
 
@@ -26,7 +27,22 @@ namespace BLL
                 throw new Exception("El usuario se encuentra deshabilitado.");
 
             if (usuario.Bloqueado)
-                throw new Exception($"La cuenta está bloqueada por {MaxIntentosFallidos} intentos fallidos. Contacte al administrador.");
+            {
+                // Desbloqueo automático: si pasaron los minutos de espera, se resetea sin intervención externa.
+                if (usuario.UltimoIntentoFallido.HasValue &&
+                    DateTime.Now >= usuario.UltimoIntentoFallido.Value.AddMinutes(MinutosBloqueo))
+                {
+                    _dalUsuario.ResetearIntentos(usuario.Id);
+                    usuario.Bloqueado = false;
+                }
+                else
+                {
+                    DateTime liberacion = usuario.UltimoIntentoFallido.Value.AddMinutes(MinutosBloqueo);
+                    int minutosRestantes = (int)Math.Ceiling((liberacion - DateTime.Now).TotalMinutes);
+                    throw new Exception(
+                        $"Cuenta bloqueada. Intentá de nuevo en {minutosRestantes} minuto(s).");
+                }
+            }
 
             if (!Seguridad.Encriptador.Verificar(password, usuario.PasswordHash))
             {

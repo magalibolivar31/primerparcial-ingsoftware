@@ -12,9 +12,10 @@ namespace BE
         public string     PasswordHash     { get; set; }
         public RolUsuario Rol              { get; set; }
         public bool       Activo           { get; set; }
-        public int        IntentosFallidos { get; set; }
-        public bool       Bloqueado        { get; set; }
-        public DateTime   FechaAlta        { get; set; }
+        public int        IntentosFallidos      { get; set; }
+        public bool       Bloqueado             { get; set; }
+        public DateTime?  UltimoIntentoFallido  { get; set; }
+        public DateTime   FechaAlta             { get; set; }
 
         public string NombreCompleto => $"{Nombre} {Apellido}";
 

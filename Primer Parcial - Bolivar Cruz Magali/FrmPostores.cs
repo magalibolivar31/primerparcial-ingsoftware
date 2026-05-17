@@ -99,7 +99,7 @@ namespace GUI
                         DniCuit  = txtDniCuit.Text.Trim(),
                         Email    = txtEmailPostor.Text.Trim(),
                         Telefono = txtTelefono.Text.Trim(),
-                        Canal    = (BE.CanalNotificacion)Enum.Parse(typeof(BE.CanalNotificacion), cboCanal.SelectedItem?.ToString() ?? "Email", true),
+                        Canal    = (BE.CanalNotificacion)Enum.Parse(typeof(BE.CanalNotificacion), cboCanal.SelectedItem?.ToString() ?? "Web", true),
                         Activo   = true
                     };
                     _bllPostor.Alta(p);
@@ -112,7 +112,7 @@ namespace GUI
                     p.DniCuit  = txtDniCuit.Text.Trim();
                     p.Email    = txtEmailPostor.Text.Trim();
                     p.Telefono = txtTelefono.Text.Trim();
-                    p.Canal    = (BE.CanalNotificacion)Enum.Parse(typeof(BE.CanalNotificacion), cboCanal.SelectedItem?.ToString() ?? "Email", true);
+                    p.Canal    = (BE.CanalNotificacion)Enum.Parse(typeof(BE.CanalNotificacion), cboCanal.SelectedItem?.ToString() ?? "Web", true);
                     _bllPostor.Modificar(p);
                     MessageBox.Show("Postor actualizado correctamente.", "Modificación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -178,7 +178,8 @@ namespace GUI
                 dgvSuscs.AutoGenerateColumns = false;
                 if (dgvSuscs.Columns.Count == 0)
                 {
-                    dgvSuscs.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "IdPostor",         HeaderText = "ID Postor",   Width = 80 });
+                    dgvSuscs.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "IdPostor",         HeaderText = "ID",          Width = 45 });
+                    dgvSuscs.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "NombrePostor",     HeaderText = "Postor",      Width = 180 });
                     dgvSuscs.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "FechaSuscripcion", HeaderText = "Fecha Susc.", Width = 130, DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy HH:mm" } });
                     dgvSuscs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     dgvSuscs.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

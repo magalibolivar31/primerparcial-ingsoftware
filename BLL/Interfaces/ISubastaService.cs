@@ -17,5 +17,9 @@ namespace BLL.Interfaces
             string estado, int? idUnidad, string filtroUnidad, string tipoUnidad,
             int? idPostor, string filtroPostor, bool soloGanadores,
             decimal? montoMin, decimal? montoMax);
+
+        // RF-05 / RF-08 — Observer: suscripción desde la GUI
+        void SuscribirObserver(int idSubasta, Servicios.IObserverPostor observer);
+        void DesuscribirObserver(int idSubasta, Servicios.IObserverPostor observer);
     }
 }

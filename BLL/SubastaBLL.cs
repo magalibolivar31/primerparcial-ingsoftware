@@ -120,6 +120,14 @@ namespace BLL
             string filtroUnidad, string filtroGanador, string resultado)
             => _dalSubasta.ObtenerCerradas(desde, hasta, filtroUnidad, filtroGanador, resultado);
 
+        // RF-05: suscribe un observer (postor) al GestorNotificaciones de la subasta.
+        public void SuscribirObserver(int idSubasta, Servicios.IObserverPostor observer)
+            => _gestorPujas.AgregarObserver(idSubasta, observer);
+
+        // RF-08: desuscribe un observer; deja de recibir alertas de forma inmediata.
+        public void DesuscribirObserver(int idSubasta, Servicios.IObserverPostor observer)
+            => _gestorPujas.QuitarObserver(idSubasta, observer);
+
         // RF-10: registra una puja delegando en el Singleton GestorPujas.
         public BE.Puja RegistrarPuja(int idSubasta, int idPostor, decimal monto)
         {

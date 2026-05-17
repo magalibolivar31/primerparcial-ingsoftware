@@ -12,7 +12,7 @@ namespace DAL
             var lista = new List<BE.Usuario>();
             DataTable tabla = acceso.Leer(
                 "SELECT Id, Nombre, Apellido, Email, PasswordHash, Rol, Activo, " +
-                "       IntentosFallidos, Bloqueado, FechaAlta " +
+                "       IntentosFallidos, Bloqueado, UltimoIntentoFallido, FechaAlta " +
                 "FROM Usuario WHERE Activo = 1 ORDER BY Apellido, Nombre", null);
             foreach (DataRow row in tabla.Rows)
                 lista.Add(Mapear(row));
@@ -24,7 +24,7 @@ namespace DAL
             SqlParameter[] p = { new SqlParameter("@Id", id) };
             DataTable tabla = acceso.Leer(
                 "SELECT Id, Nombre, Apellido, Email, PasswordHash, Rol, Activo, " +
-                "       IntentosFallidos, Bloqueado, FechaAlta " +
+                "       IntentosFallidos, Bloqueado, UltimoIntentoFallido, FechaAlta " +
                 "FROM Usuario WHERE Id = @Id", p);
             if (tabla == null || tabla.Rows.Count == 0) return null;
             return Mapear(tabla.Rows[0]);
@@ -35,7 +35,7 @@ namespace DAL
             SqlParameter[] p = { new SqlParameter("@Email", email) };
             DataTable tabla = acceso.Leer(
                 "SELECT Id, Nombre, Apellido, Email, PasswordHash, Rol, Activo, " +
-                "       IntentosFallidos, Bloqueado, FechaAlta " +
+                "       IntentosFallidos, Bloqueado, UltimoIntentoFallido, FechaAlta " +
                 "FROM Usuario WHERE Email = @Email", p);
             if (tabla == null || tabla.Rows.Count == 0) return null;
             return Mapear(tabla.Rows[0]);
@@ -63,7 +63,8 @@ namespace DAL
         {
             SqlParameter[] p = { new SqlParameter("@Id", id) };
             acceso.Escribir(
-                "UPDATE Usuario SET IntentosFallidos = IntentosFallidos + 1 " +
+                "UPDATE Usuario SET IntentosFallidos = IntentosFallidos + 1, " +
+                "                   UltimoIntentoFallido = GETDATE() " +
                 "WHERE Id = @Id", p);
         }
 
@@ -102,9 +103,12 @@ namespace DAL
                 PasswordHash     = row["PasswordHash"].ToString(),
                 Rol              = (BE.RolUsuario)Enum.Parse(typeof(BE.RolUsuario), row["Rol"].ToString()),
                 Activo           = Convert.ToBoolean(row["Activo"]),
-                IntentosFallidos = Convert.ToInt32(row["IntentosFallidos"]),
-                Bloqueado        = Convert.ToBoolean(row["Bloqueado"]),
-                FechaAlta        = Convert.ToDateTime(row["FechaAlta"])
+                IntentosFallidos     = Convert.ToInt32(row["IntentosFallidos"]),
+                Bloqueado            = Convert.ToBoolean(row["Bloqueado"]),
+                UltimoIntentoFallido = row["UltimoIntentoFallido"] == DBNull.Value
+                                       ? (DateTime?)null
+                                       : Convert.ToDateTime(row["UltimoIntentoFallido"]),
+                FechaAlta            = Convert.ToDateTime(row["FechaAlta"])
             };
         }
     }

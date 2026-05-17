@@ -14,6 +14,28 @@ namespace Servicios
         private readonly DAL.SubastaDAL       _dalSubasta = new DAL.SubastaDAL();
         private readonly DAL.AdjudicacionDAL  _dalAdj     = new DAL.AdjudicacionDAL();
 
+        // Expone el árbol Composite y los mapas de adjudicaciones/subastas para consumo de la GUI.
+        public void ObtenerDatos(out BE.UnidadDeVenta arbol,
+                                 out Dictionary<int, BE.Adjudicacion> mapaAdj,
+                                 out Dictionary<int, BE.Subasta>      mapaSubastas)
+        {
+            List<BE.UnidadDeVenta> todas = _dalUnidad.ObtenerTodos();
+            arbol = ConstruirArbol(todas);
+
+            var adjList = _dalAdj.ObtenerTodos();
+            mapaAdj = new Dictionary<int, BE.Adjudicacion>();
+            foreach (var adj in adjList)
+                mapaAdj[adj.IdUnidad] = adj;
+
+            // ObtenerTodos ordena DESC por FechaApertura; el primer registro de cada IdUnidad
+            // es el más reciente, así que solo guardamos si no está ya en el mapa.
+            var subastaList = _dalSubasta.ObtenerTodos();
+            mapaSubastas = new Dictionary<int, BE.Subasta>();
+            foreach (var s in subastaList)
+                if (!mapaSubastas.ContainsKey(s.IdUnidad))
+                    mapaSubastas[s.IdUnidad] = s;
+        }
+
         // Genera el informe consolidado de la jornada.
         // Lista todas las unidades de venta con su precio final o estado "Desierta".
         public string GenerarReporte(DateTime fecha)
