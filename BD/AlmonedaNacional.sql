@@ -834,31 +834,28 @@ INSERT INTO Suscripcion (IdPostor, IdSubasta, FechaSuscripcion, Activa) VALUES
 -- BITACORA
 -- ============================================================
 INSERT INTO Bitacora (Formulario, Accion, Criticidad, FechaHora, IdUsuario) VALUES
-('Login',           'Inicio de sesion: admin',                                              'Baja',  '2026-04-10 09:45:00', 1),
-('Subastas',        'Apertura subasta Collar brillantes — Sub ID ' + CAST(@s1  AS VARCHAR), 'Alta',  '2026-04-10 10:00:00', 2),
-('Subastas',        'Cierre — Collar adjudicado. Ganador postor 6. $1.050.000',             'Alta',  '2026-04-10 11:46:00', 2),
-('Subastas',        'Apertura subasta Lote Bellas Artes — Sub ID ' + CAST(@s2  AS VARCHAR), 'Alta',  '2026-04-15 14:00:00', 2),
-('Subastas',        'Cierre — Lote Bellas Artes adjudicado. Ganador postor 4. $340.000',    'Alta',  '2026-04-15 15:32:00', 2),
-('Subastas',        'Apertura subasta Reloj Junghans — Sub ID ' + CAST(@s3   AS VARCHAR),   'Alta',  '2026-04-22 10:00:00', 2),
-('Subastas',        'Cierre — Reloj adjudicado. Ganador postor 8. $415.000',                'Alta',  '2026-04-22 12:02:00', 2),
-('Subastas',        'Apertura subasta BMW Serie 7 — Sub ID ' + CAST(@s6   AS VARCHAR),      'Alta',  '2026-04-30 09:00:00', 9),
-('Subastas',        'Cierre — BMW adjudicado. Ganador postor 18. $9.100.000',               'Alta',  '2026-04-30 10:46:00', 9),
-('Subastas',        'Apertura subasta Lote Antiguedades — Sub ID ' + CAST(@s13 AS VARCHAR), 'Alta',  '2026-05-16 09:00:00', 2),
-('Subastas',        'Apertura subasta Ford F-150 — Sub ID ' + CAST(@s14 AS VARCHAR),        'Alta',  '2026-05-16 09:30:00', 9),
-('Subastas',        'Apertura subasta Lote Maquinaria — Sub ID ' + CAST(@s15 AS VARCHAR),   'Alta',  '2026-05-16 10:00:00', 2),
-('Subastas',        'Apertura subasta Violin Ruggieri — Sub ID ' + CAST(@s16 AS VARCHAR),   'Alta',  '2026-05-16 10:30:00', 5),
-('Postores',        'Alta postor: Juan Perez (SALA)',                                        'Baja',  '2026-01-15 09:05:00', 3),
-('Postores',        'Alta postor: Coleccionistas Arg. (WEB)',                                'Baja',  '2026-02-10 16:10:00', 3),
-('GestionUsuarios', 'Alta usuario: martillero (Carlos Mendez)',                              'Media', '2026-01-10 08:05:00', 1),
-('GestionUsuarios', 'Alta usuario: operador (Laura Torres)',                                 'Media', '2026-01-10 08:06:00', 1),
-('GestionUsuarios', 'Alta usuario: supervisor (Roberto Silva)',                              'Media', '2026-01-10 08:07:00', 1),
-('GestionUsuarios', 'Alta usuario: martillero2 (Diego Suarez)',                             'Media', '2026-02-01 09:05:00', 1),
-('Catalogo',        'Alta articulo: Collar de brillantes Art Deco ($850.000)',              'Baja',  '2026-03-10 09:05:00', 2);
+('Login',    'Inicio de sesion: martillero (Carlos Mendez)',                                'Baja',  '2026-04-10 09:45:00', 1),
+('Subastas', 'Apertura subasta Collar brillantes — Sub ID ' + CAST(@s1  AS VARCHAR),       'Alta',  '2026-04-10 10:00:00', 1),
+('Subastas', 'Cierre — Collar adjudicado. Ganador postor 6. $1.050.000',                   'Alta',  '2026-04-10 11:46:00', 1),
+('Subastas', 'Apertura subasta Lote Bellas Artes — Sub ID ' + CAST(@s2  AS VARCHAR),       'Alta',  '2026-04-15 14:00:00', 1),
+('Subastas', 'Cierre — Lote Bellas Artes adjudicado. Ganador postor 4. $340.000',          'Alta',  '2026-04-15 15:32:00', 1),
+('Subastas', 'Apertura subasta Reloj Junghans — Sub ID ' + CAST(@s3   AS VARCHAR),         'Alta',  '2026-04-22 10:00:00', 1),
+('Subastas', 'Cierre — Reloj adjudicado. Ganador postor 8. $415.000',                      'Alta',  '2026-04-22 12:02:00', 1),
+('Subastas', 'Apertura subasta BMW Serie 7 — Sub ID ' + CAST(@s6   AS VARCHAR),            'Alta',  '2026-04-30 09:00:00', 1),
+('Subastas', 'Cierre — BMW adjudicado. Ganador postor 18. $9.100.000',                     'Alta',  '2026-04-30 10:46:00', 1),
+('Subastas', 'Apertura subasta Lote Antiguedades — Sub ID ' + CAST(@s13 AS VARCHAR),       'Alta',  '2026-05-16 09:00:00', 1),
+('Subastas', 'Apertura subasta Ford F-150 — Sub ID ' + CAST(@s14 AS VARCHAR),              'Alta',  '2026-05-16 09:30:00', 1),
+('Subastas', 'Apertura subasta Lote Maquinaria — Sub ID ' + CAST(@s15 AS VARCHAR),         'Alta',  '2026-05-16 10:00:00', 1),
+('Subastas', 'Apertura subasta Violin Ruggieri — Sub ID ' + CAST(@s16 AS VARCHAR),         'Alta',  '2026-05-16 10:30:00', 1),
+('Postores', 'Alta postor: Juan Perez (SALA)',                                              'Baja',  '2026-01-15 09:05:00', 1),
+('Postores', 'Alta postor: Coleccionistas Arg. (WEB)',                                     'Baja',  '2026-02-10 16:10:00', 1),
+('Login',    'Alta usuario: martillero (Carlos Mendez)',                                    'Media', '2026-01-10 08:05:00', 1),
+('Catalogo', 'Alta articulo: Collar de brillantes Art Deco ($850.000)',                    'Baja',  '2026-03-10 09:05:00', 1);
 
 PRINT '============================================================';
 PRINT 'Base de datos AlmonedaNacionalDB creada correctamente.';
 PRINT '';
-PRINT 'Usuarios: 10  (admin / martillero / operador / supervisor + 6 mas)';
+PRINT 'Usuarios: 1  (martillero — Carlos Mendez / admin123)';
 PRINT 'Postores: 30';
 PRINT 'Catalogo: 33 items (26 articulos + 7 lotes con jerarquia anidada)';
 PRINT 'Subastas: 21 (12 CERRADAS + 6 ACTIVAS + 3 PENDIENTES)';
