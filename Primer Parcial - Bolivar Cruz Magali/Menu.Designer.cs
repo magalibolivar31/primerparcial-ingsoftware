@@ -23,7 +23,6 @@ namespace GUI
             this.menuCerrarSubasta = new System.Windows.Forms.ToolStripMenuItem();
             this.menuVerSubastas = new System.Windows.Forms.ToolStripMenuItem();
             this.menuRegistrarPuja = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuBitacoraSubastas = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPostores = new System.Windows.Forms.ToolStripMenuItem();
             this.menuGestionPostores = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportes = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,8 +92,7 @@ namespace GUI
             this.menuAbrirSubasta,
             this.menuCerrarSubasta,
             this.menuVerSubastas,
-            this.menuRegistrarPuja,
-            this.menuBitacoraSubastas});
+            this.menuRegistrarPuja});
             this.menuSubastas.ForeColor = System.Drawing.Color.White;
             this.menuSubastas.Name = "menuSubastas";
             this.menuSubastas.Size = new System.Drawing.Size(102, 29);
@@ -127,14 +125,7 @@ namespace GUI
             this.menuRegistrarPuja.Size = new System.Drawing.Size(288, 34);
             this.menuRegistrarPuja.Text = "Registrar Puja...";
             this.menuRegistrarPuja.Click += new System.EventHandler(this.menuRegistrarPuja_Click);
-            // 
-            // menuBitacoraSubastas
-            // 
-            this.menuBitacoraSubastas.Name = "menuBitacoraSubastas";
-            this.menuBitacoraSubastas.Size = new System.Drawing.Size(288, 34);
-            this.menuBitacoraSubastas.Text = "Bitácora de Subastas";
-            this.menuBitacoraSubastas.Click += new System.EventHandler(this.menuBitacoraSubastas_Click);
-            // 
+            //
             // menuPostores
             // 
             this.menuPostores.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -243,7 +234,6 @@ namespace GUI
         private System.Windows.Forms.ToolStripMenuItem     menuCerrarSubasta;
         private System.Windows.Forms.ToolStripMenuItem     menuVerSubastas;
         private System.Windows.Forms.ToolStripMenuItem     menuRegistrarPuja;
-        private System.Windows.Forms.ToolStripMenuItem     menuBitacoraSubastas;
         private System.Windows.Forms.ToolStripMenuItem     menuPostores;
         private System.Windows.Forms.ToolStripMenuItem     menuGestionPostores;
         private System.Windows.Forms.ToolStripMenuItem     menuReportes;
