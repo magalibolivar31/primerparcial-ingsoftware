@@ -131,6 +131,21 @@ namespace GUI
                 dgvPujas.DataSource = null;
                 dgvPujas.DataSource = pujas;
 
+                if (subasta.IdGanador.HasValue && subasta.PrecioFinal.HasValue)
+                {
+                    foreach (DataGridViewRow row in dgvPujas.Rows)
+                    {
+                        if (row.DataBoundItem is BE.Puja p &&
+                            p.IdPostor == subasta.IdGanador.Value &&
+                            p.Monto    == subasta.PrecioFinal.Value)
+                        {
+                            row.DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+                            row.DefaultCellStyle.ForeColor = System.Drawing.Color.DarkGreen;
+                            break;
+                        }
+                    }
+                }
+
                 var postoresUnicos = new HashSet<int>();
                 int aceptadas = 0;
                 foreach (BE.Puja p in pujas)
