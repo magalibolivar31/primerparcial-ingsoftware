@@ -117,6 +117,12 @@
     <Compile Include="FrmPostores.Designer.cs">
       <DependentUpon>FrmPostores.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmVistaPreviaPDF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmVistaPreviaPDF.Designer.cs">
+      <DependentUpon>FrmVistaPreviaPDF.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmHistorialSubastas.cs">
       <SubType>Form</SubType>
     </Compile>

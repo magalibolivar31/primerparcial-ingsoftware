@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing.Printing;
 using System.Text;
 using System.Windows.Forms;
 
@@ -185,37 +184,15 @@ namespace GUI
         {
             try
             {
-                string   texto  = GenerarTextoReporte();
-                string[] lineas = texto.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
-                int lineaActual = 0;
+                string[] lineas = GenerarTextoReporte()
+                    .Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
 
-                var doc = new PrintDocument();
-                doc.DocumentName = $"BitacoraSubastas_{DateTime.Today:yyyyMMdd}";
-                doc.PrintPage += (s2, ev) =>
-                {
-                    using (var fuente = new System.Drawing.Font("Courier New", 7.5f))
-                    {
-                        float altLinea = fuente.GetHeight(ev.Graphics);
-                        float y        = ev.MarginBounds.Top;
-                        while (lineaActual < lineas.Length)
-                        {
-                            ev.Graphics.DrawString(lineas[lineaActual], fuente,
-                                System.Drawing.Brushes.Black, ev.MarginBounds.Left, y);
-                            y += altLinea;
-                            lineaActual++;
-                            if (y + altLinea > ev.MarginBounds.Bottom)
-                            { ev.HasMorePages = lineaActual < lineas.Length; break; }
-                        }
-                    }
-                };
-
-                using (var dlg = new PrintDialog { Document = doc, UseEXDialog = true })
-                    if (dlg.ShowDialog() == DialogResult.OK)
-                        doc.Print();
+                using (var frm = new FrmVistaPreviaPDF(lineas))
+                    frm.ShowDialog(this);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error al generar PDF", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error al generar vista previa", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
