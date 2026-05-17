@@ -27,6 +27,7 @@ namespace GUI
             this.menuPostores = new System.Windows.Forms.ToolStripMenuItem();
             this.menuGestionPostores = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportes = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuReporteJornada = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHistorialSubastas = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSesion = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
@@ -153,11 +154,19 @@ namespace GUI
             // menuReportes
             //
             this.menuReportes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuReporteJornada,
             this.menuHistorialSubastas});
             this.menuReportes.ForeColor = System.Drawing.Color.White;
             this.menuReportes.Name = "menuReportes";
             this.menuReportes.Size = new System.Drawing.Size(98, 29);
             this.menuReportes.Text = "Reportes";
+            //
+            // menuReporteJornada
+            //
+            this.menuReporteJornada.Name = "menuReporteJornada";
+            this.menuReporteJornada.Size = new System.Drawing.Size(260, 34);
+            this.menuReporteJornada.Text = "Reporte de Jornada (RF-13)";
+            this.menuReporteJornada.Click += new System.EventHandler(this.menuReporteJornada_Click);
             //
             // menuHistorialSubastas
             //
@@ -238,6 +247,7 @@ namespace GUI
         private System.Windows.Forms.ToolStripMenuItem     menuPostores;
         private System.Windows.Forms.ToolStripMenuItem     menuGestionPostores;
         private System.Windows.Forms.ToolStripMenuItem     menuReportes;
+        private System.Windows.Forms.ToolStripMenuItem     menuReporteJornada;
         private System.Windows.Forms.ToolStripMenuItem     menuHistorialSubastas;
         private System.Windows.Forms.ToolStripMenuItem     menuSesion;
         private System.Windows.Forms.ToolStripMenuItem     menuCerrarSesion;

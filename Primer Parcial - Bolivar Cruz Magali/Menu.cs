@@ -85,10 +85,10 @@ namespace GUI
 
         // ── Reportes ─────────────────────────────────────────────────────────
 
-        private void menuHistorialSubastas_Click(object sender, EventArgs e)
-            => AbrirHijo<FrmHistorialSubastas>();
+        private void menuReporteJornada_Click(object sender, EventArgs e)
+            => AbrirHijo<FrmReporteJornada>();
 
-        private void menuBitacoraSubastas_Click(object sender, EventArgs e)
+        private void menuHistorialSubastas_Click(object sender, EventArgs e)
             => AbrirHijo<FrmBitacoraSubastas>();
 
         // ── Sesion ───────────────────────────────────────────────────────────

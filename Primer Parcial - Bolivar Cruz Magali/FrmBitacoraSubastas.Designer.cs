@@ -23,7 +23,6 @@ namespace GUI
             this.cboTipo           = new System.Windows.Forms.ComboBox();
             this.btnBuscar         = new System.Windows.Forms.Button();
             this.btnLimpiar        = new System.Windows.Forms.Button();
-            this.btnDescargarPDF   = new System.Windows.Forms.Button();
             this.lblProducto       = new System.Windows.Forms.Label();
             this.txtProducto       = new System.Windows.Forms.TextBox();
             this.lblIdProducto     = new System.Windows.Forms.Label();
@@ -136,18 +135,6 @@ namespace GUI
             this.btnLimpiar.Size      = new System.Drawing.Size(90, 28);
             this.btnLimpiar.Click    += new System.EventHandler(this.btnLimpiar_Click);
 
-            this.btnDescargarPDF.Text      = "⬇ Descargar PDF";
-            this.btnDescargarPDF.Font      = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-            this.btnDescargarPDF.BackColor = System.Drawing.Color.FromArgb(180, 30, 30);
-            this.btnDescargarPDF.ForeColor = System.Drawing.Color.White;
-            this.btnDescargarPDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDescargarPDF.FlatAppearance.BorderSize = 0;
-            this.btnDescargarPDF.Location  = new System.Drawing.Point(620, 128);
-            this.btnDescargarPDF.Size      = new System.Drawing.Size(150, 28);
-            this.btnDescargarPDF.Anchor    = System.Windows.Forms.AnchorStyles.Bottom
-                                           | System.Windows.Forms.AnchorStyles.Right;
-            this.btnDescargarPDF.Click    += new System.EventHandler(this.btnDescargarPDF_Click);
-
             // ── Row 2: Producto · ID · Ofertante · ID ─────────────────────────
             this.lblProducto.Text      = "Producto:";
             this.lblProducto.Font      = boldFont;
@@ -243,7 +230,7 @@ namespace GUI
             this.grpFiltros.Controls.AddRange(new System.Windows.Forms.Control[] {
                 this.lblDesde,  this.dtpDesde,  this.lblHasta,  this.dtpHasta,
                 this.lblEstado, this.cboEstado, this.lblTipo,   this.cboTipo,
-                this.btnBuscar, this.btnLimpiar, this.btnDescargarPDF,
+                this.btnBuscar, this.btnLimpiar,
                 this.lblProducto,  this.txtProducto,  this.lblIdProducto,  this.nudIdProducto,
                 this.lblOfertante, this.txtOfertante,  this.lblIdOfertante, this.nudIdOfertante,
                 this.lblMontoMin,  this.nudMontoMin,   this.lblMontoMax,    this.nudMontoMax,
@@ -339,7 +326,6 @@ namespace GUI
         private System.Windows.Forms.ComboBox         cboTipo;
         private System.Windows.Forms.Button           btnBuscar;
         private System.Windows.Forms.Button           btnLimpiar;
-        private System.Windows.Forms.Button           btnDescargarPDF;
         private System.Windows.Forms.Label            lblProducto;
         private System.Windows.Forms.TextBox          txtProducto;
         private System.Windows.Forms.Label            lblIdProducto;

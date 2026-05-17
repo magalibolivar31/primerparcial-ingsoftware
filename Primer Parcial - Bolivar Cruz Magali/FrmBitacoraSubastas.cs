@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 
 namespace GUI
@@ -22,7 +21,7 @@ namespace GUI
             Buscar();
         }
 
-        private void btnBuscar_Click(object sender, EventArgs e)  => Buscar();
+        private void btnBuscar_Click(object sender, EventArgs e) => Buscar();
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
@@ -47,9 +46,9 @@ namespace GUI
                 string estado;
                 switch (cboEstado.SelectedIndex)
                 {
-                    case 1:  estado = "ACTIVA";   break;
-                    case 2:  estado = "CERRADA";  break;
-                    default: estado = null;       break;
+                    case 1:  estado = "ACTIVA";  break;
+                    case 2:  estado = "CERRADA"; break;
+                    default: estado = null;      break;
                 }
 
                 string tipo;
@@ -78,16 +77,16 @@ namespace GUI
                 dgvSubastas.AutoGenerateColumns = false;
                 if (dgvSubastas.Columns.Count == 0)
                 {
-                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Id",               HeaderText = "ID",         Width = 45  });
-                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "NombreUnidad",     HeaderText = "Producto",   Width = 210 });
-                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "TipoUnidad",       HeaderText = "Tipo",       Width = 75  });
-                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Estado",           HeaderText = "Estado",     Width = 75  });
-                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "PrecioInicial",    HeaderText = "P. Base",    Width = 90,  DefaultCellStyle = new DataGridViewCellStyle { Format = "N2" } });
-                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "PrecioVigente",    HeaderText = "P. Vigente", Width = 90,  DefaultCellStyle = new DataGridViewCellStyle { Format = "N2" } });
-                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "PrecioFinal",      HeaderText = "P. Final",   Width = 90,  DefaultCellStyle = new DataGridViewCellStyle { Format = "N2" } });
-                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "NombreGanador",    HeaderText = "Ganador",    Width = 150 });
-                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "FechaApertura",    HeaderText = "Apertura",   Width = 130, DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy HH:mm" } });
-                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "FechaCierre",      HeaderText = "Cierre",     Width = 130, DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy HH:mm" } });
+                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Id",            HeaderText = "ID",         Width = 45  });
+                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "NombreUnidad",  HeaderText = "Producto",   Width = 210 });
+                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "TipoUnidad",    HeaderText = "Tipo",       Width = 75  });
+                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Estado",        HeaderText = "Estado",     Width = 75  });
+                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "PrecioInicial", HeaderText = "P. Base",    Width = 90,  DefaultCellStyle = new DataGridViewCellStyle { Format = "N2" } });
+                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "PrecioVigente", HeaderText = "P. Vigente", Width = 90,  DefaultCellStyle = new DataGridViewCellStyle { Format = "N2" } });
+                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "PrecioFinal",   HeaderText = "P. Final",   Width = 90,  DefaultCellStyle = new DataGridViewCellStyle { Format = "N2" } });
+                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "NombreGanador", HeaderText = "Ganador",    Width = 150 });
+                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "FechaApertura", HeaderText = "Apertura",   Width = 130, DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy HH:mm" } });
+                    dgvSubastas.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "FechaCierre",   HeaderText = "Cierre",     Width = 130, DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy HH:mm" } });
                     dgvSubastas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     dgvSubastas.SelectionMode       = DataGridViewSelectionMode.FullRowSelect;
                 }
@@ -178,59 +177,6 @@ namespace GUI
             dgvPujas.DataSource = null;
             lblSumario.Text     = "Seleccione una subasta para ver las ofertas.";
             grpOfertas.Text     = "Ofertas";
-        }
-
-        private void btnDescargarPDF_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string[] lineas = GenerarTextoReporte()
-                    .Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
-
-                using (var frm = new FrmVistaPreviaPDF(lineas))
-                    frm.ShowDialog(this);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error al generar vista previa", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private string GenerarTextoReporte()
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine("BITÁCORA DE SUBASTAS — LA ALMONEDA NACIONAL");
-            sb.AppendLine($"Generado: {DateTime.Now:dd/MM/yyyy HH:mm:ss}");
-            sb.AppendLine($"Período:  {dtpDesde.Value:dd/MM/yyyy} — {dtpHasta.Value:dd/MM/yyyy}");
-            sb.AppendLine(new string('─', 100));
-            sb.AppendLine();
-
-            foreach (DataGridViewRow row in dgvSubastas.Rows)
-            {
-                if (!(row.DataBoundItem is BE.Subasta s)) continue;
-
-                sb.AppendLine($"Subasta #{s.Id}  |  {s.NombreUnidad}  |  Tipo: {s.TipoUnidad ?? "─"}  |  Estado: {s.Estado}");
-                sb.AppendLine($"  Precio base: ${s.PrecioInicial:N2}   Precio final: {(s.PrecioFinal.HasValue ? $"${s.PrecioFinal:N2}" : "─")}   Ganador: {s.NombreGanador ?? "Sin ganador"}");
-                sb.AppendLine($"  Apertura: {s.FechaApertura:dd/MM/yyyy HH:mm}   Cierre: {(s.FechaCierre.HasValue ? s.FechaCierre.Value.ToString("dd/MM/yyyy HH:mm") : "En curso")}");
-
-                try
-                {
-                    List<BE.Puja> pujas = _bll.ObtenerHistorialPujas(s.Id);
-                    if (pujas.Count > 0)
-                    {
-                        sb.AppendLine($"  Ofertas ({pujas.Count}):");
-                        foreach (BE.Puja p in pujas)
-                            sb.AppendLine($"    · {p.NombrePostor,-28} ${p.Monto,12:N2}  {p.Estado,-10}  {p.FechaHora:dd/MM/yyyy HH:mm:ss}");
-                    }
-                    else
-                        sb.AppendLine("  Sin ofertas.");
-                }
-                catch { sb.AppendLine("  (error al cargar ofertas)"); }
-
-                sb.AppendLine(new string('─', 100));
-            }
-
-            return sb.ToString();
         }
     }
 }
