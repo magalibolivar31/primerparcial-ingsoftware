@@ -15,12 +15,16 @@
 | `BLL` | Class Library | Lógica de negocio + interfaces + `GestorPujas` (Singleton) |
 | `Servicios` | Class Library | Observer + Reporte de Jornada + Bitácora |
 | `Seguridad` | Class Library | Sesión (Singleton) + Hash SHA-256 |
-| `GUI` | WinExe | WinForms MDI — formularios operativos |
+| `GUI` | WinExe | WinForms — formularios operativos |
 
 **Flujo de dependencias:**
 ```
 GUI       → BLL → DAL → BE
-Servicios → BLL → DAL → BE
+GUI       → Servicios  → BE
+GUI       → Seguridad  → BE
+BLL       → Servicios  → BE
+BLL       → Seguridad  → BE
+Servicios → DAL        → BE
 ```
 
 ---
@@ -52,13 +56,15 @@ Servicios.ISujetoSubasta          ← Subject interface
 Servicios.IObserverPostor         ← Observer interface
 Servicios.GestorNotificaciones    ← Concrete Subject  (uno por subasta activa)
 Servicios.NotificadorPostor       ← Concrete Observer (uno por postor suscripto)
+GUI.FrmRegistrarPuja              ← Concrete Observer (el formulario mismo implementa IObserverPostor)
 ```
 
 - `BLL.SubastaBLL.AbrirSubasta()` crea un `GestorNotificaciones` y lo registra en el `GestorPujas`.
 - `BLL.PostorBLL.Suscribir()` crea un `NotificadorPostor` y lo agrega al gestor de la subasta.
+- `FrmRegistrarPuja` se suscribe automáticamente al seleccionar una subasta y recibe `Actualizar()` sin hacer polling.
 - `BLL.GestorPujas.RegistrarPuja()` llama `gestor.Notificar()` tras aceptar la puja (RF-06).
 - `BLL.GestorPujas.NotificarCierre()` notifica el resultado a todos los suscriptores antes de eliminar el gestor (RF-07).
-- `BLL.PostorBLL.Desuscribir()` quita el observer de inmediato (RF-08).
+- `BLL.PostorBLL.Desuscribir()` y `FrmRegistrarPuja.DesuscribirActual()` quitan el observer de inmediato (RF-08).
 
 ---
 
@@ -78,18 +84,19 @@ Todos implementan **double-checked locking** (`volatile` + `lock`):
 
 ## Formularios GUI
 
-| Formulario | Rol | Patrón que demuestra |
-|-----------|-----|---------------------|
-| `Login` | — | Seguridad / SessionManager |
-| `Menu` (MDI) | Todos | Menú dinámico por rol en `ConfigurarMenuPorRol()` |
-| `FrmCatalogo` | Martillero | Composite — DataGridView + botón "Ver Detalle (Composite)" |
-| `FrmNuevoArticulo` | Martillero | Composite — alta de hoja (ArticuloIndividual) |
-| `FrmNuevoLote` | Martillero | Composite — alta de nodo (Lote) |
-| `FrmSubastas` | Martillero | Observer — apertura crea el Subject (GestorNotificaciones) |
-| `FrmRegistrarPuja` | Operador | Singleton + Observer — puja serializada y notificación automática |
-| `FrmPostores` | Ambos | Observer — suscripción registra el Observer (NotificadorPostor) |
-| `FrmReporteJornada` | Ambos | Composite — recorrido recursivo del catálogo (RF-13) |
-| `FrmGestionUsuarios` | Martillero | Seguridad — desbloqueo y reset de contraseña |
+| Formulario | Rol | RF / Patrón que demuestra |
+|-----------|-----|--------------------------|
+| `Login` | Autenticación | SessionManager (Singleton) — bloqueo tras 3 intentos, desbloqueo automático a los 10 min |
+| `Menu` (MDI) | Navegación | Menú dinámico según rol en `ConfigurarMenuPorRol()` |
+| `FrmCatalogo` | Martillero | RF-01, RF-03 — grilla del catálogo con estados; RF-04 — botón "Ver Detalle" (Composite) |
+| `FrmDetalle` | Modal | RF-04 — muestra nombre, precio y descripción jerárquica de una UnidadDeVenta |
+| `FrmNuevoArticulo` | Martillero | RF-01 — alta de hoja (ArticuloIndividual) |
+| `FrmNuevoLote` | Martillero | RF-01, RF-02 — alta de nodo (Lote) con selección de componentes |
+| `FrmSubastas` | Martillero | RF-03 — precio base calculado; apertura y cierre de subastas |
+| `FrmRegistrarPuja` | Martillero | RF-05/08 — suscripción automática; RF-06/07 — `Actualizar()` push sin polling; RF-09/10 — puja serializada |
+| `FrmPostores` | Martillero | RF-05 — suscripción manual de postores; RF-08 — desuscripción inmediata |
+| `FrmReporteJornada` | Martillero | RF-13 — recorrido recursivo del catálogo (Composite) |
+| `FrmBitacoraSubastas` | Martillero | Auditoría de operaciones con filtros |
 
 ---
 
@@ -98,9 +105,8 @@ Todos implementan **double-checked locking** (`volatile` + `lock`):
 Script completo en `BD/AlmonedaNacional.sql`.  
 Cadena de conexión en `Primer Parcial - Bolivar Cruz Magali/App.config` → `AlmonedaNacionalDB`.
 
-**Usuarios de prueba** (contraseña: `admin123`):
+**Usuario de prueba** (contraseña: `admin123`):
 
 | Email | Rol |
 |-------|-----|
 | `martillero` | Martillero |
-| `operador` | Operador |

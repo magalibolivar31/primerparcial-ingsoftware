@@ -85,8 +85,7 @@ namespace GUI
             try
             {
                 string descripcion = _bll.ObtenerDescripcionCompleta(u.Id);
-                MessageBox.Show(descripcion, $"Detalle — {u.Nombre} (Composite)",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                FrmDetalle.Mostrar(this, u.Nombre, u.ObtenerPrecioBase(), descripcion);
             }
             catch (Exception ex)
             {
