@@ -39,9 +39,6 @@ namespace GUI
             // Reportes: todos los roles
             menuReportes.Visible = true;
 
-            // Administracion: oculto (funcionalidad eliminada)
-            menuAdmin.Visible = false;
-
             // Subopciones de Subastas segun rol
             menuAbrirSubasta.Visible  = usuario.EsMartillero;
             menuCerrarSubasta.Visible = usuario.EsMartillero;
