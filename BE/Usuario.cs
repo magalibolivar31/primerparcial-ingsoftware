@@ -19,6 +19,5 @@ namespace BE
         public string NombreCompleto => $"{Nombre} {Apellido}";
 
         public bool EsMartillero => Rol == RolUsuario.Martillero;
-        public bool EsOperador   => Rol == RolUsuario.Operador;
     }
 }

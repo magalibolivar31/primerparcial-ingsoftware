@@ -58,7 +58,7 @@ CREATE TABLE Usuario (
     Apellido         VARCHAR(100)  NOT NULL,
     Email            VARCHAR(200)  NOT NULL UNIQUE,
     PasswordHash     VARCHAR(512)  NOT NULL,
-    Rol              VARCHAR(20)   NOT NULL CHECK (Rol IN ('Martillero','Operador')),
+    Rol              VARCHAR(20)   NOT NULL CHECK (Rol IN ('Martillero')),
     Activo           BIT           NOT NULL DEFAULT 1,
     IntentosFallidos INT           NOT NULL DEFAULT 0,
     Bloqueado        BIT           NOT NULL DEFAULT 0,
@@ -175,8 +175,7 @@ DECLARE @hash VARCHAR(512) = '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa8
 -- USUARIOS (10) — password de todos: admin123
 -- ============================================================
 INSERT INTO Usuario (Nombre, Apellido, Email, PasswordHash, Rol, Activo, FechaAlta) VALUES
-('Carlos',  'Mendez', 'martillero', @hash, 'Martillero', 1, '2026-01-10 08:05:00'),
-('Laura',   'Torres', 'operador',   @hash, 'Operador',   1, '2026-01-10 08:10:00');
+('Carlos',  'Mendez', 'martillero', @hash, 'Martillero', 1, '2026-01-10 08:05:00');
 
 -- ============================================================
 -- POSTORES (30)

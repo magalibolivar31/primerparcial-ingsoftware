@@ -30,19 +30,9 @@ namespace GUI
             // Catalogo: solo Martillero
             menuCatalogo.Visible = usuario.EsMartillero;
 
-            // Subastas: ambos roles
-            menuSubastas.Visible = usuario.EsMartillero || usuario.EsOperador;
-
-            // Postores: ambos roles
-            menuPostores.Visible = usuario.EsMartillero || usuario.EsOperador;
-
-            // Reportes: todos los roles
-            menuReportes.Visible = true;
-
-            // Subopciones de Subastas segun rol
-            menuAbrirSubasta.Visible  = usuario.EsMartillero;
-            menuCerrarSubasta.Visible = usuario.EsMartillero;
-            menuRegistrarPuja.Visible = usuario.EsOperador;
+            menuSubastas.Visible = usuario.EsMartillero;
+            menuPostores.Visible = usuario.EsMartillero;
+            menuReportes.Visible = usuario.EsMartillero;
         }
 
         // Abre una instancia única del formulario hijo MDI del tipo T.
