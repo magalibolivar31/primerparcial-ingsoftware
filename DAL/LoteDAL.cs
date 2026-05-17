@@ -55,6 +55,19 @@ namespace DAL
             return idNuevo;
         }
 
+        // Modifica Nombre y Descripcion del lote (el precio lo recalcula CatalogoBLL).
+        public void Modificar(BE.Lote lote)
+        {
+            SqlParameter[] p =
+            {
+                new SqlParameter("@Id",          lote.Id),
+                new SqlParameter("@Nombre",      lote.Nombre),
+                new SqlParameter("@Descripcion", (object)lote.Descripcion ?? DBNull.Value)
+            };
+            acceso.Escribir(
+                "UPDATE UnidadDeVenta SET Nombre=@Nombre, Descripcion=@Descripcion WHERE Id=@Id", p);
+        }
+
         // Actualiza el precio base y la cantidad de componentes del lote.
         public void ActualizarPrecioYCantidad(int id, decimal precioBase, int cantidad)
         {

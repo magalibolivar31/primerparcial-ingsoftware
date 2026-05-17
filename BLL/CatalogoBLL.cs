@@ -11,6 +11,9 @@ namespace BLL
 
         public List<BE.UnidadDeVenta> ObtenerTodos() => _dalUnidad.ObtenerTodos();
 
+        // Incluye unidades retiradas (Activo = 0) para mostrarlas en el catálogo.
+        public List<BE.UnidadDeVenta> ObtenerTodosConBaja() => _dalUnidad.ObtenerTodosConBaja();
+
         public BE.UnidadDeVenta ObtenerPorId(int id) => _dalUnidad.ObtenerPorId(id);
 
         // RF-01: alta de articulo individual.
@@ -29,6 +32,13 @@ namespace BLL
             _dalArticulo.Modificar(articulo);
             if (articulo.IdLotePadre.HasValue)
                 RecalcularPrecioLote(articulo.IdLotePadre.Value);
+        }
+
+        public void ModificarLote(BE.Lote lote)
+        {
+            if (string.IsNullOrWhiteSpace(lote.Nombre))
+                throw new Exception("El nombre del lote es obligatorio.");
+            _dalLote.Modificar(lote);
         }
 
         // RF-01: alta de lote.
@@ -83,6 +93,9 @@ namespace BLL
             if (unidad == null) throw new Exception($"Unidad {id} no encontrada.");
             return unidad.ObtenerPrecioBase();
         }
+
+        // RF-03 / RF-04: devuelve el árbol completo con hijos cargados en memoria.
+        public BE.UnidadDeVenta ObtenerArbol(int id) => ConstruirArbolDesde(id);
 
         // Construye el sub-arbol Composite desde un nodo raiz hacia abajo.
         private BE.UnidadDeVenta ConstruirArbolDesde(int id)

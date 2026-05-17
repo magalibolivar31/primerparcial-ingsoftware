@@ -5,17 +5,31 @@ namespace GUI
 {
     public partial class FrmNuevoLote : Form
     {
-        private readonly BLL.CatalogoBLL _bll = new BLL.CatalogoBLL();
+        private readonly BLL.CatalogoBLL _bll          = new BLL.CatalogoBLL();
+        private readonly BE.Lote         _loteEdicion;
+        private readonly bool            _modoEdicion;
 
-        public FrmNuevoLote()
+        public FrmNuevoLote() { InitializeComponent(); }
+
+        public FrmNuevoLote(BE.Lote lote)
         {
             InitializeComponent();
+            _modoEdicion  = true;
+            _loteEdicion  = lote;
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
             CargarLotes();
+
+            if (_modoEdicion)
+            {
+                this.Text           = "Modificar Lote";
+                txtNombre.Text      = _loteEdicion.Nombre;
+                txtDescripcion.Text = _loteEdicion.Descripcion ?? "";
+                cboLotePadre.Enabled = false;
+            }
         }
 
         private void CargarLotes()
@@ -42,20 +56,29 @@ namespace GUI
 
             try
             {
-                var lote = new BE.Lote
+                if (_modoEdicion)
                 {
-                    Nombre      = txtNombre.Text.Trim(),
-                    Descripcion = txtDescripcion.Text.Trim(),
-                    Activo      = true
-                };
+                    _loteEdicion.Nombre      = txtNombre.Text.Trim();
+                    _loteEdicion.Descripcion = txtDescripcion.Text.Trim();
+                    _bll.ModificarLote(_loteEdicion);
+                    MessageBox.Show($"Lote «{_loteEdicion.Nombre}» modificado correctamente.",
+                        "Modificación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    var lote = new BE.Lote
+                    {
+                        Nombre      = txtNombre.Text.Trim(),
+                        Descripcion = txtDescripcion.Text.Trim(),
+                        Activo      = true
+                    };
+                    int id = _bll.AltaLote(lote);
+                    if (cboLotePadre.SelectedItem is ItemCombo item && item.Id.HasValue)
+                        _bll.AgregarALote(item.Id.Value, id);
+                    MessageBox.Show($"Lote «{lote.Nombre}» creado correctamente (ID: {id}).",
+                        "Alta exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
-                int id = _bll.AltaLote(lote);
-
-                if (cboLotePadre.SelectedItem is ItemCombo item && item.Id.HasValue)
-                    _bll.AgregarALote(item.Id.Value, id);
-
-                MessageBox.Show($"Lote «{lote.Nombre}» creado correctamente (ID: {id}).",
-                    "Alta exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

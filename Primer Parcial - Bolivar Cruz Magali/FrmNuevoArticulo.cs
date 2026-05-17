@@ -5,17 +5,32 @@ namespace GUI
 {
     public partial class FrmNuevoArticulo : Form
     {
-        private readonly BLL.CatalogoBLL _bll = new BLL.CatalogoBLL();
+        private readonly BLL.CatalogoBLL      _bll             = new BLL.CatalogoBLL();
+        private readonly BE.ArticuloIndividual _articuloEdicion;
+        private readonly bool                  _modoEdicion;
 
-        public FrmNuevoArticulo()
+        public FrmNuevoArticulo() { InitializeComponent(); }
+
+        public FrmNuevoArticulo(BE.ArticuloIndividual articulo)
         {
             InitializeComponent();
+            _modoEdicion     = true;
+            _articuloEdicion = articulo;
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
             CargarLotes();
+
+            if (_modoEdicion)
+            {
+                this.Text           = "Modificar Artículo";
+                txtNombre.Text      = _articuloEdicion.Nombre;
+                txtDescripcion.Text = _articuloEdicion.Descripcion ?? "";
+                nudValor.Value      = _articuloEdicion.ValorDeclarado;
+                cboLotePadre.Enabled = false;
+            }
         }
 
         private void CargarLotes()
@@ -47,21 +62,31 @@ namespace GUI
 
             try
             {
-                var articulo = new BE.ArticuloIndividual
+                if (_modoEdicion)
                 {
-                    Nombre         = txtNombre.Text.Trim(),
-                    Descripcion    = txtDescripcion.Text.Trim(),
-                    ValorDeclarado = nudValor.Value,
-                    Activo         = true
-                };
+                    _articuloEdicion.Nombre         = txtNombre.Text.Trim();
+                    _articuloEdicion.Descripcion    = txtDescripcion.Text.Trim();
+                    _articuloEdicion.ValorDeclarado = nudValor.Value;
+                    _bll.ModificarArticulo(_articuloEdicion);
+                    MessageBox.Show($"Artículo «{_articuloEdicion.Nombre}» modificado correctamente.",
+                        "Modificación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    var articulo = new BE.ArticuloIndividual
+                    {
+                        Nombre         = txtNombre.Text.Trim(),
+                        Descripcion    = txtDescripcion.Text.Trim(),
+                        ValorDeclarado = nudValor.Value,
+                        Activo         = true
+                    };
+                    int id = _bll.AltaArticulo(articulo);
+                    if (cboLotePadre.SelectedItem is ItemCombo item && item.Id.HasValue)
+                        _bll.AgregarALote(item.Id.Value, id);
+                    MessageBox.Show($"Artículo «{articulo.Nombre}» agregado correctamente (ID: {id}).",
+                        "Alta exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
-                int id = _bll.AltaArticulo(articulo);
-
-                if (cboLotePadre.SelectedItem is ItemCombo item && item.Id.HasValue)
-                    _bll.AgregarALote(item.Id.Value, id);
-
-                MessageBox.Show($"Artículo «{articulo.Nombre}» agregado correctamente (ID: {id}).",
-                    "Alta exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

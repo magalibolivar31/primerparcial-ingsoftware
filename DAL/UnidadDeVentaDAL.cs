@@ -32,6 +32,30 @@ namespace DAL
             return lista;
         }
 
+        // Igual que ObtenerTodos pero incluye las unidades con Activo = 0 (Retiradas).
+        public List<BE.UnidadDeVenta> ObtenerTodosConBaja()
+        {
+            var lista = new List<BE.UnidadDeVenta>();
+            try
+            {
+                DataTable tabla = acceso.Leer(
+                    "SELECT u.Id, u.Nombre, u.Descripcion, u.Tipo, u.PrecioBase, " +
+                    "       u.FechaAlta, u.Activo, u.IdLotePadre, " +
+                    "       a.ValorDeclarado " +
+                    "FROM UnidadDeVenta u " +
+                    "LEFT JOIN ArticuloIndividual a ON a.Id = u.Id " +
+                    "ORDER BY u.Nombre", null);
+
+                foreach (DataRow row in tabla.Rows)
+                    lista.Add(Mapear(row));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el catálogo.", ex);
+            }
+            return lista;
+        }
+
         public override BE.UnidadDeVenta ObtenerPorId(int id)
         {
             SqlParameter[] p = { new SqlParameter("@Id", id) };

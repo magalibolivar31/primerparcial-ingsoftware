@@ -7,10 +7,10 @@ namespace GUI
     {
         private Point _drag;
 
-        public FrmDetalle(string nombre, decimal precio, string descripcion)
+        public FrmDetalle(BE.UnidadDeVenta arbol)
         {
-            const int W = 420;
-            const int H = 260;
+            const int W = 460;
+            const int H = 340;
 
             FormBorderStyle = FormBorderStyle.None;
             Size            = new Size(W, H);
@@ -27,7 +27,7 @@ namespace GUI
 
             var lblTitulo = new Label
             {
-                Text      = nombre,
+                Text      = arbol.Nombre,
                 Location  = new Point(14, 0),
                 Size      = new Size(W - 60, 46),
                 ForeColor = Color.White,
@@ -54,42 +54,65 @@ namespace GUI
             header.Controls.Add(btnX);
             btnX.BringToFront();
 
-            // Arrastre desde el header y el título
-            header.MouseDown   += (s, e) => { if (e.Button == MouseButtons.Left) _drag = e.Location; };
-            header.MouseMove   += (s, e) => { if (e.Button == MouseButtons.Left) Location = new Point(Location.X + e.X - _drag.X, Location.Y + e.Y - _drag.Y); };
+            header.MouseDown    += (s, e) => { if (e.Button == MouseButtons.Left) _drag = e.Location; };
+            header.MouseMove    += (s, e) => { if (e.Button == MouseButtons.Left) Location = new Point(Location.X + e.X - _drag.X, Location.Y + e.Y - _drag.Y); };
             lblTitulo.MouseDown += (s, e) => { if (e.Button == MouseButtons.Left) _drag = e.Location; };
             lblTitulo.MouseMove += (s, e) => { if (e.Button == MouseButtons.Left) Location = new Point(Location.X + e.X - _drag.X, Location.Y + e.Y - _drag.Y); };
 
             // ── Precio ────────────────────────────────────────────────────────
+            // ObtenerPrecioBase() funciona correctamente porque el árbol
+            // fue construido por CatalogoBLL.ObtenerArbol(), con todos los hijos cargados.
             var lblPrecio = new Label
             {
-                Text      = $"$ {precio:N2}",
+                Text      = $"$ {arbol.ObtenerPrecioBase():N2}",
                 AutoSize  = true,
                 Location  = new Point(18, 58),
                 ForeColor = Color.FromArgb(39, 174, 96),
                 Font      = new Font("Segoe UI", 18f, FontStyle.Bold)
             };
 
-            // ── Descripción ───────────────────────────────────────────────────
-            var txtDesc = new TextBox
+            // ── TreeView ──────────────────────────────────────────────────────
+            var trv = new TreeView
             {
-                Text        = descripcion,
-                Multiline   = true,
-                ReadOnly    = true,
-                BorderStyle = BorderStyle.None,
-                ScrollBars  = ScrollBars.Vertical,
-                BackColor   = Color.White,
-                ForeColor   = Color.FromArgb(60, 60, 60),
-                Font        = new Font("Segoe UI", 9.5f),
-                Location    = new Point(20, 112),
-                Size        = new Size(W - 40, H - 130),
-                TabStop     = false
+                Location     = new Point(18, 108),
+                Size         = new Size(W - 36, H - 126),
+                BorderStyle  = BorderStyle.None,
+                Font         = new Font("Segoe UI", 9.5f),
+                BackColor    = Color.White,
+                ForeColor    = Color.FromArgb(50, 50, 50),
+                ShowLines    = true,
+                ShowPlusMinus = true,
+                Anchor       = AnchorStyles.Left | AnchorStyles.Right |
+                               AnchorStyles.Top  | AnchorStyles.Bottom
             };
+
+            trv.Nodes.Add(CrearNodo(arbol));
+            trv.ExpandAll();
 
             Controls.Add(header);
             Controls.Add(lblPrecio);
-            Controls.Add(txtDesc);
+            Controls.Add(trv);
         }
+
+        // ── Construcción recursiva del TreeView ───────────────────────────────
+
+        private static TreeNode CrearNodo(BE.UnidadDeVenta unidad)
+        {
+            string etiqueta = unidad is BE.Lote
+                ? $"[Lote] {unidad.Nombre}  —  $ {unidad.ObtenerPrecioBase():N2}"
+                : $"[Artículo] {unidad.Nombre}  —  $ {((BE.ArticuloIndividual)unidad).ValorDeclarado:N2}";
+
+            var nodo = new TreeNode(etiqueta);
+
+            var hijos = unidad.ObtenerHijos();
+            if (hijos != null)
+                foreach (var hijo in hijos)
+                    nodo.Nodes.Add(CrearNodo(hijo));
+
+            return nodo;
+        }
+
+        // ── Infraestructura ───────────────────────────────────────────────────
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -103,9 +126,9 @@ namespace GUI
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        public static void Mostrar(Form padre, string nombre, decimal precio, string descripcion)
+        public static void Mostrar(Form padre, BE.UnidadDeVenta arbol)
         {
-            using (var frm = new FrmDetalle(nombre, precio, descripcion))
+            using (var frm = new FrmDetalle(arbol))
             {
                 frm.StartPosition = FormStartPosition.Manual;
                 frm.Location      = new Point(
