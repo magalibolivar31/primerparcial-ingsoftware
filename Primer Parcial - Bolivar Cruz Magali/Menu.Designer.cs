@@ -14,6 +14,8 @@ namespace GUI
         private void InitializeComponent()
         {
             this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.menuSesion = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCatalogo = new System.Windows.Forms.ToolStripMenuItem();
             this.menuNuevoArticulo = new System.Windows.Forms.ToolStripMenuItem();
             this.menuNuevoLote = new System.Windows.Forms.ToolStripMenuItem();
@@ -25,8 +27,6 @@ namespace GUI
             this.menuReportes = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReporteJornada = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHistorialSubastas = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuSesion = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.lblUsuarioStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip.SuspendLayout();
@@ -48,8 +48,24 @@ namespace GUI
             this.menuReportes});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1650, 35);
+            this.menuStrip.Size = new System.Drawing.Size(1650, 33);
             this.menuStrip.TabIndex = 1;
+            // 
+            // menuSesion
+            // 
+            this.menuSesion.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuCerrarSesion});
+            this.menuSesion.ForeColor = System.Drawing.Color.White;
+            this.menuSesion.Name = "menuSesion";
+            this.menuSesion.Size = new System.Drawing.Size(83, 29);
+            this.menuSesion.Text = "Sesión";
+            // 
+            // menuCerrarSesion
+            // 
+            this.menuCerrarSesion.Name = "menuCerrarSesion";
+            this.menuCerrarSesion.Size = new System.Drawing.Size(227, 34);
+            this.menuCerrarSesion.Text = "Cerrar Sesión";
+            this.menuCerrarSesion.Click += new System.EventHandler(this.menuCerrarSesion_Click);
             // 
             // menuCatalogo
             // 
@@ -91,14 +107,14 @@ namespace GUI
             this.menuSubastas.Name = "menuSubastas";
             this.menuSubastas.Size = new System.Drawing.Size(102, 29);
             this.menuSubastas.Text = "Subastas";
-            //
+            // 
             // menuGestionSubastas
-            //
+            // 
             this.menuGestionSubastas.Name = "menuGestionSubastas";
-            this.menuGestionSubastas.Size = new System.Drawing.Size(288, 34);
+            this.menuGestionSubastas.Size = new System.Drawing.Size(295, 34);
             this.menuGestionSubastas.Text = "Gestión de Subastas...";
             this.menuGestionSubastas.Click += new System.EventHandler(this.menuGestionSubastas_Click);
-            //
+            // 
             // menuPostores
             // 
             this.menuPostores.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -114,46 +130,30 @@ namespace GUI
             this.menuGestionPostores.Size = new System.Drawing.Size(292, 34);
             this.menuGestionPostores.Text = "Gestión de Postores...";
             this.menuGestionPostores.Click += new System.EventHandler(this.menuGestionPostores_Click);
-            //
+            // 
             // menuReportes
-            //
+            // 
             this.menuReportes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuReporteJornada,
             this.menuHistorialSubastas});
             this.menuReportes.ForeColor = System.Drawing.Color.White;
             this.menuReportes.Name = "menuReportes";
-            this.menuReportes.Size = new System.Drawing.Size(98, 29);
+            this.menuReportes.Size = new System.Drawing.Size(101, 29);
             this.menuReportes.Text = "Reportes";
-            //
+            // 
             // menuReporteJornada
-            //
+            // 
             this.menuReporteJornada.Name = "menuReporteJornada";
-            this.menuReporteJornada.Size = new System.Drawing.Size(260, 34);
-            this.menuReporteJornada.Text = "Reporte de Jornada (RF-13)";
+            this.menuReporteJornada.Size = new System.Drawing.Size(289, 34);
+            this.menuReporteJornada.Text = "Reporte de Jornada";
             this.menuReporteJornada.Click += new System.EventHandler(this.menuReporteJornada_Click);
-            //
+            // 
             // menuHistorialSubastas
-            //
+            // 
             this.menuHistorialSubastas.Name = "menuHistorialSubastas";
-            this.menuHistorialSubastas.Size = new System.Drawing.Size(260, 34);
+            this.menuHistorialSubastas.Size = new System.Drawing.Size(289, 34);
             this.menuHistorialSubastas.Text = "Historial de Subastas";
             this.menuHistorialSubastas.Click += new System.EventHandler(this.menuHistorialSubastas_Click);
-            //
-            // menuSesion
-            //
-            this.menuSesion.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuCerrarSesion});
-            this.menuSesion.ForeColor = System.Drawing.Color.White;
-            this.menuSesion.Name = "menuSesion";
-            this.menuSesion.Size = new System.Drawing.Size(83, 29);
-            this.menuSesion.Text = "Sesión";
-            // 
-            // menuCerrarSesion
-            // 
-            this.menuCerrarSesion.Name = "menuCerrarSesion";
-            this.menuCerrarSesion.Size = new System.Drawing.Size(270, 34);
-            this.menuCerrarSesion.Text = "Cerrar Sesión";
-            this.menuCerrarSesion.Click += new System.EventHandler(this.menuCerrarSesion_Click);
             // 
             // statusStrip
             // 

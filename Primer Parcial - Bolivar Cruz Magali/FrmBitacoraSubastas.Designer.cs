@@ -12,61 +12,66 @@ namespace GUI
 
         private void InitializeComponent()
         {
-            this.grpFiltros        = new System.Windows.Forms.GroupBox();
-            this.lblDesde          = new System.Windows.Forms.Label();
-            this.dtpDesde          = new System.Windows.Forms.DateTimePicker();
-            this.lblHasta          = new System.Windows.Forms.Label();
-            this.dtpHasta          = new System.Windows.Forms.DateTimePicker();
-            this.lblEstado         = new System.Windows.Forms.Label();
-            this.cboEstado         = new System.Windows.Forms.ComboBox();
-            this.lblTipo           = new System.Windows.Forms.Label();
-            this.cboTipo           = new System.Windows.Forms.ComboBox();
-            this.btnBuscar         = new System.Windows.Forms.Button();
-            this.btnLimpiar        = new System.Windows.Forms.Button();
-            this.lblProducto       = new System.Windows.Forms.Label();
-            this.txtProducto       = new System.Windows.Forms.TextBox();
-            this.lblIdProducto     = new System.Windows.Forms.Label();
-            this.nudIdProducto     = new System.Windows.Forms.NumericUpDown();
-            this.lblOfertante      = new System.Windows.Forms.Label();
-            this.txtOfertante      = new System.Windows.Forms.TextBox();
-            this.lblIdOfertante    = new System.Windows.Forms.Label();
-            this.nudIdOfertante    = new System.Windows.Forms.NumericUpDown();
-            this.lblMontoMin       = new System.Windows.Forms.Label();
-            this.nudMontoMin       = new System.Windows.Forms.NumericUpDown();
-            this.lblMontoMax       = new System.Windows.Forms.Label();
-            this.nudMontoMax       = new System.Windows.Forms.NumericUpDown();
-            this.chkSoloGanadores  = new System.Windows.Forms.CheckBox();
-            this.lblConteo         = new System.Windows.Forms.Label();
-            this.grpSubastas       = new System.Windows.Forms.GroupBox();
-            this.dgvSubastas       = new System.Windows.Forms.DataGridView();
-            this.grpOfertas        = new System.Windows.Forms.GroupBox();
-            this.lblSumario        = new System.Windows.Forms.Label();
-            this.dgvPujas          = new System.Windows.Forms.DataGridView();
+            this.grpFiltros       = new System.Windows.Forms.GroupBox();
+            this.lblDesde         = new System.Windows.Forms.Label();
+            this.dtpDesde         = new System.Windows.Forms.DateTimePicker();
+            this.lblHasta         = new System.Windows.Forms.Label();
+            this.dtpHasta         = new System.Windows.Forms.DateTimePicker();
+            this.lblEstado        = new System.Windows.Forms.Label();
+            this.cboEstado        = new System.Windows.Forms.ComboBox();
+            this.lblTipo          = new System.Windows.Forms.Label();
+            this.cboTipo          = new System.Windows.Forms.ComboBox();
+            this.btnBuscar        = new System.Windows.Forms.Button();
+            this.btnLimpiar       = new System.Windows.Forms.Button();
+            this.lblProducto      = new System.Windows.Forms.Label();
+            this.txtProducto      = new System.Windows.Forms.TextBox();
+            this.lblIdProducto    = new System.Windows.Forms.Label();
+            this.nudIdProducto    = new System.Windows.Forms.NumericUpDown();
+            this.lblOfertante     = new System.Windows.Forms.Label();
+            this.txtOfertante     = new System.Windows.Forms.TextBox();
+            this.lblIdOfertante   = new System.Windows.Forms.Label();
+            this.nudIdOfertante   = new System.Windows.Forms.NumericUpDown();
+            this.lblMontoMin      = new System.Windows.Forms.Label();
+            this.nudMontoMin      = new System.Windows.Forms.NumericUpDown();
+            this.lblMontoMax      = new System.Windows.Forms.Label();
+            this.nudMontoMax      = new System.Windows.Forms.NumericUpDown();
+            this.chkSoloGanadores = new System.Windows.Forms.CheckBox();
+            this.lblConteo        = new System.Windows.Forms.Label();
+            this.grpSubastas      = new System.Windows.Forms.GroupBox();
+            this.dgvSubastas      = new System.Windows.Forms.DataGridView();
+            this.grpOfertas       = new System.Windows.Forms.GroupBox();
+            this.lblSumario       = new System.Windows.Forms.Label();
+            this.dgvPujas         = new System.Windows.Forms.DataGridView();
+            this.grpSuscriptores  = new System.Windows.Forms.GroupBox();
+            this.lblSuscSubtitulo = new System.Windows.Forms.Label();
+            this.dgvSuscriptores  = new System.Windows.Forms.DataGridView();
 
             this.grpFiltros.SuspendLayout();
             this.grpSubastas.SuspendLayout();
             this.grpOfertas.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.nudIdProducto).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)this.nudIdOfertante).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)this.nudMontoMin).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)this.nudMontoMax).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)this.dgvSubastas).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)this.dgvPujas).BeginInit();
+            this.grpSuscriptores.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIdProducto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIdOfertante)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMontoMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMontoMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSubastas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPujas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSuscriptores)).BeginInit();
             this.SuspendLayout();
 
             var boldFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             var normFont = new System.Drawing.Font("Segoe UI", 9.5F);
+            var darkNavy = System.Drawing.Color.FromArgb(26, 35, 64);
 
-            // ── grpFiltros ────────────────────────────────────────────────────
+            // ── grpFiltros ─────────────────────────────────────────────────────
             this.grpFiltros.Text     = "Filtros de búsqueda";
             this.grpFiltros.Font     = boldFont;
             this.grpFiltros.Location = new System.Drawing.Point(5, 5);
-            this.grpFiltros.Size     = new System.Drawing.Size(1045, 162);
+            this.grpFiltros.Size     = new System.Drawing.Size(1185, 162);
             this.grpFiltros.Anchor   = System.Windows.Forms.AnchorStyles.Top
                                      | System.Windows.Forms.AnchorStyles.Left
                                      | System.Windows.Forms.AnchorStyles.Right;
 
-            // ── Row 1: Desde · Hasta · Estado · Tipo · Botones ────────────────
             this.lblDesde.Text      = "Desde:";
             this.lblDesde.Font      = boldFont;
             this.lblDesde.Location  = new System.Drawing.Point(10, 26);
@@ -117,7 +122,7 @@ namespace GUI
 
             this.btnBuscar.Text      = "Buscar";
             this.btnBuscar.Font      = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-            this.btnBuscar.BackColor = System.Drawing.Color.FromArgb(30, 30, 100);
+            this.btnBuscar.BackColor = darkNavy;
             this.btnBuscar.ForeColor = System.Drawing.Color.White;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.FlatAppearance.BorderSize = 0;
@@ -135,7 +140,6 @@ namespace GUI
             this.btnLimpiar.Size      = new System.Drawing.Size(90, 28);
             this.btnLimpiar.Click    += new System.EventHandler(this.btnLimpiar_Click);
 
-            // ── Row 2: Producto · ID · Ofertante · ID ─────────────────────────
             this.lblProducto.Text      = "Producto:";
             this.lblProducto.Font      = boldFont;
             this.lblProducto.Location  = new System.Drawing.Point(10, 62);
@@ -184,21 +188,20 @@ namespace GUI
             this.nudIdOfertante.Value         = 0;
             this.nudIdOfertante.DecimalPlaces = 0;
 
-            // ── Row 3: Monto mín · Monto máx · Solo ganadores ─────────────────
             this.lblMontoMin.Text      = "Monto mín.:";
             this.lblMontoMin.Font      = boldFont;
             this.lblMontoMin.Location  = new System.Drawing.Point(10, 98);
             this.lblMontoMin.Size      = new System.Drawing.Size(80, 20);
             this.lblMontoMin.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 
-            this.nudMontoMin.Font                = normFont;
-            this.nudMontoMin.Location            = new System.Drawing.Point(93, 96);
-            this.nudMontoMin.Size                = new System.Drawing.Size(120, 22);
-            this.nudMontoMin.Minimum             = 0;
-            this.nudMontoMin.Maximum             = 99999999;
-            this.nudMontoMin.Value               = 0;
-            this.nudMontoMin.DecimalPlaces       = 2;
-            this.nudMontoMin.ThousandsSeparator  = true;
+            this.nudMontoMin.Font               = normFont;
+            this.nudMontoMin.Location           = new System.Drawing.Point(93, 96);
+            this.nudMontoMin.Size               = new System.Drawing.Size(120, 22);
+            this.nudMontoMin.Minimum            = 0;
+            this.nudMontoMin.Maximum            = 99999999;
+            this.nudMontoMin.Value              = 0;
+            this.nudMontoMin.DecimalPlaces      = 2;
+            this.nudMontoMin.ThousandsSeparator = true;
 
             this.lblMontoMax.Text      = "Monto máx.:";
             this.lblMontoMax.Font      = boldFont;
@@ -206,21 +209,20 @@ namespace GUI
             this.lblMontoMax.Size      = new System.Drawing.Size(82, 20);
             this.lblMontoMax.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 
-            this.nudMontoMax.Font                = normFont;
-            this.nudMontoMax.Location            = new System.Drawing.Point(308, 96);
-            this.nudMontoMax.Size                = new System.Drawing.Size(120, 22);
-            this.nudMontoMax.Minimum             = 0;
-            this.nudMontoMax.Maximum             = 99999999;
-            this.nudMontoMax.Value               = 0;
-            this.nudMontoMax.DecimalPlaces       = 2;
-            this.nudMontoMax.ThousandsSeparator  = true;
+            this.nudMontoMax.Font               = normFont;
+            this.nudMontoMax.Location           = new System.Drawing.Point(308, 96);
+            this.nudMontoMax.Size               = new System.Drawing.Size(120, 22);
+            this.nudMontoMax.Minimum            = 0;
+            this.nudMontoMax.Maximum            = 99999999;
+            this.nudMontoMax.Value              = 0;
+            this.nudMontoMax.DecimalPlaces      = 2;
+            this.nudMontoMax.ThousandsSeparator = true;
 
             this.chkSoloGanadores.Text     = "Solo ganadores";
             this.chkSoloGanadores.Font     = boldFont;
             this.chkSoloGanadores.Location = new System.Drawing.Point(440, 97);
             this.chkSoloGanadores.Size     = new System.Drawing.Size(145, 22);
 
-            // ── Row 4: Conteo ─────────────────────────────────────────────────
             this.lblConteo.Font      = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Italic);
             this.lblConteo.ForeColor = System.Drawing.Color.DimGray;
             this.lblConteo.Location  = new System.Drawing.Point(10, 132);
@@ -237,17 +239,17 @@ namespace GUI
                 this.chkSoloGanadores, this.lblConteo
             });
 
-            // ── grpSubastas ───────────────────────────────────────────────────
+            // ── grpSubastas ────────────────────────────────────────────────────
             this.grpSubastas.Text     = "Subastas";
             this.grpSubastas.Font     = boldFont;
             this.grpSubastas.Location = new System.Drawing.Point(5, 172);
-            this.grpSubastas.Size     = new System.Drawing.Size(1045, 220);
+            this.grpSubastas.Size     = new System.Drawing.Size(1185, 230);
             this.grpSubastas.Anchor   = System.Windows.Forms.AnchorStyles.Top
                                       | System.Windows.Forms.AnchorStyles.Left
                                       | System.Windows.Forms.AnchorStyles.Right;
 
             this.dgvSubastas.Location          = new System.Drawing.Point(8, 20);
-            this.dgvSubastas.Size              = new System.Drawing.Size(1027, 190);
+            this.dgvSubastas.Size              = new System.Drawing.Size(1167, 200);
             this.dgvSubastas.Anchor            = System.Windows.Forms.AnchorStyles.Top
                                                | System.Windows.Forms.AnchorStyles.Left
                                                | System.Windows.Forms.AnchorStyles.Right;
@@ -259,31 +261,29 @@ namespace GUI
 
             this.grpSubastas.Controls.Add(this.dgvSubastas);
 
-            // ── grpOfertas ────────────────────────────────────────────────────
+            // ── grpOfertas ─────────────────────────────────────────────────────
             this.grpOfertas.Text     = "Ofertas";
             this.grpOfertas.Font     = boldFont;
-            this.grpOfertas.Location = new System.Drawing.Point(5, 397);
-            this.grpOfertas.Size     = new System.Drawing.Size(1045, 280);
+            this.grpOfertas.Location = new System.Drawing.Point(5, 407);
+            this.grpOfertas.Size     = new System.Drawing.Size(1185, 240);
             this.grpOfertas.Anchor   = System.Windows.Forms.AnchorStyles.Top
                                      | System.Windows.Forms.AnchorStyles.Left
-                                     | System.Windows.Forms.AnchorStyles.Right
-                                     | System.Windows.Forms.AnchorStyles.Bottom;
+                                     | System.Windows.Forms.AnchorStyles.Right;
 
             this.lblSumario.Font      = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Italic);
             this.lblSumario.ForeColor = System.Drawing.Color.DimGray;
             this.lblSumario.Location  = new System.Drawing.Point(8, 20);
-            this.lblSumario.Size      = new System.Drawing.Size(1027, 18);
+            this.lblSumario.Size      = new System.Drawing.Size(1167, 18);
             this.lblSumario.Text      = "Seleccione una subasta para ver las ofertas.";
             this.lblSumario.Anchor    = System.Windows.Forms.AnchorStyles.Top
                                       | System.Windows.Forms.AnchorStyles.Left
                                       | System.Windows.Forms.AnchorStyles.Right;
 
             this.dgvPujas.Location          = new System.Drawing.Point(8, 42);
-            this.dgvPujas.Size              = new System.Drawing.Size(1027, 228);
+            this.dgvPujas.Size              = new System.Drawing.Size(1167, 188);
             this.dgvPujas.Anchor            = System.Windows.Forms.AnchorStyles.Top
                                             | System.Windows.Forms.AnchorStyles.Left
-                                            | System.Windows.Forms.AnchorStyles.Right
-                                            | System.Windows.Forms.AnchorStyles.Bottom;
+                                            | System.Windows.Forms.AnchorStyles.Right;
             this.dgvPujas.ReadOnly          = true;
             this.dgvPujas.RowHeadersVisible = false;
             this.dgvPujas.Font              = normFont;
@@ -292,26 +292,61 @@ namespace GUI
                 this.lblSumario, this.dgvPujas
             });
 
+            // ── grpSuscriptores ────────────────────────────────────────────────
+            this.grpSuscriptores.Text     = "Suscriptores";
+            this.grpSuscriptores.Font     = boldFont;
+            this.grpSuscriptores.Location = new System.Drawing.Point(5, 652);
+            this.grpSuscriptores.Size     = new System.Drawing.Size(1185, 196);
+            this.grpSuscriptores.Anchor   = System.Windows.Forms.AnchorStyles.Top
+                                          | System.Windows.Forms.AnchorStyles.Left
+                                          | System.Windows.Forms.AnchorStyles.Right
+                                          | System.Windows.Forms.AnchorStyles.Bottom;
+
+            this.lblSuscSubtitulo.Font      = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Italic);
+            this.lblSuscSubtitulo.ForeColor = System.Drawing.Color.DimGray;
+            this.lblSuscSubtitulo.Location  = new System.Drawing.Point(8, 20);
+            this.lblSuscSubtitulo.Size      = new System.Drawing.Size(1167, 18);
+            this.lblSuscSubtitulo.Text      = "";
+            this.lblSuscSubtitulo.Anchor    = System.Windows.Forms.AnchorStyles.Top
+                                            | System.Windows.Forms.AnchorStyles.Left
+                                            | System.Windows.Forms.AnchorStyles.Right;
+
+            this.dgvSuscriptores.Location          = new System.Drawing.Point(8, 42);
+            this.dgvSuscriptores.Size              = new System.Drawing.Size(1167, 145);
+            this.dgvSuscriptores.Anchor            = System.Windows.Forms.AnchorStyles.Top
+                                                   | System.Windows.Forms.AnchorStyles.Left
+                                                   | System.Windows.Forms.AnchorStyles.Right
+                                                   | System.Windows.Forms.AnchorStyles.Bottom;
+            this.dgvSuscriptores.ReadOnly          = true;
+            this.dgvSuscriptores.RowHeadersVisible = false;
+            this.dgvSuscriptores.Font              = normFont;
+
+            this.grpSuscriptores.Controls.AddRange(new System.Windows.Forms.Control[] {
+                this.lblSuscSubtitulo, this.dgvSuscriptores
+            });
+
             // ── Form ──────────────────────────────────────────────────────────
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode       = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize          = new System.Drawing.Size(1060, 690);
+            this.ClientSize          = new System.Drawing.Size(1200, 860);
             this.Controls.AddRange(new System.Windows.Forms.Control[] {
-                this.grpFiltros, this.grpSubastas, this.grpOfertas
+                this.grpFiltros, this.grpSubastas, this.grpOfertas, this.grpSuscriptores
             });
-            this.Font  = new System.Drawing.Font("Segoe UI", 9F);
-            this.Name  = "FrmBitacoraSubastas";
-            this.Text  = "Bitácora de Subastas";
+            this.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.Name = "FrmBitacoraSubastas";
+            this.Text = "Bitácora de Subastas";
 
             this.grpFiltros.ResumeLayout(false);
             this.grpSubastas.ResumeLayout(false);
             this.grpOfertas.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)this.nudIdProducto).EndInit();
-            ((System.ComponentModel.ISupportInitialize)this.nudIdOfertante).EndInit();
-            ((System.ComponentModel.ISupportInitialize)this.nudMontoMin).EndInit();
-            ((System.ComponentModel.ISupportInitialize)this.nudMontoMax).EndInit();
-            ((System.ComponentModel.ISupportInitialize)this.dgvSubastas).EndInit();
-            ((System.ComponentModel.ISupportInitialize)this.dgvPujas).EndInit();
+            this.grpSuscriptores.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudIdProducto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIdOfertante)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMontoMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMontoMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSubastas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPujas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSuscriptores)).EndInit();
             this.ResumeLayout(false);
         }
 
@@ -345,5 +380,8 @@ namespace GUI
         private System.Windows.Forms.GroupBox         grpOfertas;
         private System.Windows.Forms.Label            lblSumario;
         private System.Windows.Forms.DataGridView     dgvPujas;
+        private System.Windows.Forms.GroupBox         grpSuscriptores;
+        private System.Windows.Forms.Label            lblSuscSubtitulo;
+        private System.Windows.Forms.DataGridView     dgvSuscriptores;
     }
 }
