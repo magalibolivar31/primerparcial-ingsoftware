@@ -131,13 +131,18 @@ namespace GUI
                 dgvPujas.DataSource = null;
                 dgvPujas.DataSource = pujas;
 
-                if (subasta.IdGanador.HasValue && subasta.PrecioFinal.HasValue)
+                decimal maxAceptada = 0;
+                foreach (BE.Puja p in pujas)
+                    if (p.Estado == BE.EstadoPuja.Aceptada && p.Monto > maxAceptada)
+                        maxAceptada = p.Monto;
+
+                if (maxAceptada > 0)
                 {
                     foreach (DataGridViewRow row in dgvPujas.Rows)
                     {
                         if (row.DataBoundItem is BE.Puja p &&
-                            p.IdPostor == subasta.IdGanador.Value &&
-                            p.Monto    == subasta.PrecioFinal.Value)
+                            p.Estado == BE.EstadoPuja.Aceptada &&
+                            p.Monto  == maxAceptada)
                         {
                             row.DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
                             row.DefaultCellStyle.ForeColor = System.Drawing.Color.DarkGreen;
