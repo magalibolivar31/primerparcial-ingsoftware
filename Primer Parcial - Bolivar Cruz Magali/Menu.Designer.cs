@@ -13,153 +13,214 @@ namespace GUI
 
         private void InitializeComponent()
         {
-            this.menuStrip         = new System.Windows.Forms.MenuStrip();
-            this.menuCatalogo      = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.menuCatalogo = new System.Windows.Forms.ToolStripMenuItem();
             this.menuNuevoArticulo = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuNuevoLote     = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuVerCatalogo   = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuSubastas      = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuAbrirSubasta  = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuNuevoLote = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuVerCatalogo = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSubastas = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuAbrirSubasta = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCerrarSubasta = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuVerSubastas   = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuRegistrarPuja    = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuVerSubastas = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuRegistrarPuja = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBitacoraSubastas = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuPostores      = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuPostores = new System.Windows.Forms.ToolStripMenuItem();
             this.menuGestionPostores = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuReportes           = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuHistorialSubastas  = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuSesion        = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuCerrarSesion  = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip       = new System.Windows.Forms.StatusStrip();
-            this.lblUsuarioStatus  = new System.Windows.Forms.ToolStripStatusLabel();
-
+            this.menuReportes = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuHistorialSubastas = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSesion = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.lblUsuarioStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
-
-            // ── menuStrip ────────────────────────────────────────────────────
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                this.menuCatalogo,
-                this.menuSubastas,
-                this.menuPostores,
-                this.menuReportes,
-                this.menuSesion
-            });
-            this.menuStrip.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip.Name     = "menuStrip";
-            this.menuStrip.Size     = new System.Drawing.Size(1100, 24);
-            this.menuStrip.Font     = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.menuStrip.BackColor = System.Drawing.Color.FromArgb(30, 30, 80);
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(80)))));
+            this.menuStrip.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.menuStrip.ForeColor = System.Drawing.Color.White;
-
-            // ── Catalogo ─────────────────────────────────────────────────────
-            this.menuCatalogo.Text = "Catálogo";
-            this.menuCatalogo.ForeColor = System.Drawing.Color.White;
+            this.menuStrip.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.menuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuSesion,
+            this.menuCatalogo,
+            this.menuSubastas,
+            this.menuPostores,
+            this.menuReportes});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(1650, 35);
+            this.menuStrip.TabIndex = 1;
+            // 
+            // menuCatalogo
+            // 
             this.menuCatalogo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                this.menuNuevoArticulo,
-                this.menuNuevoLote,
-                new System.Windows.Forms.ToolStripSeparator(),
-                this.menuVerCatalogo
-            });
-
-            this.menuNuevoArticulo.Text   = "Nuevo Artículo...";
+            this.menuNuevoArticulo,
+            this.menuNuevoLote,
+            this.menuVerCatalogo});
+            this.menuCatalogo.ForeColor = System.Drawing.Color.White;
+            this.menuCatalogo.Name = "menuCatalogo";
+            this.menuCatalogo.Size = new System.Drawing.Size(104, 29);
+            this.menuCatalogo.Text = "Catálogo";
+            // 
+            // menuNuevoArticulo
+            // 
+            this.menuNuevoArticulo.Name = "menuNuevoArticulo";
+            this.menuNuevoArticulo.Size = new System.Drawing.Size(252, 34);
+            this.menuNuevoArticulo.Text = "Nuevo Artículo...";
             this.menuNuevoArticulo.Click += new System.EventHandler(this.menuNuevoArticulo_Click);
-
-            this.menuNuevoLote.Text   = "Nuevo Lote...";
+            // 
+            // menuNuevoLote
+            // 
+            this.menuNuevoLote.Name = "menuNuevoLote";
+            this.menuNuevoLote.Size = new System.Drawing.Size(252, 34);
+            this.menuNuevoLote.Text = "Nuevo Lote...";
             this.menuNuevoLote.Click += new System.EventHandler(this.menuNuevoLote_Click);
-
-            this.menuVerCatalogo.Text   = "Ver Catálogo";
+            // 
+            // menuVerCatalogo
+            // 
+            this.menuVerCatalogo.Name = "menuVerCatalogo";
+            this.menuVerCatalogo.Size = new System.Drawing.Size(252, 34);
+            this.menuVerCatalogo.Text = "Ver Catálogo";
             this.menuVerCatalogo.Click += new System.EventHandler(this.menuVerCatalogo_Click);
-
-            // ── Subastas ─────────────────────────────────────────────────────
-            this.menuSubastas.Text      = "Subastas";
-            this.menuSubastas.ForeColor = System.Drawing.Color.White;
+            // 
+            // menuSubastas
+            // 
             this.menuSubastas.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                this.menuAbrirSubasta,
-                this.menuCerrarSubasta,
-                new System.Windows.Forms.ToolStripSeparator(),
-                this.menuVerSubastas,
-                this.menuRegistrarPuja,
-                new System.Windows.Forms.ToolStripSeparator(),
-                this.menuBitacoraSubastas
-            });
-
-            this.menuAbrirSubasta.Text   = "Abrir Subasta...";
+            this.menuAbrirSubasta,
+            this.menuCerrarSubasta,
+            this.menuVerSubastas,
+            this.menuRegistrarPuja,
+            this.menuBitacoraSubastas});
+            this.menuSubastas.ForeColor = System.Drawing.Color.White;
+            this.menuSubastas.Name = "menuSubastas";
+            this.menuSubastas.Size = new System.Drawing.Size(102, 29);
+            this.menuSubastas.Text = "Subastas";
+            // 
+            // menuAbrirSubasta
+            // 
+            this.menuAbrirSubasta.Name = "menuAbrirSubasta";
+            this.menuAbrirSubasta.Size = new System.Drawing.Size(288, 34);
+            this.menuAbrirSubasta.Text = "Abrir Subasta...";
             this.menuAbrirSubasta.Click += new System.EventHandler(this.menuAbrirSubasta_Click);
-
-            this.menuCerrarSubasta.Text   = "Cerrar Subasta...";
+            // 
+            // menuCerrarSubasta
+            // 
+            this.menuCerrarSubasta.Name = "menuCerrarSubasta";
+            this.menuCerrarSubasta.Size = new System.Drawing.Size(288, 34);
+            this.menuCerrarSubasta.Text = "Cerrar Subasta...";
             this.menuCerrarSubasta.Click += new System.EventHandler(this.menuCerrarSubasta_Click);
-
-            this.menuVerSubastas.Text   = "Ver Subastas Activas";
+            // 
+            // menuVerSubastas
+            // 
+            this.menuVerSubastas.Name = "menuVerSubastas";
+            this.menuVerSubastas.Size = new System.Drawing.Size(288, 34);
+            this.menuVerSubastas.Text = "Ver Subastas Activas";
             this.menuVerSubastas.Click += new System.EventHandler(this.menuVerSubastas_Click);
-
-            this.menuRegistrarPuja.Text   = "Registrar Puja...";
+            // 
+            // menuRegistrarPuja
+            // 
+            this.menuRegistrarPuja.Name = "menuRegistrarPuja";
+            this.menuRegistrarPuja.Size = new System.Drawing.Size(288, 34);
+            this.menuRegistrarPuja.Text = "Registrar Puja...";
             this.menuRegistrarPuja.Click += new System.EventHandler(this.menuRegistrarPuja_Click);
-
-            this.menuBitacoraSubastas.Text   = "Bitácora de Subastas";
+            // 
+            // menuBitacoraSubastas
+            // 
+            this.menuBitacoraSubastas.Name = "menuBitacoraSubastas";
+            this.menuBitacoraSubastas.Size = new System.Drawing.Size(288, 34);
+            this.menuBitacoraSubastas.Text = "Bitácora de Subastas";
             this.menuBitacoraSubastas.Click += new System.EventHandler(this.menuBitacoraSubastas_Click);
-
-            // ── Postores ─────────────────────────────────────────────────────
-            this.menuPostores.Text      = "Postores";
-            this.menuPostores.ForeColor = System.Drawing.Color.White;
+            // 
+            // menuPostores
+            // 
             this.menuPostores.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                this.menuGestionPostores
-            });
-
-            this.menuGestionPostores.Text   = "Gestión de Postores...";
+            this.menuGestionPostores});
+            this.menuPostores.ForeColor = System.Drawing.Color.White;
+            this.menuPostores.Name = "menuPostores";
+            this.menuPostores.Size = new System.Drawing.Size(99, 29);
+            this.menuPostores.Text = "Postores";
+            // 
+            // menuGestionPostores
+            // 
+            this.menuGestionPostores.Name = "menuGestionPostores";
+            this.menuGestionPostores.Size = new System.Drawing.Size(292, 34);
+            this.menuGestionPostores.Text = "Gestión de Postores...";
             this.menuGestionPostores.Click += new System.EventHandler(this.menuGestionPostores_Click);
-
-            // ── Reportes ─────────────────────────────────────────────────────
-            this.menuReportes.Text      = "Reportes";
-            this.menuReportes.ForeColor = System.Drawing.Color.White;
+            //
+            // menuReportes
+            //
             this.menuReportes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                this.menuHistorialSubastas
-            });
-
-            this.menuHistorialSubastas.Text   = "Historial de Subastas";
+            this.menuHistorialSubastas});
+            this.menuReportes.ForeColor = System.Drawing.Color.White;
+            this.menuReportes.Name = "menuReportes";
+            this.menuReportes.Size = new System.Drawing.Size(98, 29);
+            this.menuReportes.Text = "Reportes";
+            //
+            // menuHistorialSubastas
+            //
+            this.menuHistorialSubastas.Name = "menuHistorialSubastas";
+            this.menuHistorialSubastas.Size = new System.Drawing.Size(260, 34);
+            this.menuHistorialSubastas.Text = "Historial de Subastas";
             this.menuHistorialSubastas.Click += new System.EventHandler(this.menuHistorialSubastas_Click);
-
-            // ── Sesion ───────────────────────────────────────────────────────
-            this.menuSesion.Text      = "Sesión";
-            this.menuSesion.ForeColor = System.Drawing.Color.White;
+            //
+            // menuSesion
+            //
             this.menuSesion.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                this.menuCerrarSesion
-            });
-
-            this.menuCerrarSesion.Text   = "Cerrar Sesión";
+            this.menuCerrarSesion});
+            this.menuSesion.ForeColor = System.Drawing.Color.White;
+            this.menuSesion.Name = "menuSesion";
+            this.menuSesion.Size = new System.Drawing.Size(83, 29);
+            this.menuSesion.Text = "Sesión";
+            // 
+            // menuCerrarSesion
+            // 
+            this.menuCerrarSesion.Name = "menuCerrarSesion";
+            this.menuCerrarSesion.Size = new System.Drawing.Size(270, 34);
+            this.menuCerrarSesion.Text = "Cerrar Sesión";
             this.menuCerrarSesion.Click += new System.EventHandler(this.menuCerrarSesion_Click);
-
-            // ── statusStrip ──────────────────────────────────────────────────
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(80)))));
+            this.statusStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                this.lblUsuarioStatus
-            });
-            this.statusStrip.Location  = new System.Drawing.Point(0, 628);
-            this.statusStrip.Name      = "statusStrip";
-            this.statusStrip.BackColor = System.Drawing.Color.FromArgb(30, 30, 80);
-
+            this.lblUsuarioStatus});
+            this.statusStrip.Location = new System.Drawing.Point(0, 978);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 21, 0);
+            this.statusStrip.Size = new System.Drawing.Size(1650, 22);
+            this.statusStrip.TabIndex = 0;
+            // 
+            // lblUsuarioStatus
+            // 
             this.lblUsuarioStatus.ForeColor = System.Drawing.Color.White;
-            this.lblUsuarioStatus.Name      = "lblUsuarioStatus";
-            this.lblUsuarioStatus.Text      = "";
-
-            // ── Form Menu (MDI) ───────────────────────────────────────────────
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode       = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize          = new System.Drawing.Size(1100, 650);
+            this.lblUsuarioStatus.Name = "lblUsuarioStatus";
+            this.lblUsuarioStatus.Size = new System.Drawing.Size(0, 15);
+            // 
+            // Menu
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1650, 1000);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
-            this.IsMdiContainer      = true;
-            this.MainMenuStrip       = this.menuStrip;
-            this.Name                = "Menu";
-            this.StartPosition       = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text                = "La Almoneda Nacional";
-            this.WindowState         = System.Windows.Forms.FormWindowState.Maximized;
-
+            this.IsMdiContainer = true;
+            this.MainMenuStrip = this.menuStrip;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Name = "Menu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "La Almoneda Nacional";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         // ── Controles ────────────────────────────────────────────────────────

@@ -93,8 +93,9 @@ namespace BLL
             subasta.IdGanador   = idGanador;
             subasta.PrecioFinal = precioFinal;
 
-            // El GestorPujas notifica el cierre a todos los suscriptores.
-            _gestorPujas.EliminarGestor(idSubasta); // ya se notifico; limpiar el gestor
+            // Notificar cierre a todos los observers (RF-07) y luego limpiar el gestor.
+            _gestorPujas.NotificarCierre(idSubasta, subasta);
+            _gestorPujas.EliminarGestor(idSubasta);
 
             string resumen = mejorPuja != null
                 ? $"Ganador: Postor ID {idGanador} — Precio final: ${precioFinal:N2}"
