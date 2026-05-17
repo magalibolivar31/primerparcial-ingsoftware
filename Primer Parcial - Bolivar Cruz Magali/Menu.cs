@@ -66,17 +66,8 @@ namespace GUI
 
         // ── Subastas ─────────────────────────────────────────────────────────
 
-        private void menuAbrirSubasta_Click(object sender, EventArgs e)
-            => AbrirHijo<FrmSubastas>();
-
-        private void menuCerrarSubasta_Click(object sender, EventArgs e)
-            => AbrirHijo<FrmSubastas>();
-
-        private void menuVerSubastas_Click(object sender, EventArgs e)
-            => AbrirHijo<FrmSubastas>();
-
-        private void menuRegistrarPuja_Click(object sender, EventArgs e)
-            => AbrirHijo<FrmRegistrarPuja>();
+        private void menuGestionSubastas_Click(object sender, EventArgs e)
+            => AbrirHijo<FrmGestionSubastas>();
 
         // ── Postores ─────────────────────────────────────────────────────────
 

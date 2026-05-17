@@ -19,10 +19,7 @@ namespace GUI
             this.menuNuevoLote = new System.Windows.Forms.ToolStripMenuItem();
             this.menuVerCatalogo = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSubastas = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuAbrirSubasta = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuCerrarSubasta = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuVerSubastas = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuRegistrarPuja = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuGestionSubastas = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPostores = new System.Windows.Forms.ToolStripMenuItem();
             this.menuGestionPostores = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportes = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,42 +86,18 @@ namespace GUI
             // menuSubastas
             // 
             this.menuSubastas.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuAbrirSubasta,
-            this.menuCerrarSubasta,
-            this.menuVerSubastas,
-            this.menuRegistrarPuja});
+            this.menuGestionSubastas});
             this.menuSubastas.ForeColor = System.Drawing.Color.White;
             this.menuSubastas.Name = "menuSubastas";
             this.menuSubastas.Size = new System.Drawing.Size(102, 29);
             this.menuSubastas.Text = "Subastas";
-            // 
-            // menuAbrirSubasta
-            // 
-            this.menuAbrirSubasta.Name = "menuAbrirSubasta";
-            this.menuAbrirSubasta.Size = new System.Drawing.Size(288, 34);
-            this.menuAbrirSubasta.Text = "Abrir Subasta...";
-            this.menuAbrirSubasta.Click += new System.EventHandler(this.menuAbrirSubasta_Click);
-            // 
-            // menuCerrarSubasta
-            // 
-            this.menuCerrarSubasta.Name = "menuCerrarSubasta";
-            this.menuCerrarSubasta.Size = new System.Drawing.Size(288, 34);
-            this.menuCerrarSubasta.Text = "Cerrar Subasta...";
-            this.menuCerrarSubasta.Click += new System.EventHandler(this.menuCerrarSubasta_Click);
-            // 
-            // menuVerSubastas
-            // 
-            this.menuVerSubastas.Name = "menuVerSubastas";
-            this.menuVerSubastas.Size = new System.Drawing.Size(288, 34);
-            this.menuVerSubastas.Text = "Ver Subastas Activas";
-            this.menuVerSubastas.Click += new System.EventHandler(this.menuVerSubastas_Click);
-            // 
-            // menuRegistrarPuja
-            // 
-            this.menuRegistrarPuja.Name = "menuRegistrarPuja";
-            this.menuRegistrarPuja.Size = new System.Drawing.Size(288, 34);
-            this.menuRegistrarPuja.Text = "Registrar Puja...";
-            this.menuRegistrarPuja.Click += new System.EventHandler(this.menuRegistrarPuja_Click);
+            //
+            // menuGestionSubastas
+            //
+            this.menuGestionSubastas.Name = "menuGestionSubastas";
+            this.menuGestionSubastas.Size = new System.Drawing.Size(288, 34);
+            this.menuGestionSubastas.Text = "Gestión de Subastas...";
+            this.menuGestionSubastas.Click += new System.EventHandler(this.menuGestionSubastas_Click);
             //
             // menuPostores
             // 
@@ -230,10 +203,7 @@ namespace GUI
         private System.Windows.Forms.ToolStripMenuItem     menuNuevoLote;
         private System.Windows.Forms.ToolStripMenuItem     menuVerCatalogo;
         private System.Windows.Forms.ToolStripMenuItem     menuSubastas;
-        private System.Windows.Forms.ToolStripMenuItem     menuAbrirSubasta;
-        private System.Windows.Forms.ToolStripMenuItem     menuCerrarSubasta;
-        private System.Windows.Forms.ToolStripMenuItem     menuVerSubastas;
-        private System.Windows.Forms.ToolStripMenuItem     menuRegistrarPuja;
+        private System.Windows.Forms.ToolStripMenuItem     menuGestionSubastas;
         private System.Windows.Forms.ToolStripMenuItem     menuPostores;
         private System.Windows.Forms.ToolStripMenuItem     menuGestionPostores;
         private System.Windows.Forms.ToolStripMenuItem     menuReportes;

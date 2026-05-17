@@ -129,11 +129,20 @@
     <Compile Include="FrmBitacoraSubastas.Designer.cs">
       <DependentUpon>FrmBitacoraSubastas.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmGestionSubastas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGestionSubastas.Designer.cs">
+      <DependentUpon>FrmGestionSubastas.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmDetalle.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmCatalogo.resx">
+      <DependentUpon>FrmCatalogo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
