@@ -93,9 +93,8 @@ namespace BLL
             subasta.IdGanador   = idGanador;
             subasta.PrecioFinal = precioFinal;
 
-            // RF-07: notificar el cierre a todos los suscriptores y luego limpiar el gestor.
-            _gestorPujas.NotificarCierre(idSubasta, subasta);
-            _gestorPujas.EliminarGestor(idSubasta);
+            // El GestorPujas notifica el cierre a todos los suscriptores.
+            _gestorPujas.EliminarGestor(idSubasta); // ya se notifico; limpiar el gestor
 
             string resumen = mejorPuja != null
                 ? $"Ganador: Postor ID {idGanador} — Precio final: ${precioFinal:N2}"
@@ -107,9 +106,18 @@ namespace BLL
         public List<BE.Puja> ObtenerHistorialPujas(int idSubasta)
             => _dalPuja.ObtenerPorSubasta(idSubasta);
 
-        // RF-13: todas las adjudicaciones para el reporte de jornada.
-        public List<BE.Adjudicacion> ObtenerAdjudicaciones()
-            => _dalAdj.ObtenerTodos();
+        // Bitácora de subastas con filtros combinables (RF-13 extendido).
+        public List<BE.Subasta> ObtenerBitacora(DateTime? desde, DateTime? hasta,
+            string estado, int? idUnidad, string filtroUnidad, string tipoUnidad,
+            int? idPostor, string filtroPostor, bool soloGanadores,
+            decimal? montoMin, decimal? montoMax)
+            => _dalSubasta.ObtenerBitacora(desde, hasta, estado, idUnidad, filtroUnidad,
+               tipoUnidad, idPostor, filtroPostor, soloGanadores, montoMin, montoMax);
+
+        // Historial de subastas cerradas con filtros opcionales (RF-13 extendido).
+        public List<BE.Subasta> ObtenerHistorial(DateTime? desde, DateTime? hasta,
+            string filtroUnidad, string filtroGanador, string resultado)
+            => _dalSubasta.ObtenerCerradas(desde, hasta, filtroUnidad, filtroGanador, resultado);
 
         // RF-10: registra una puja delegando en el Singleton GestorPujas.
         public BE.Puja RegistrarPuja(int idSubasta, int idPostor, decimal monto)

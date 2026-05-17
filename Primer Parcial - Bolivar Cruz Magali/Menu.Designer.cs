@@ -22,11 +22,13 @@ namespace GUI
             this.menuAbrirSubasta  = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCerrarSubasta = new System.Windows.Forms.ToolStripMenuItem();
             this.menuVerSubastas   = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuRegistrarPuja = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuRegistrarPuja    = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuBitacoraSubastas = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPostores      = new System.Windows.Forms.ToolStripMenuItem();
             this.menuGestionPostores = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuReportes      = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuReporteJornada= new System.Windows.Forms.ToolStripMenuItem();
+            this.menuReportes           = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuReporteJornada     = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuHistorialSubastas  = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAdmin         = new System.Windows.Forms.ToolStripMenuItem();
             this.menuGestionUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSesion        = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,7 +83,9 @@ namespace GUI
                 this.menuCerrarSubasta,
                 new System.Windows.Forms.ToolStripSeparator(),
                 this.menuVerSubastas,
-                this.menuRegistrarPuja
+                this.menuRegistrarPuja,
+                new System.Windows.Forms.ToolStripSeparator(),
+                this.menuBitacoraSubastas
             });
 
             this.menuAbrirSubasta.Text   = "Abrir Subasta...";
@@ -95,6 +99,9 @@ namespace GUI
 
             this.menuRegistrarPuja.Text   = "Registrar Puja...";
             this.menuRegistrarPuja.Click += new System.EventHandler(this.menuRegistrarPuja_Click);
+
+            this.menuBitacoraSubastas.Text   = "Bitácora de Subastas";
+            this.menuBitacoraSubastas.Click += new System.EventHandler(this.menuBitacoraSubastas_Click);
 
             // ── Postores ─────────────────────────────────────────────────────
             this.menuPostores.Text      = "Postores";
@@ -110,11 +117,16 @@ namespace GUI
             this.menuReportes.Text      = "Reportes";
             this.menuReportes.ForeColor = System.Drawing.Color.White;
             this.menuReportes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                this.menuReporteJornada
+                this.menuReporteJornada,
+                new System.Windows.Forms.ToolStripSeparator(),
+                this.menuHistorialSubastas
             });
 
             this.menuReporteJornada.Text   = "Reporte de Jornada";
             this.menuReporteJornada.Click += new System.EventHandler(this.menuReporteJornada_Click);
+
+            this.menuHistorialSubastas.Text   = "Historial de Subastas";
+            this.menuHistorialSubastas.Click += new System.EventHandler(this.menuHistorialSubastas_Click);
 
             // ── Administracion ───────────────────────────────────────────────
             this.menuAdmin.Text      = "Administración";
@@ -180,10 +192,12 @@ namespace GUI
         private System.Windows.Forms.ToolStripMenuItem     menuCerrarSubasta;
         private System.Windows.Forms.ToolStripMenuItem     menuVerSubastas;
         private System.Windows.Forms.ToolStripMenuItem     menuRegistrarPuja;
+        private System.Windows.Forms.ToolStripMenuItem     menuBitacoraSubastas;
         private System.Windows.Forms.ToolStripMenuItem     menuPostores;
         private System.Windows.Forms.ToolStripMenuItem     menuGestionPostores;
         private System.Windows.Forms.ToolStripMenuItem     menuReportes;
         private System.Windows.Forms.ToolStripMenuItem     menuReporteJornada;
+        private System.Windows.Forms.ToolStripMenuItem     menuHistorialSubastas;
         private System.Windows.Forms.ToolStripMenuItem     menuAdmin;
         private System.Windows.Forms.ToolStripMenuItem     menuGestionUsuarios;
         private System.Windows.Forms.ToolStripMenuItem     menuSesion;

@@ -27,25 +27,25 @@ namespace GUI
         // Muestra u oculta opciones del menu segun el rol del usuario autenticado.
         private void ConfigurarMenuPorRol(BE.Usuario usuario)
         {
-            // Catalogo: solo Martillero
-            menuCatalogo.Visible = usuario.EsMartillero;
+            // Catalogo: solo Martillero y Administrador
+            menuCatalogo.Visible = usuario.EsMartillero || usuario.EsAdministrador;
 
-            // Subastas: ambos roles
-            menuSubastas.Visible = true;
+            // Subastas: Martillero y Operador
+            menuSubastas.Visible = usuario.EsMartillero || usuario.EsOperador || usuario.EsAdministrador;
 
-            // Postores: ambos roles
-            menuPostores.Visible = true;
+            // Postores: Martillero y Operador
+            menuPostores.Visible = usuario.EsMartillero || usuario.EsOperador || usuario.EsAdministrador;
 
-            // Reportes: ambos roles
+            // Reportes: todos los roles
             menuReportes.Visible = true;
 
-            // Administracion (gestión de usuarios): solo Martillero
-            menuAdmin.Visible = usuario.EsMartillero;
+            // Administracion: solo Administrador
+            menuAdmin.Visible = usuario.EsAdministrador;
 
             // Subopciones de Subastas segun rol
-            menuAbrirSubasta.Visible  = usuario.EsMartillero;
-            menuCerrarSubasta.Visible = usuario.EsMartillero;
-            menuRegistrarPuja.Visible = usuario.EsOperador;
+            menuAbrirSubasta.Visible  = usuario.EsMartillero || usuario.EsAdministrador;
+            menuCerrarSubasta.Visible = usuario.EsMartillero || usuario.EsAdministrador;
+            menuRegistrarPuja.Visible = usuario.EsOperador   || usuario.EsAdministrador;
         }
 
         // Abre una instancia única del formulario hijo MDI del tipo T.
@@ -100,6 +100,12 @@ namespace GUI
 
         private void menuReporteJornada_Click(object sender, EventArgs e)
             => AbrirHijo<FrmReporteJornada>();
+
+        private void menuHistorialSubastas_Click(object sender, EventArgs e)
+            => AbrirHijo<FrmHistorialSubastas>();
+
+        private void menuBitacoraSubastas_Click(object sender, EventArgs e)
+            => AbrirHijo<FrmBitacoraSubastas>();
 
         // ── Administracion ───────────────────────────────────────────────────
 

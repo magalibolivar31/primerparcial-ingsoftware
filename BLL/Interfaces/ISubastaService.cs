@@ -9,7 +9,12 @@ namespace BLL.Interfaces
         BE.Subasta       ObtenerPorId(int id);
         int  AbrirSubasta(int idUnidad, int idMartillero);
         void CerrarSubasta(int idSubasta, int idMartillero, string observaciones = null);
-        List<BE.Puja>         ObtenerHistorialPujas(int idSubasta);
-        List<BE.Adjudicacion> ObtenerAdjudicaciones();
+        List<BE.Puja>    ObtenerHistorialPujas(int idSubasta);
+        List<BE.Subasta> ObtenerHistorial(DateTime? desde, DateTime? hasta,
+            string filtroUnidad, string filtroGanador, string resultado);
+        List<BE.Subasta> ObtenerBitacora(DateTime? desde, DateTime? hasta,
+            string estado, int? idUnidad, string filtroUnidad, string tipoUnidad,
+            int? idPostor, string filtroPostor, bool soloGanadores,
+            decimal? montoMin, decimal? montoMax);
     }
 }

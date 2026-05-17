@@ -118,6 +118,131 @@ namespace DAL
             return lista;
         }
 
+        // Bitácora de subastas con todos los filtros combinables.
+        public List<BE.Subasta> ObtenerBitacora(
+            DateTime? desde, DateTime? hasta,
+            string estadoFiltro,
+            int? idUnidad, string filtroNombreUnidad, string tipoUnidad,
+            int? idPostor, string filtroNombrePostor,
+            bool soloGanadores,
+            decimal? montoMin, decimal? montoMax)
+        {
+            var lista = new List<BE.Subasta>();
+            string sql =
+                "SELECT s.Id, s.IdUnidad, s.IdMartillero, s.Estado, s.PrecioInicial, " +
+                "       s.PrecioVigente, s.FechaApertura, s.FechaCierre, s.IdGanador, s.PrecioFinal, " +
+                "       u.Nombre AS NombreUnidad, u.Tipo AS TipoUnidad, " +
+                "       us.Nombre + ' ' + us.Apellido AS NombreMartillero, " +
+                "       p.Nombre AS NombreGanador " +
+                "FROM Subasta s " +
+                "INNER JOIN UnidadDeVenta u  ON u.Id  = s.IdUnidad " +
+                "INNER JOIN Usuario us       ON us.Id = s.IdMartillero " +
+                "LEFT  JOIN Postor  p        ON p.Id  = s.IdGanador " +
+                "WHERE 1=1";
+
+            var pars = new List<SqlParameter>();
+
+            if (desde.HasValue)
+            { sql += " AND s.FechaApertura >= @Desde"; pars.Add(new SqlParameter("@Desde", desde.Value)); }
+            if (hasta.HasValue)
+            { sql += " AND s.FechaApertura < @Hasta";  pars.Add(new SqlParameter("@Hasta", hasta.Value.AddDays(1))); }
+            if (!string.IsNullOrWhiteSpace(estadoFiltro))
+            { sql += " AND s.Estado = @Estado"; pars.Add(new SqlParameter("@Estado", estadoFiltro)); }
+            if (idUnidad.HasValue && idUnidad.Value > 0)
+            { sql += " AND s.IdUnidad = @IdUnidad"; pars.Add(new SqlParameter("@IdUnidad", idUnidad.Value)); }
+            else if (!string.IsNullOrWhiteSpace(filtroNombreUnidad))
+            { sql += " AND u.Nombre LIKE @NombreUnidad"; pars.Add(new SqlParameter("@NombreUnidad", "%" + filtroNombreUnidad.Trim() + "%")); }
+            if (!string.IsNullOrWhiteSpace(tipoUnidad))
+            { sql += " AND u.Tipo = @TipoUnidad"; pars.Add(new SqlParameter("@TipoUnidad", tipoUnidad)); }
+
+            bool hayPostor = (idPostor.HasValue && idPostor.Value > 0) || !string.IsNullOrWhiteSpace(filtroNombrePostor);
+
+            if (soloGanadores && hayPostor)
+            {
+                if (idPostor.HasValue && idPostor.Value > 0)
+                { sql += " AND s.IdGanador = @IdPostorGanador"; pars.Add(new SqlParameter("@IdPostorGanador", idPostor.Value)); }
+                else
+                { sql += " AND p.Nombre LIKE @NombrePostorGanador"; pars.Add(new SqlParameter("@NombrePostorGanador", "%" + filtroNombrePostor.Trim() + "%")); }
+            }
+            else if (soloGanadores)
+            {
+                sql += " AND s.IdGanador IS NOT NULL";
+            }
+            else if (hayPostor)
+            {
+                if (idPostor.HasValue && idPostor.Value > 0)
+                { sql += " AND EXISTS (SELECT 1 FROM Puja pj WHERE pj.IdSubasta = s.Id AND pj.IdPostor = @IdPostorPart AND pj.Estado = 'ACEPTADA')"; pars.Add(new SqlParameter("@IdPostorPart", idPostor.Value)); }
+                else
+                { sql += " AND EXISTS (SELECT 1 FROM Puja pj INNER JOIN Postor po ON po.Id = pj.IdPostor WHERE pj.IdSubasta = s.Id AND po.Nombre LIKE @NombrePostorPart AND pj.Estado = 'ACEPTADA')"; pars.Add(new SqlParameter("@NombrePostorPart", "%" + filtroNombrePostor.Trim() + "%")); }
+            }
+
+            if (montoMin.HasValue)
+            { sql += " AND EXISTS (SELECT 1 FROM Puja pj WHERE pj.IdSubasta = s.Id AND pj.Monto >= @MontoMin AND pj.Estado = 'ACEPTADA')"; pars.Add(new SqlParameter("@MontoMin", montoMin.Value)); }
+            if (montoMax.HasValue)
+            { sql += " AND EXISTS (SELECT 1 FROM Puja pj WHERE pj.IdSubasta = s.Id AND pj.Monto <= @MontoMax AND pj.Estado = 'ACEPTADA')"; pars.Add(new SqlParameter("@MontoMax", montoMax.Value)); }
+
+            sql += " ORDER BY s.FechaApertura DESC";
+
+            DataTable tabla = acceso.Leer(sql, pars.Count > 0 ? pars.ToArray() : null);
+            foreach (DataRow row in tabla.Rows)
+            {
+                BE.Subasta s = Mapear(row);
+                s.TipoUnidad = row["TipoUnidad"] != DBNull.Value ? row["TipoUnidad"].ToString() : null;
+                lista.Add(s);
+            }
+            return lista;
+        }
+
+        // Devuelve subastas cerradas con filtros opcionales para el historial.
+        public List<BE.Subasta> ObtenerCerradas(DateTime? desde, DateTime? hasta,
+            string filtroUnidad, string filtroGanador, string resultado)
+        {
+            var lista = new List<BE.Subasta>();
+            string sql =
+                "SELECT s.Id, s.IdUnidad, s.IdMartillero, s.Estado, s.PrecioInicial, " +
+                "       s.PrecioVigente, s.FechaApertura, s.FechaCierre, s.IdGanador, s.PrecioFinal, " +
+                "       u.Nombre AS NombreUnidad, " +
+                "       us.Nombre + ' ' + us.Apellido AS NombreMartillero, " +
+                "       p.Nombre AS NombreGanador " +
+                "FROM Subasta s " +
+                "INNER JOIN UnidadDeVenta u  ON u.Id  = s.IdUnidad " +
+                "INNER JOIN Usuario us       ON us.Id = s.IdMartillero " +
+                "LEFT  JOIN Postor  p        ON p.Id  = s.IdGanador " +
+                "WHERE s.Estado = 'CERRADA'";
+
+            var pars = new List<SqlParameter>();
+
+            if (desde.HasValue)
+            {
+                sql += " AND s.FechaCierre >= @Desde";
+                pars.Add(new SqlParameter("@Desde", desde.Value));
+            }
+            if (hasta.HasValue)
+            {
+                sql += " AND s.FechaCierre < @Hasta";
+                pars.Add(new SqlParameter("@Hasta", hasta.Value.AddDays(1)));
+            }
+            if (!string.IsNullOrWhiteSpace(filtroUnidad))
+            {
+                sql += " AND u.Nombre LIKE @Unidad";
+                pars.Add(new SqlParameter("@Unidad", "%" + filtroUnidad.Trim() + "%"));
+            }
+            if (!string.IsNullOrWhiteSpace(filtroGanador))
+            {
+                sql += " AND p.Nombre LIKE @Ganador";
+                pars.Add(new SqlParameter("@Ganador", "%" + filtroGanador.Trim() + "%"));
+            }
+            if (resultado == "ADJUDICADA") sql += " AND s.IdGanador IS NOT NULL";
+            if (resultado == "DESIERTA")   sql += " AND s.IdGanador IS NULL";
+
+            sql += " ORDER BY s.FechaCierre DESC";
+
+            DataTable tabla = acceso.Leer(sql, pars.Count > 0 ? pars.ToArray() : null);
+            foreach (DataRow row in tabla.Rows)
+                lista.Add(Mapear(row));
+            return lista;
+        }
+
         private BE.Subasta Mapear(DataRow row)
         {
             return new BE.Subasta

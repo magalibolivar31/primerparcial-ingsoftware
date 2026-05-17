@@ -19,9 +19,10 @@ namespace BE
         public decimal?      PrecioFinal    { get; set; }
 
         // Datos enriquecidos (cargados por JOIN, no persisten en esta tabla).
-        public string NombreUnidad    { get; set; }
+        public string NombreUnidad     { get; set; }
         public string NombreMartillero { get; set; }
-        public string NombreGanador   { get; set; }
+        public string NombreGanador    { get; set; }
+        public string TipoUnidad       { get; set; }
 
         public bool EstaActiva  => Estado == EstadoSubasta.Activa;
         public bool EstaCerrada => Estado == EstadoSubasta.Cerrada;
