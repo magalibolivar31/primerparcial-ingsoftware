@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
+using System.Text;
 using System.Windows.Forms;
 
 namespace GUI
@@ -177,6 +179,81 @@ namespace GUI
             dgvPujas.DataSource = null;
             lblSumario.Text     = "Seleccione una subasta para ver las ofertas.";
             grpOfertas.Text     = "Ofertas";
+        }
+
+        private void btnDescargarPDF_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string   texto  = GenerarTextoReporte();
+                string[] lineas = texto.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
+                int lineaActual = 0;
+
+                var doc = new PrintDocument();
+                doc.DocumentName = $"BitacoraSubastas_{DateTime.Today:yyyyMMdd}";
+                doc.PrintPage += (s2, ev) =>
+                {
+                    using (var fuente = new System.Drawing.Font("Courier New", 7.5f))
+                    {
+                        float altLinea = fuente.GetHeight(ev.Graphics);
+                        float y        = ev.MarginBounds.Top;
+                        while (lineaActual < lineas.Length)
+                        {
+                            ev.Graphics.DrawString(lineas[lineaActual], fuente,
+                                System.Drawing.Brushes.Black, ev.MarginBounds.Left, y);
+                            y += altLinea;
+                            lineaActual++;
+                            if (y + altLinea > ev.MarginBounds.Bottom)
+                            { ev.HasMorePages = lineaActual < lineas.Length; break; }
+                        }
+                    }
+                };
+
+                using (var dlg = new PrintDialog { Document = doc, UseEXDialog = true })
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                        doc.Print();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error al generar PDF", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private string GenerarTextoReporte()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("BITÁCORA DE SUBASTAS — LA ALMONEDA NACIONAL");
+            sb.AppendLine($"Generado: {DateTime.Now:dd/MM/yyyy HH:mm:ss}");
+            sb.AppendLine($"Período:  {dtpDesde.Value:dd/MM/yyyy} — {dtpHasta.Value:dd/MM/yyyy}");
+            sb.AppendLine(new string('─', 100));
+            sb.AppendLine();
+
+            foreach (DataGridViewRow row in dgvSubastas.Rows)
+            {
+                if (!(row.DataBoundItem is BE.Subasta s)) continue;
+
+                sb.AppendLine($"Subasta #{s.Id}  |  {s.NombreUnidad}  |  Tipo: {s.TipoUnidad ?? "─"}  |  Estado: {s.Estado}");
+                sb.AppendLine($"  Precio base: ${s.PrecioInicial:N2}   Precio final: {(s.PrecioFinal.HasValue ? $"${s.PrecioFinal:N2}" : "─")}   Ganador: {s.NombreGanador ?? "Sin ganador"}");
+                sb.AppendLine($"  Apertura: {s.FechaApertura:dd/MM/yyyy HH:mm}   Cierre: {(s.FechaCierre.HasValue ? s.FechaCierre.Value.ToString("dd/MM/yyyy HH:mm") : "En curso")}");
+
+                try
+                {
+                    List<BE.Puja> pujas = _bll.ObtenerHistorialPujas(s.Id);
+                    if (pujas.Count > 0)
+                    {
+                        sb.AppendLine($"  Ofertas ({pujas.Count}):");
+                        foreach (BE.Puja p in pujas)
+                            sb.AppendLine($"    · {p.NombrePostor,-28} ${p.Monto,12:N2}  {p.Estado,-10}  {p.FechaHora:dd/MM/yyyy HH:mm:ss}");
+                    }
+                    else
+                        sb.AppendLine("  Sin ofertas.");
+                }
+                catch { sb.AppendLine("  (error al cargar ofertas)"); }
+
+                sb.AppendLine(new string('─', 100));
+            }
+
+            return sb.ToString();
         }
     }
 }

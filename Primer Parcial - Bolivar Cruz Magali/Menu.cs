@@ -39,8 +39,8 @@ namespace GUI
             // Reportes: todos los roles
             menuReportes.Visible = true;
 
-            // Administracion: solo Martillero (rol de mayor jerarquia)
-            menuAdmin.Visible = usuario.EsMartillero;
+            // Administracion: oculto (funcionalidad eliminada)
+            menuAdmin.Visible = false;
 
             // Subopciones de Subastas segun rol
             menuAbrirSubasta.Visible  = usuario.EsMartillero;
@@ -98,19 +98,11 @@ namespace GUI
 
         // ── Reportes ─────────────────────────────────────────────────────────
 
-        private void menuReporteJornada_Click(object sender, EventArgs e)
-            => AbrirHijo<FrmReporteJornada>();
-
         private void menuHistorialSubastas_Click(object sender, EventArgs e)
             => AbrirHijo<FrmHistorialSubastas>();
 
         private void menuBitacoraSubastas_Click(object sender, EventArgs e)
             => AbrirHijo<FrmBitacoraSubastas>();
-
-        // ── Administracion ───────────────────────────────────────────────────
-
-        private void menuGestionUsuarios_Click(object sender, EventArgs e)
-            => AbrirHijo<FrmGestionUsuarios>();
 
         // ── Sesion ───────────────────────────────────────────────────────────
 

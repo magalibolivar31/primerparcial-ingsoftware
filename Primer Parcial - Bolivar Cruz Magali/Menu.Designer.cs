@@ -27,10 +27,7 @@ namespace GUI
             this.menuPostores      = new System.Windows.Forms.ToolStripMenuItem();
             this.menuGestionPostores = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReportes           = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuReporteJornada     = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHistorialSubastas  = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuAdmin         = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuGestionUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSesion        = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCerrarSesion  = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip       = new System.Windows.Forms.StatusStrip();
@@ -46,7 +43,6 @@ namespace GUI
                 this.menuSubastas,
                 this.menuPostores,
                 this.menuReportes,
-                this.menuAdmin,
                 this.menuSesion
             });
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
@@ -117,26 +113,11 @@ namespace GUI
             this.menuReportes.Text      = "Reportes";
             this.menuReportes.ForeColor = System.Drawing.Color.White;
             this.menuReportes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                this.menuReporteJornada,
-                new System.Windows.Forms.ToolStripSeparator(),
                 this.menuHistorialSubastas
             });
 
-            this.menuReporteJornada.Text   = "Reporte de Jornada";
-            this.menuReporteJornada.Click += new System.EventHandler(this.menuReporteJornada_Click);
-
             this.menuHistorialSubastas.Text   = "Historial de Subastas";
             this.menuHistorialSubastas.Click += new System.EventHandler(this.menuHistorialSubastas_Click);
-
-            // ── Administracion ───────────────────────────────────────────────
-            this.menuAdmin.Text      = "Administración";
-            this.menuAdmin.ForeColor = System.Drawing.Color.White;
-            this.menuAdmin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-                this.menuGestionUsuarios
-            });
-
-            this.menuGestionUsuarios.Text   = "Gestión de Usuarios...";
-            this.menuGestionUsuarios.Click += new System.EventHandler(this.menuGestionUsuarios_Click);
 
             // ── Sesion ───────────────────────────────────────────────────────
             this.menuSesion.Text      = "Sesión";
@@ -196,10 +177,7 @@ namespace GUI
         private System.Windows.Forms.ToolStripMenuItem     menuPostores;
         private System.Windows.Forms.ToolStripMenuItem     menuGestionPostores;
         private System.Windows.Forms.ToolStripMenuItem     menuReportes;
-        private System.Windows.Forms.ToolStripMenuItem     menuReporteJornada;
         private System.Windows.Forms.ToolStripMenuItem     menuHistorialSubastas;
-        private System.Windows.Forms.ToolStripMenuItem     menuAdmin;
-        private System.Windows.Forms.ToolStripMenuItem     menuGestionUsuarios;
         private System.Windows.Forms.ToolStripMenuItem     menuSesion;
         private System.Windows.Forms.ToolStripMenuItem     menuCerrarSesion;
         private System.Windows.Forms.StatusStrip           statusStrip;

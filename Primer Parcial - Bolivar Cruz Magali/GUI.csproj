@@ -117,12 +117,6 @@
     <Compile Include="FrmPostores.Designer.cs">
       <DependentUpon>FrmPostores.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmReporteJornada.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmReporteJornada.Designer.cs">
-      <DependentUpon>FrmReporteJornada.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmHistorialSubastas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,18 +128,6 @@
     </Compile>
     <Compile Include="FrmBitacoraSubastas.Designer.cs">
       <DependentUpon>FrmBitacoraSubastas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmGestionUsuarios.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmGestionUsuarios.Designer.cs">
-      <DependentUpon>FrmGestionUsuarios.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmNuevoUsuario.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmNuevoUsuario.Designer.cs">
-      <DependentUpon>FrmNuevoUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
