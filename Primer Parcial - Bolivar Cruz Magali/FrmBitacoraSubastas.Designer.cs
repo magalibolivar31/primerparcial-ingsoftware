@@ -136,14 +136,16 @@ namespace GUI
             this.btnLimpiar.Size      = new System.Drawing.Size(90, 28);
             this.btnLimpiar.Click    += new System.EventHandler(this.btnLimpiar_Click);
 
-            this.btnDescargarPDF.Text      = "Descargar PDF";
+            this.btnDescargarPDF.Text      = "⬇ Descargar PDF";
             this.btnDescargarPDF.Font      = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
             this.btnDescargarPDF.BackColor = System.Drawing.Color.FromArgb(180, 30, 30);
             this.btnDescargarPDF.ForeColor = System.Drawing.Color.White;
             this.btnDescargarPDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDescargarPDF.FlatAppearance.BorderSize = 0;
-            this.btnDescargarPDF.Location  = new System.Drawing.Point(898, 22);
-            this.btnDescargarPDF.Size      = new System.Drawing.Size(135, 28);
+            this.btnDescargarPDF.Location  = new System.Drawing.Point(620, 128);
+            this.btnDescargarPDF.Size      = new System.Drawing.Size(150, 28);
+            this.btnDescargarPDF.Anchor    = System.Windows.Forms.AnchorStyles.Bottom
+                                           | System.Windows.Forms.AnchorStyles.Right;
             this.btnDescargarPDF.Click    += new System.EventHandler(this.btnDescargarPDF_Click);
 
             // ── Row 2: Producto · ID · Ofertante · ID ─────────────────────────
