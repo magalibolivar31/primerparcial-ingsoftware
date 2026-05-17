@@ -27,25 +27,25 @@ namespace GUI
         // Muestra u oculta opciones del menu segun el rol del usuario autenticado.
         private void ConfigurarMenuPorRol(BE.Usuario usuario)
         {
-            // Catalogo: solo Martillero y Administrador
-            menuCatalogo.Visible = usuario.EsMartillero || usuario.EsAdministrador;
+            // Catalogo: solo Martillero
+            menuCatalogo.Visible = usuario.EsMartillero;
 
-            // Subastas: Martillero y Operador
-            menuSubastas.Visible = usuario.EsMartillero || usuario.EsOperador || usuario.EsAdministrador;
+            // Subastas: ambos roles
+            menuSubastas.Visible = usuario.EsMartillero || usuario.EsOperador;
 
-            // Postores: Martillero y Operador
-            menuPostores.Visible = usuario.EsMartillero || usuario.EsOperador || usuario.EsAdministrador;
+            // Postores: ambos roles
+            menuPostores.Visible = usuario.EsMartillero || usuario.EsOperador;
 
             // Reportes: todos los roles
             menuReportes.Visible = true;
 
-            // Administracion: solo Administrador
-            menuAdmin.Visible = usuario.EsAdministrador;
+            // Administracion: solo Martillero (rol de mayor jerarquia)
+            menuAdmin.Visible = usuario.EsMartillero;
 
             // Subopciones de Subastas segun rol
-            menuAbrirSubasta.Visible  = usuario.EsMartillero || usuario.EsAdministrador;
-            menuCerrarSubasta.Visible = usuario.EsMartillero || usuario.EsAdministrador;
-            menuRegistrarPuja.Visible = usuario.EsOperador   || usuario.EsAdministrador;
+            menuAbrirSubasta.Visible  = usuario.EsMartillero;
+            menuCerrarSubasta.Visible = usuario.EsMartillero;
+            menuRegistrarPuja.Visible = usuario.EsOperador;
         }
 
         // Abre una instancia única del formulario hijo MDI del tipo T.
