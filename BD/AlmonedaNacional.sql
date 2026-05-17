@@ -172,7 +172,7 @@ GO
 DECLARE @hash VARCHAR(512) = '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9';
 
 -- ============================================================
--- USUARIOS (10) — password de todos: admin123
+-- USUARIOS (1) — password de todos: admin123
 -- ============================================================
 INSERT INTO Usuario (Nombre, Apellido, Email, PasswordHash, Rol, Activo, FechaAlta) VALUES
 ('Carlos',  'Mendez', 'martillero', @hash, 'Martillero', 1, '2026-01-10 08:05:00');
@@ -512,7 +512,7 @@ VALUES (SCOPE_IDENTITY(), 320000.00);
 --   CERRADAS: 1-12
 --   ACTIVAS:  13-18
 --   PENDIENTES: 19-21
--- IdMartillero 2 = Carlos Mendez, 5 = Diego Suarez, 9 = Sebastian Rojas
+-- IdMartillero 1 = Carlos Mendez
 -- ============================================================
 DECLARE @s1  INT, @s2  INT, @s3  INT, @s4  INT, @s5  INT, @s6  INT,
         @s7  INT, @s8  INT, @s9  INT, @s10 INT, @s11 INT, @s12 INT,
@@ -521,107 +521,107 @@ DECLARE @s1  INT, @s2  INT, @s3  INT, @s4  INT, @s5  INT, @s6  INT,
 
 -- ---- Sub 1: Collar (CERRADA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura, FechaCierre, IdGanador, PrecioFinal)
-VALUES (10, 2, 'CERRADA', 850000.00, 1050000.00, '2026-04-10 10:00:00', '2026-04-10 11:45:00', 6, 1050000.00);
+VALUES (10, 1, 'CERRADA', 850000.00, 1050000.00, '2026-04-10 10:00:00', '2026-04-10 11:45:00', 6, 1050000.00);
 SET @s1 = SCOPE_IDENTITY();
 
 -- ---- Sub 2: Lote Bellas Artes (CERRADA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura, FechaCierre, IdGanador, PrecioFinal)
-VALUES (3, 2, 'CERRADA', 275000.00, 340000.00, '2026-04-15 14:00:00', '2026-04-15 15:30:00', 4, 340000.00);
+VALUES (3, 1, 'CERRADA', 275000.00, 340000.00, '2026-04-15 14:00:00', '2026-04-15 15:30:00', 4, 340000.00);
 SET @s2 = SCOPE_IDENTITY();
 
 -- ---- Sub 3: Reloj de pie (CERRADA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura, FechaCierre, IdGanador, PrecioFinal)
-VALUES (4, 2, 'CERRADA', 320000.00, 415000.00, '2026-04-22 10:00:00', '2026-04-22 12:00:00', 8, 415000.00);
+VALUES (4, 1, 'CERRADA', 320000.00, 415000.00, '2026-04-22 10:00:00', '2026-04-22 12:00:00', 8, 415000.00);
 SET @s3 = SCOPE_IDENTITY();
 
 -- ---- Sub 4: Anillo solitario (CERRADA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura, FechaCierre, IdGanador, PrecioFinal)
-VALUES (11, 5, 'CERRADA', 1200000.00, 1580000.00, '2026-04-25 10:00:00', '2026-04-25 12:30:00', 12, 1580000.00);
+VALUES (11, 1, 'CERRADA', 1200000.00, 1580000.00, '2026-04-25 10:00:00', '2026-04-25 12:30:00', 12, 1580000.00);
 SET @s4 = SCOPE_IDENTITY();
 
 -- ---- Sub 5: Piano Steinway (CERRADA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura, FechaCierre, IdGanador, PrecioFinal)
-VALUES (25, 2, 'CERRADA', 2800000.00, 3200000.00, '2026-04-28 10:00:00', '2026-04-28 11:20:00', 15, 3200000.00);
+VALUES (25, 1, 'CERRADA', 2800000.00, 3200000.00, '2026-04-28 10:00:00', '2026-04-28 11:20:00', 15, 3200000.00);
 SET @s5 = SCOPE_IDENTITY();
 
 -- ---- Sub 6: BMW Serie 7 (CERRADA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura, FechaCierre, IdGanador, PrecioFinal)
-VALUES (15, 9, 'CERRADA', 8500000.00, 9100000.00, '2026-04-30 09:00:00', '2026-04-30 10:45:00', 18, 9100000.00);
+VALUES (15, 1, 'CERRADA', 8500000.00, 9100000.00, '2026-04-30 09:00:00', '2026-04-30 10:45:00', 18, 9100000.00);
 SET @s6 = SCOPE_IDENTITY();
 
 -- ---- Sub 7: Escritorio victoriano (CERRADA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura, FechaCierre, IdGanador, PrecioFinal)
-VALUES (12, 5, 'CERRADA', 145000.00, 165000.00, '2026-05-02 14:00:00', '2026-05-02 15:00:00', 3, 165000.00);
+VALUES (12, 1, 'CERRADA', 145000.00, 165000.00, '2026-05-02 14:00:00', '2026-05-02 15:00:00', 3, 165000.00);
 SET @s7 = SCOPE_IDENTITY();
 
 -- ---- Sub 8: Generador Diesel (CERRADA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura, FechaCierre, IdGanador, PrecioFinal)
-VALUES (18, 2, 'CERRADA', 380000.00, 420000.00, '2026-05-05 10:00:00', '2026-05-05 11:30:00', 22, 420000.00);
+VALUES (18, 1, 'CERRADA', 380000.00, 420000.00, '2026-05-05 10:00:00', '2026-05-05 11:30:00', 22, 420000.00);
 SET @s8 = SCOPE_IDENTITY();
 
 -- ---- Sub 9: Coleccion de vinos (CERRADA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura, FechaCierre, IdGanador, PrecioFinal)
-VALUES (14, 5, 'CERRADA', 38000.00, 45000.00, '2026-05-06 16:00:00', '2026-05-06 17:00:00', 5, 45000.00);
+VALUES (14, 1, 'CERRADA', 38000.00, 45000.00, '2026-05-06 16:00:00', '2026-05-06 17:00:00', 5, 45000.00);
 SET @s9 = SCOPE_IDENTITY();
 
 -- ---- Sub 10: Moto Harley-Davidson (CERRADA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura, FechaCierre, IdGanador, PrecioFinal)
-VALUES (17, 9, 'CERRADA', 1850000.00, 2050000.00, '2026-05-08 10:00:00', '2026-05-08 11:45:00', 9, 2050000.00);
+VALUES (17, 1, 'CERRADA', 1850000.00, 2050000.00, '2026-05-08 10:00:00', '2026-05-08 11:45:00', 9, 2050000.00);
 SET @s10 = SCOPE_IDENTITY();
 
 -- ---- Sub 11: Juego de te Meissen (CERRADA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura, FechaCierre, IdGanador, PrecioFinal)
-VALUES (7, 2, 'CERRADA', 90000.00, 110000.00, '2026-05-10 14:00:00', '2026-05-10 15:10:00', 25, 110000.00);
+VALUES (7, 1, 'CERRADA', 90000.00, 110000.00, '2026-05-10 14:00:00', '2026-05-10 15:10:00', 25, 110000.00);
 SET @s11 = SCOPE_IDENTITY();
 
 -- ---- Sub 12: Set herramientas Snap-on (CERRADA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura, FechaCierre, IdGanador, PrecioFinal)
-VALUES (21, 5, 'CERRADA', 45000.00, 52000.00, '2026-05-12 10:00:00', '2026-05-12 11:00:00', 7, 52000.00);
+VALUES (21, 1, 'CERRADA', 45000.00, 52000.00, '2026-05-12 10:00:00', '2026-05-12 11:00:00', 7, 52000.00);
 SET @s12 = SCOPE_IDENTITY();
 
 -- ---- Sub 13: Lote Antiguedades (ACTIVA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura)
-VALUES (9, 2, 'ACTIVA', 685000.00, 750000.00, '2026-05-16 09:00:00');
+VALUES (9, 1, 'ACTIVA', 685000.00, 750000.00, '2026-05-16 09:00:00');
 SET @s13 = SCOPE_IDENTITY();
 
 -- ---- Sub 14: Ford F-150 (ACTIVA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura)
-VALUES (16, 9, 'ACTIVA', 6200000.00, 7000000.00, '2026-05-16 09:30:00');
+VALUES (16, 1, 'ACTIVA', 6200000.00, 7000000.00, '2026-05-16 09:30:00');
 SET @s14 = SCOPE_IDENTITY();
 
 -- ---- Sub 15: Lote Maquinaria Industrial (ACTIVA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura)
-VALUES (28, 2, 'ACTIVA', 740000.00, 790000.00, '2026-05-16 10:00:00');
+VALUES (28, 1, 'ACTIVA', 740000.00, 790000.00, '2026-05-16 10:00:00');
 SET @s15 = SCOPE_IDENTITY();
 
 -- ---- Sub 16: Violin italiano (ACTIVA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura)
-VALUES (26, 5, 'ACTIVA', 480000.00, 530000.00, '2026-05-16 10:30:00');
+VALUES (26, 1, 'ACTIVA', 480000.00, 530000.00, '2026-05-16 10:30:00');
 SET @s16 = SCOPE_IDENTITY();
 
 -- ---- Sub 17: Tapiz flamenco (ACTIVA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura)
-VALUES (31, 5, 'ACTIVA', 175000.00, 185000.00, '2026-05-16 11:00:00');
+VALUES (31, 1, 'ACTIVA', 175000.00, 185000.00, '2026-05-16 11:00:00');
 SET @s17 = SCOPE_IDENTITY();
 
 -- ---- Sub 18: Silla Luis XV (ACTIVA) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura)
-VALUES (32, 9, 'ACTIVA', 110000.00, 115000.00, '2026-05-16 11:30:00');
+VALUES (32, 1, 'ACTIVA', 110000.00, 115000.00, '2026-05-16 11:30:00');
 SET @s18 = SCOPE_IDENTITY();
 
 -- ---- Sub 19: Lote Musical Clasico (PENDIENTE) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura)
-VALUES (30, 2, 'PENDIENTE', 3280000.00, 3280000.00, '2026-05-16 08:00:00');
+VALUES (30, 1, 'PENDIENTE', 3280000.00, 3280000.00, '2026-05-16 08:00:00');
 SET @s19 = SCOPE_IDENTITY();
 
 -- ---- Sub 20: Camara Leica (PENDIENTE) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura)
-VALUES (33, 5, 'PENDIENTE', 320000.00, 320000.00, '2026-05-16 08:00:00');
+VALUES (33, 1, 'PENDIENTE', 320000.00, 320000.00, '2026-05-16 08:00:00');
 SET @s20 = SCOPE_IDENTITY();
 
 -- ---- Sub 21: Kit suspension (PENDIENTE) ----
 INSERT INTO Subasta (IdUnidad, IdMartillero, Estado, PrecioInicial, PrecioVigente, FechaApertura)
-VALUES (24, 9, 'PENDIENTE', 35000.00, 35000.00, '2026-05-16 08:00:00');
+VALUES (24, 1, 'PENDIENTE', 35000.00, 35000.00, '2026-05-16 08:00:00');
 SET @s21 = SCOPE_IDENTITY();
 
 -- ============================================================
@@ -779,18 +779,18 @@ INSERT INTO Puja (IdSubasta, IdPostor, Monto, FechaHora, Estado) VALUES
 -- ADJUDICACIONES
 -- ============================================================
 INSERT INTO Adjudicacion (IdSubasta, IdUnidad, IdGanador, PrecioFinal, FechaHoraAdjudicacion, IdMartillero, Observaciones) VALUES
-(@s1,  10, 6,  1050000.00, '2026-04-10 11:46:00', 2, 'Collar adjudicado a Coleccionistas Arg. Pago contra entrega certificado.'),
-(@s2,  3,  4,  340000.00,  '2026-04-15 15:32:00', 2, 'Lote Bellas Artes adjudicado a Ana Kovalenko. Retiro coordinado.'),
-(@s3,  4,  8,  415000.00,  '2026-04-22 12:02:00', 2, 'Reloj adjudicado a Horacio Blanco. Traslado a cargo del comprador.'),
-(@s4,  11, 12, 1580000.00, '2026-04-25 12:31:00', 5, 'Anillo solitario adjudicado a Matias Benegas. Pago en cuotas acordado.'),
-(@s5,  25, 15, 3200000.00, '2026-04-28 11:22:00', 2, 'Piano Steinway adjudicado a Alejandro Niro. Traslado piano: empresa especializada.'),
-(@s6,  15, 18, 9100000.00, '2026-04-30 10:46:00', 9, 'BMW adjudicado a Grupo Inversores BA. Transferencia dominio incluida.'),
-(@s7,  12, 3,  165000.00,  '2026-05-02 15:01:00', 5, 'Escritorio adjudicado a Tech Solutions. Retiro en deposito.'),
-(@s8,  18, 22, 420000.00,  '2026-05-05 11:31:00', 2, 'Generador adjudicado a Industrias Pampa. Flete a cargo del comprador.'),
-(@s9,  14, 5,  45000.00,   '2026-05-06 17:01:00', 5, 'Vinos adjudicados a Ricardo Fontana. Retiro inmediato.'),
-(@s10, 17, 9,  2050000.00, '2026-05-08 11:46:00', 9, 'Harley adjudicada a Ignacio Pereyra. Transferencia moto gestionada.'),
-(@s11, 7,  25, 110000.00,  '2026-05-10 15:12:00', 2, 'Juego de te Meissen adjudicado a Federico Zamponi. Embalaje especial.'),
-(@s12, 21, 7,  52000.00,   '2026-05-12 11:01:00', 5, 'Set Snap-on adjudicado a Valentina Ruiz. Retiro inmediato.');
+(@s1,  10, 6,  1050000.00, '2026-04-10 11:46:00', 1, 'Collar adjudicado a Coleccionistas Arg. Pago contra entrega certificado.'),
+(@s2,  3,  4,  340000.00,  '2026-04-15 15:32:00', 1, 'Lote Bellas Artes adjudicado a Ana Kovalenko. Retiro coordinado.'),
+(@s3,  4,  8,  415000.00,  '2026-04-22 12:02:00', 1, 'Reloj adjudicado a Horacio Blanco. Traslado a cargo del comprador.'),
+(@s4,  11, 12, 1580000.00, '2026-04-25 12:31:00', 1, 'Anillo solitario adjudicado a Matias Benegas. Pago en cuotas acordado.'),
+(@s5,  25, 15, 3200000.00, '2026-04-28 11:22:00', 1, 'Piano Steinway adjudicado a Alejandro Niro. Traslado piano: empresa especializada.'),
+(@s6,  15, 18, 9100000.00, '2026-04-30 10:46:00', 1, 'BMW adjudicado a Grupo Inversores BA. Transferencia dominio incluida.'),
+(@s7,  12, 3,  165000.00,  '2026-05-02 15:01:00', 1, 'Escritorio adjudicado a Tech Solutions. Retiro en deposito.'),
+(@s8,  18, 22, 420000.00,  '2026-05-05 11:31:00', 1, 'Generador adjudicado a Industrias Pampa. Flete a cargo del comprador.'),
+(@s9,  14, 5,  45000.00,   '2026-05-06 17:01:00', 1, 'Vinos adjudicados a Ricardo Fontana. Retiro inmediato.'),
+(@s10, 17, 9,  2050000.00, '2026-05-08 11:46:00', 1, 'Harley adjudicada a Ignacio Pereyra. Transferencia moto gestionada.'),
+(@s11, 7,  25, 110000.00,  '2026-05-10 15:12:00', 1, 'Juego de te Meissen adjudicado a Federico Zamponi. Embalaje especial.'),
+(@s12, 21, 7,  52000.00,   '2026-05-12 11:01:00', 1, 'Set Snap-on adjudicado a Valentina Ruiz. Retiro inmediato.');
 
 -- ============================================================
 -- SUSCRIPCIONES (6 subastas activas + 3 pendientes)
