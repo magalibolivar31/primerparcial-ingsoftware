@@ -33,7 +33,7 @@ namespace GUI
         private void InicializarFiltros()
         {
             cmbFiltroEstado.Items.AddRange(new object[] {
-                "(Todos)", "Disponible", "En Subasta", "Adjudicado", "Retirado"
+                "(Todos)", "Disponible", "En Subasta", "Adjudicado", "Desierta", "Retirado"
             });
             cmbFiltroEstado.SelectedIndex = 0;
 
@@ -64,7 +64,7 @@ namespace GUI
                 {
                     if (s.Estado == BE.EstadoSubasta.Activa)
                         subastaPorUnidad[s.IdUnidad] = s;
-                    else if (s.Estado == BE.EstadoSubasta.Cerrada && s.IdGanador.HasValue
+                    else if (s.Estado == BE.EstadoSubasta.Cerrada
                              && !subastaPorUnidad.ContainsKey(s.IdUnidad))
                         subastaPorUnidad[s.IdUnidad] = s;
                 }
@@ -91,12 +91,16 @@ namespace GUI
                             estado        = "En Subasta";
                             precioVigente = $"$ {sub.PrecioVigente:N2}";
                         }
-                        else
+                        else if (sub.IdGanador.HasValue)
                         {
                             estado        = "Adjudicado";
-                            precioVigente = sub.PrecioFinal.HasValue
-                                ? $"$ {sub.PrecioFinal.Value:N2}"
-                                : "—";
+                            precioVigente = $"$ {sub.PrecioFinal.Value:N2}";
+                        }
+                        else
+                        {
+                            // Cerrada sin pujas — el ítem puede volver a subastarse
+                            estado        = "Desierta";
+                            precioVigente = "—";
                         }
                     }
                     else
@@ -155,6 +159,7 @@ namespace GUI
 
                 var color = f.Estado == "En Subasta" ? System.Drawing.Color.FromArgb(255, 248, 220)
                           : f.Estado == "Adjudicado" ? System.Drawing.Color.FromArgb(220, 240, 220)
+                          : f.Estado == "Desierta"   ? System.Drawing.Color.FromArgb(230, 230, 245)
                           : f.Estado == "Retirado"   ? System.Drawing.Color.FromArgb(240, 220, 220)
                           : System.Drawing.Color.Empty;
 
@@ -185,12 +190,14 @@ namespace GUI
 
             string estado = dgv.SelectedRows[0].Cells["colEstado"].Value?.ToString() ?? "";
 
-            // Solo se puede retirar y modificar cuando está Disponible
-            btnBaja.Enabled      = (estado == "Disponible");
-            btnModificar.Enabled = (estado == "Disponible");
+            // Desierta: subasta cerrada sin pujas — el ítem puede volver a subastarse
+            bool disponibleParaOperar = (estado == "Disponible" || estado == "Desierta");
 
-            btnIniciarSubasta.Visible = (estado == "Disponible");
-            btnVerEnBitacora.Visible  = (estado == "En Subasta" || estado == "Adjudicado");
+            btnBaja.Enabled      = disponibleParaOperar;
+            btnModificar.Enabled = disponibleParaOperar;
+
+            btnIniciarSubasta.Visible = disponibleParaOperar;
+            btnVerEnBitacora.Visible  = (estado == "En Subasta" || estado == "Adjudicado" || estado == "Desierta");
         }
 
         // ── Eventos de selección y filtros ────────────────────────────────────
