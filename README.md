@@ -56,15 +56,15 @@ Servicios.ISujetoSubasta          ← Subject interface
 Servicios.IObserverPostor         ← Observer interface
 Servicios.GestorNotificaciones    ← Concrete Subject  (uno por subasta activa)
 Servicios.NotificadorPostor       ← Concrete Observer (uno por postor suscripto)
-GUI.FrmRegistrarPuja              ← Concrete Observer (el formulario mismo implementa IObserverPostor)
+GUI.FrmGestionSubastas            ← Concrete Observer (la pestaña "Registrar Puja" implementa IObserverPostor)
 ```
 
 - `BLL.SubastaBLL.AbrirSubasta()` crea un `GestorNotificaciones` y lo registra en el `GestorPujas`.
 - `BLL.PostorBLL.Suscribir()` crea un `NotificadorPostor` y lo agrega al gestor de la subasta.
-- `FrmRegistrarPuja` se suscribe automáticamente al seleccionar una subasta y recibe `Actualizar()` sin hacer polling.
+- `FrmGestionSubastas` se suscribe automáticamente al seleccionar una subasta y recibe `Actualizar()` sin hacer polling.
 - `BLL.GestorPujas.RegistrarPuja()` llama `gestor.Notificar()` tras aceptar la puja (RF-06).
 - `BLL.GestorPujas.NotificarCierre()` notifica el resultado a todos los suscriptores antes de eliminar el gestor (RF-07).
-- `BLL.PostorBLL.Desuscribir()` y `FrmRegistrarPuja.DesuscribirActual()` quitan el observer de inmediato (RF-08).
+- `BLL.PostorBLL.Desuscribir()` y `FrmGestionSubastas.DesuscribirActual()` quitan el observer de inmediato (RF-08).
 
 ---
 
@@ -92,11 +92,10 @@ Todos implementan **double-checked locking** (`volatile` + `lock`):
 | `FrmDetalle` | Modal | RF-04 — muestra nombre, precio y descripción jerárquica de una UnidadDeVenta |
 | `FrmNuevoArticulo` | Martillero | RF-01 — alta de hoja (ArticuloIndividual) |
 | `FrmNuevoLote` | Martillero | RF-01, RF-02 — alta de nodo (Lote) con selección de componentes |
-| `FrmSubastas` | Martillero | RF-03 — precio base calculado; apertura y cierre de subastas |
-| `FrmRegistrarPuja` | Martillero | RF-05/08 — suscripción automática; RF-06/07 — `Actualizar()` push sin polling; RF-09/10 — puja serializada |
+| `FrmGestionSubastas` | Martillero | RF-03 — ver subastas activas (tab 1); RF-10 — abrir/cerrar subasta (tab 2); RF-05/06/07/08/09 — registrar puja con Observer push (tab 3) |
 | `FrmPostores` | Martillero | RF-05 — suscripción manual de postores; RF-08 — desuscripción inmediata |
-| `FrmReporteJornada` | Martillero | RF-13 — recorrido recursivo del catálogo (Composite) |
-| `FrmBitacoraSubastas` | Martillero | Auditoría de operaciones con filtros |
+| `FrmReporteJornada` | Martillero | RF-13 — TreeView jerárquico con recorrido transparente del Composite; filtros por tipo/estado; exporta TXT |
+| `FrmBitacoraSubastas` | Martillero | Auditoría de subastas con filtros; panel de ofertas por subasta seleccionada; panel de suscriptores activos |
 
 ---
 
