@@ -170,40 +170,44 @@ namespace GUI
             this.dgv.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(245, 246, 255);
             this.dgv.SelectionChanged += new System.EventHandler(this.dgv_SelectionChanged);
 
-            var colMonedaDerecha = new System.Windows.Forms.DataGridViewCellStyle {
-                Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            };
+            System.Windows.Forms.DataGridViewTextBoxColumn colTipo         = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            System.Windows.Forms.DataGridViewTextBoxColumn colNombre       = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            System.Windows.Forms.DataGridViewTextBoxColumn colPrecio       = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            System.Windows.Forms.DataGridViewTextBoxColumn colPrecioVigente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            System.Windows.Forms.DataGridViewTextBoxColumn colCantItems    = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            System.Windows.Forms.DataGridViewTextBoxColumn colEstado       = new System.Windows.Forms.DataGridViewTextBoxColumn();
+
+            colTipo.Name       = "colTipo";
+            colTipo.HeaderText = "Tipo";
+            colTipo.Width      = 75;
+
+            colNombre.Name       = "colNombre";
+            colNombre.HeaderText = "Nombre";
+            colNombre.Width      = 210;
+
+            colPrecio.Name                          = "colPrecio";
+            colPrecio.HeaderText                    = "Precio Base";
+            colPrecio.Width                         = 110;
+            colPrecio.DefaultCellStyle.Alignment    = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            colPrecio.DefaultCellStyle.ForeColor    = System.Drawing.Color.DarkGreen;
+
+            colPrecioVigente.Name                          = "colPrecioVigente";
+            colPrecioVigente.HeaderText                    = "Precio Vigente";
+            colPrecioVigente.Width                         = 115;
+            colPrecioVigente.DefaultCellStyle.Alignment    = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            colPrecioVigente.DefaultCellStyle.ForeColor    = System.Drawing.Color.FromArgb(180, 80, 0);
+
+            colCantItems.Name                          = "colCantItems";
+            colCantItems.HeaderText                    = "Cant. Ítems";
+            colCantItems.Width                         = 85;
+            colCantItems.DefaultCellStyle.Alignment    = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+
+            colEstado.Name       = "colEstado";
+            colEstado.HeaderText = "Estado";
+            colEstado.Width      = 105;
 
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-                new System.Windows.Forms.DataGridViewTextBoxColumn {
-                    Name = "colTipo", HeaderText = "Tipo", Width = 75
-                },
-                new System.Windows.Forms.DataGridViewTextBoxColumn {
-                    Name = "colNombre", HeaderText = "Nombre", Width = 210
-                },
-                new System.Windows.Forms.DataGridViewTextBoxColumn {
-                    Name = "colPrecio", HeaderText = "Precio Base", Width = 110,
-                    DefaultCellStyle = new System.Windows.Forms.DataGridViewCellStyle {
-                        Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight,
-                        ForeColor = System.Drawing.Color.DarkGreen
-                    }
-                },
-                new System.Windows.Forms.DataGridViewTextBoxColumn {
-                    Name = "colPrecioVigente", HeaderText = "Precio Vigente", Width = 115,
-                    DefaultCellStyle = new System.Windows.Forms.DataGridViewCellStyle {
-                        Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight,
-                        ForeColor = System.Drawing.Color.FromArgb(180, 80, 0)
-                    }
-                },
-                new System.Windows.Forms.DataGridViewTextBoxColumn {
-                    Name = "colCantItems", HeaderText = "Cant. Ítems", Width = 85,
-                    DefaultCellStyle = new System.Windows.Forms.DataGridViewCellStyle {
-                        Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-                    }
-                },
-                new System.Windows.Forms.DataGridViewTextBoxColumn {
-                    Name = "colEstado", HeaderText = "Estado", Width = 105
-                },
+                colTipo, colNombre, colPrecio, colPrecioVigente, colCantItems, colEstado
             });
 
             // ── Form ───────────────────────────────────────────────────────────
